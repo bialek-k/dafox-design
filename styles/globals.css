@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  #__next {
+    @apply min-h-screen flex flex-col;
+  }
+}
+
+html,
+body {
+  font-family: poppins;
+}
+
+.MuiAccordion-rounded {
+  box-shadow: 0 0 0 0;
+}
+.MuiAccordionDetails {
+  padding: 0px 16px 16px;
+}

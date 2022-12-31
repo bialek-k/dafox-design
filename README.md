@@ -25,6 +25,9 @@
     <li>
       <a href="#wykorzystane-technologie">Wykorzystane Technologie</a></li>
     </li>
+    <li>
+      <a href="#planowane-aktualizacje">Planowane Aktualizacje</a></li>
+    </li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -48,6 +51,17 @@ Podczas budowy aplkacji wykorzystałem:
 - DatoCMS
 - React Hook Form 
 - ZOD form validation
+
+<p align="right">(<a href="#top">Powrót na górę</a>)</p>
+
+<!-- ROADMAP -->
+
+## Planowane aktualizacje
+
+- [ ] Dodanie opcji rejestracji użytkownika
+- [ ] Dodanie opcji płatności przez PayPall (request uzytkownika)
+- [ ] Zmiana HeroSection z filmem w tle 
+- [ ] Stworzenie konfiguratora kierownic
 
 <p align="right">(<a href="#top">Powrót na górę</a>)</p>
 

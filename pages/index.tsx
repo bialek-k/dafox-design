@@ -2,11 +2,11 @@ import React, { useEffect, useContext } from "react";
 import Welcome from "../components/Welcome";
 
 import { client } from "../lib/apollo";
-import { allProductsQuery } from "../lib/queries";
+import { allProductsQuery, heroImagesQuery } from "../lib/queries";
 
 import { Store } from "../store/Store";
 
-const Home = ({ data }): React.ReactElement => {
+const Home = ({ data, heroImagesArr }): React.ReactElement => {
   const { dispatch } = useContext(Store);
 
   useEffect(() => {
@@ -18,17 +18,21 @@ const Home = ({ data }): React.ReactElement => {
 
   return (
     <>
-      <Welcome />
+      <Welcome heroImagesArr={heroImagesArr} />
     </>
   );
 };
 
 export async function getStaticProps() {
   const { data } = await client.query(allProductsQuery);
+  const heroImages = await client.query(heroImagesQuery);
+
+  const heroImagesArr = heroImages.data.heroSection.heroGallery;
 
   return {
     props: {
       data,
+      heroImagesArr,
     },
   };
 }

@@ -234,3 +234,27 @@ export const privacyPolicyQuery = {
     }
   `,
 };
+
+export const heroImagesQuery = {
+  query: gql`
+    query MyQuery {
+      heroSection {
+        heroGallery {
+          responsiveImage {
+            alt
+            aspectRatio
+            base64
+            bgColor
+            height
+            sizes
+            srcSet
+            src
+            title
+            webpSrcSet
+            width
+          }
+        }
+      }
+    }
+  `,
+};

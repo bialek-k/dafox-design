@@ -42,72 +42,72 @@ const MobileMenu = ({ setOpenMobileMenu }) => {
             </div>
           </Link>
         </div>
-        <motion.li
-          whileTap={{ scale: 0.85 }}
-          onClick={() =>
-            setTimeout(() => {
-              setOpenMobileMenu(false);
-            }, 1000)
-          }
-          className="hover:text-orange-300 bg-yellow-500 w-full text-center py-4"
-        >
-          <Link href="/">
+        <Link href="/">
+          <motion.li
+            whileTap={{ scale: 0.85 }}
+            onClick={() =>
+              setTimeout(() => {
+                setOpenMobileMenu(false);
+              }, 1000)
+            }
+            className="hover:text-orange-300 bg-yellow-500 w-full text-center py-4"
+          >
             <a>Home</a>
-          </Link>
-        </motion.li>
-        <motion.li
-          whileTap={{ scale: 0.85 }}
-          onClick={() =>
-            setTimeout(() => {
-              setOpenMobileMenu(false);
-            }, 1000)
-          }
-          className="hover:text-orange-300 bg-yellow-500 w-full text-center py-4"
-        >
-          <Link href="/shop">
+          </motion.li>
+        </Link>
+        <Link href="/shop">
+          <motion.li
+            whileTap={{ scale: 0.85 }}
+            onClick={() =>
+              setTimeout(() => {
+                setOpenMobileMenu(false);
+              }, 1000)
+            }
+            className="hover:text-orange-300 bg-yellow-500 w-full text-center py-4"
+          >
             <a>Shop</a>
-          </Link>
-        </motion.li>
-        <motion.li
-          whileTap={{ scale: 0.85 }}
-          onClick={() =>
-            setTimeout(() => {
-              setOpenMobileMenu(false);
-            }, 1000)
-          }
-          className="hover:text-orange-300 bg-yellow-500 w-full text-center py-4"
-        >
-          <Link href="/about">
+          </motion.li>
+        </Link>
+        <Link href="/about">
+          <motion.li
+            whileTap={{ scale: 0.85 }}
+            onClick={() =>
+              setTimeout(() => {
+                setOpenMobileMenu(false);
+              }, 1000)
+            }
+            className="hover:text-orange-300 bg-yellow-500 w-full text-center py-4"
+          >
             <a>About us</a>
-          </Link>
-        </motion.li>
-        <motion.li
-          whileTap={{ scale: 0.85 }}
-          onClick={() =>
-            setTimeout(() => {
-              setOpenMobileMenu(false);
-            }, 1000)
-          }
-          className="hover:text-orange-300 bg-yellow-500 w-full text-center py-4"
-        >
-          <Link href="/faq">
+          </motion.li>
+        </Link>
+        <Link href="/faq">
+          <motion.li
+            whileTap={{ scale: 0.85 }}
+            onClick={() =>
+              setTimeout(() => {
+                setOpenMobileMenu(false);
+              }, 1000)
+            }
+            className="hover:text-orange-300 bg-yellow-500 w-full text-center py-4"
+          >
             <a>FAQ</a>
-          </Link>
-        </motion.li>
+          </motion.li>
+        </Link>
 
-        <motion.li
-          whileTap={{ scale: 0.85 }}
-          onClick={() =>
-            setTimeout(() => {
-              setOpenMobileMenu(false);
-            }, 1000)
-          }
-          className="hover:text-orange-300 bg-yellow-500 w-full text-center py-4"
-        >
-          <Link href="/contact">
+        <Link href="/contact">
+          <motion.li
+            whileTap={{ scale: 0.85 }}
+            onClick={() =>
+              setTimeout(() => {
+                setOpenMobileMenu(false);
+              }, 1000)
+            }
+            className="hover:text-orange-300 bg-yellow-500 w-full text-center py-4"
+          >
             <a>Contact</a>
-          </Link>
-        </motion.li>
+          </motion.li>
+        </Link>
       </ul>
     </nav>
   );

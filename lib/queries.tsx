@@ -8,6 +8,7 @@ export const singleProductQuery = (params) => {
           id
           name
           price
+          freeShipping
           promotion
           slug
           inStock
@@ -80,6 +81,7 @@ export const allProductsQuery = {
         id
         slug
         price
+        freeShipping
         promotion
         inStock
         category {

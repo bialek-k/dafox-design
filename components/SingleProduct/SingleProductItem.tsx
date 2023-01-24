@@ -60,6 +60,11 @@ const SingleProduct = ({ allProductsData }): React.ReactElement => {
             <div className="mb-2"></div>
             <div className="flex flex-col">
               <p className="text-black/50 dark:invert">
+                {ctxProductData.freeShipping && (
+                  <p className="font-bold text-2xl text-yellow-400">
+                    FREE SHIPPING
+                  </p>
+                )}
                 in stock: <span>{ctxProductData.inStock}</span>
               </p>
               <div className="action  flex items-center gap-4">

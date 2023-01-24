@@ -36,6 +36,7 @@ const Checkout = (): React.ReactElement => {
   });
 
   const checkoutProduct = (data) => {
+    console.log(data);
     const deliveryTotalPrice = () => {
       const price = deliveryPriceArr.filter(
         (item) => item.country === data.country

@@ -11,7 +11,7 @@ import { getSortingMethod } from "../utilities/getSortingMethod";
 
 const ProductList = ({ products, convertedSeriesData }): React.ReactElement => {
   const [selected, setSelected] = useState("all");
-  const [sortingMethod, setSortingMethod] = useState("Sort by latest");
+  const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const filtered_products = getSortingMethod(sortingMethod, products);
 
   const displayFilteredProduct = () => {
@@ -40,6 +40,7 @@ const ProductList = ({ products, convertedSeriesData }): React.ReactElement => {
             title={product.name}
             price={product.price}
             promotion={product.promotion}
+            freeShipping={product.freeShipping}
           />
         </motion.div>
       </a>

@@ -4,7 +4,13 @@ import { Image as DatoImage } from "react-datocms";
 
 import { FaShoppingCart } from "react-icons/fa";
 
-const Product = ({ title, price, data, promotion }): React.ReactElement => {
+const Product = ({
+  title,
+  price,
+  data,
+  promotion,
+  freeShipping,
+}): React.ReactElement => {
   return (
     <div className="single-product p-4 flex flex-col justify-between ease-in-out duration-200 shadow-xl sm:h-128 rounded-md">
       <div className="content">
@@ -22,8 +28,11 @@ const Product = ({ title, price, data, promotion }): React.ReactElement => {
           <p>{title}</p>
         </div>
       </div>
-      <div className="price flex  justify-between items-end  ">
+      <div className="price flex  justify-between items-end">
         <div className="flex flex-col gap-2">
+          {freeShipping && (
+            <p className="font-bold text-xl text-yellow-400">FREE SHIPPING</p>
+          )}
           <p className="text-black/50 text-sm dark:invert">
             in stock: <span>{data.inStock}</span>
           </p>

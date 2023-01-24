@@ -9,6 +9,15 @@ import SortingProducts from "./SortingProducts";
 
 import { getSortingMethod } from "../utilities/getSortingMethod";
 
+interface ProductProps {
+  title: string;
+  price: number;
+  data: any;
+  promotion: any;
+  freeShipping: any;
+  category: any;
+}
+
 const ProductList = ({ products, convertedSeriesData }): React.ReactElement => {
   const [selected, setSelected] = useState("all");
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
@@ -19,8 +28,9 @@ const ProductList = ({ products, convertedSeriesData }): React.ReactElement => {
     if (selected === "all") {
       products = [...filtered_products];
     } else {
-      const existingProduct = filtered_products.filter((product) =>
-        product.category.some((category) => category.name === selected)
+      const existingProduct = filtered_products.filter(
+        (product: ProductProps) =>
+          product.category.some((category) => category.name === selected)
       );
       products.push(...existingProduct);
     }

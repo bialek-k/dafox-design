@@ -4,21 +4,13 @@ import { Image as DatoImage } from "react-datocms";
 
 import { FaShoppingCart } from "react-icons/fa";
 
-type ProductProps = {
-  title: string;
-  price: number;
-  data: any;
-  promotion: any;
-  freeShipping: any;
-};
-
 const Product = ({
   title,
   price,
   data,
   promotion,
   freeShipping,
-}: ProductProps) => {
+}): React.ReactElement => {
   return (
     <div className="single-product p-4 flex flex-col justify-between ease-in-out duration-200 shadow-xl sm:h-128 rounded-md">
       <div className="content">

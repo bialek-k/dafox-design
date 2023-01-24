@@ -10,6 +10,7 @@ import SortingProducts from "./SortingProducts";
 import { getSortingMethod } from "../utilities/getSortingMethod";
 
 interface ProductProps {
+  name: string;
   title: string;
   price: number;
   data: any;

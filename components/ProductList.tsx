@@ -14,8 +14,10 @@ interface ProductProps {
   price: number;
   data: any;
   promotion: any;
-  freeShipping: any;
-  category: any;
+  freeShipping?: any;
+  category?: any;
+  slug?: string;
+  id?: any;
 }
 
 const ProductList = ({ products, convertedSeriesData }): React.ReactElement => {
@@ -37,25 +39,27 @@ const ProductList = ({ products, convertedSeriesData }): React.ReactElement => {
     return [...products];
   };
 
-  const displayProduct = displayFilteredProduct().map((product) => (
-    <Link href={`steeringwheels/${product.slug}`} key={product.id}>
-      <a>
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.95 }}
-          className="dark:border-2 dark:rounded-md dark:border-neutral-800"
-        >
-          <Product
-            data={product}
-            title={product.name}
-            price={product.price}
-            promotion={product.promotion}
-            freeShipping={product.freeShipping}
-          />
-        </motion.div>
-      </a>
-    </Link>
-  ));
+  const displayProduct = displayFilteredProduct().map(
+    (product: ProductProps) => (
+      <Link href={`steeringwheels/${product.slug}`} key={product.id}>
+        <a>
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.95 }}
+            className="dark:border-2 dark:rounded-md dark:border-neutral-800"
+          >
+            <Product
+              data={product}
+              title={product.name}
+              price={product.price}
+              promotion={product.promotion}
+              freeShipping={product.freeShipping}
+            />
+          </motion.div>
+        </a>
+      </Link>
+    )
+  );
 
   return (
     <div className=" container flex justify-center">

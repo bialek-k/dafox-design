@@ -2,6 +2,11 @@ import React, { useContext } from "react";
 import { Store } from "../store/Store";
 
 import { z } from "zod";
+import {
+  basicForm,
+  extendsForm,
+  defaultValues,
+} from "../utilities/zod/zodObjects";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 
@@ -15,62 +20,7 @@ import { deliveryPrice } from "../utilities/deliveryPriceSetter";
 
 import Spinner from "../components/UI/Spinner";
 
-const basicForm = z.object({
-  name: z.string().min(1, "Name is required"),
-  surname: z.string().min(1, "Surname is required"),
-  address: z.string().min(1, "address is reguired"),
-  zipcode: z.string().min(1, "Zip-code is reguired"),
-  country: z.string().min(1, "Country is required").optional(),
-  city: z.string().min(1, "City is reguired"),
-  email: z
-    .string()
-    .min(1, "This is required")
-    .email({ message: "Must be a valid email" }),
-  message: z.string(),
-  checkbox: z.literal(false),
-});
-
-const extendsForm = z.object({
-  name: z.string().min(1, "Name is required"),
-  surname: z.string().min(1, "Surname is required"),
-  address: z.string().min(1, "address is reguired"),
-  zipcode: z.string().min(1, "Zip-code is reguired"),
-  country: z.string().min(1, "Country is required").optional(),
-  city: z.string().min(1, "City is reguired"),
-  email: z
-    .string()
-    .min(1, "This is required")
-    .email({ message: "Must be a valid email" }),
-  message: z.string(),
-  tax_id: z.number(),
-  shipping_name: z.string().min(1, "Name is required"),
-  shipping_surname: z.string().min(1, "Surname is required"),
-  shipping_address: z.string().min(1, "Address is reguired"),
-  shipping_zipcode: z.string().min(1, "Zip-code is reguired"),
-  shipping_country: z.string().min(1, "Country is required").optional(),
-  shipping_city: z.string().min(1, "City is reguired"),
-  checkbox: z.literal(true),
-});
-
 const FormSchema = z.discriminatedUnion("checkbox", [basicForm, extendsForm]);
-
-const defaultValues = {
-  name: "",
-  surname: "",
-  address: "",
-  city: "",
-  country: "Australia",
-  zipcode: "",
-  email: "",
-  message: "",
-  shipping_name: "",
-  shipping_surname: "",
-  shipping_address: "",
-  shipping_city: "",
-  shipping_country: "Poland",
-  shipping_zipcode: "",
-  checkbox: false,
-};
 
 type CheckoutFormType = z.TypeOf<typeof FormSchema>;
 

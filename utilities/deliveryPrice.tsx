@@ -1,4 +1,5 @@
 export const deliveryPriceArr = [
+  { country: "Select Country", price: 0 },
   { country: "Australia", price: 150 },
   { country: "Austria", price: 20 },
   { country: "Belgium", price: 20 },
@@ -30,4 +31,5 @@ export const deliveryPriceArr = [
   { country: "Greate Britain", price: 30 },
   { country: "Italy", price: 150 },
   { country: "United States", price: 50 },
+  { country: "Cyprus", price: 30 },
 ];

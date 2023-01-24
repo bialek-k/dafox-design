@@ -5,11 +5,11 @@ import { Image as DatoImage } from "react-datocms";
 import { FaShoppingCart } from "react-icons/fa";
 
 interface ProductProps {
-  name: string;
-  title: string;
-  price: number;
-  data: any;
-  promotion: any;
+  name?: string;
+  title?: string;
+  price?: number;
+  data?: any;
+  promotion?: any;
   freeShipping?: any;
   category?: any;
   slug?: string;

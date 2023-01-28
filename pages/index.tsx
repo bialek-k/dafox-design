@@ -16,11 +16,7 @@ const Home = ({ data, heroImagesArr }): React.ReactElement => {
     });
   }, [dispatch, data]);
 
-  return (
-    <>
-      <Welcome heroImagesArr={heroImagesArr} />
-    </>
-  );
+  return <Welcome heroImagesArr={heroImagesArr} />;
 };
 
 export async function getStaticProps() {

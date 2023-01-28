@@ -3,6 +3,15 @@ import { ThemeProvider } from "next-themes";
 import "../styles/globals.css";
 import { StoreProvider } from "../store/Store";
 
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  gql,
+} from "@apollo/client";
+
+import { client } from "../lib/apollo";
+
 import { GoogleAnalytics, event } from "nextjs-google-analytics";
 
 export function reportWebVitals({ id, name, label, value }) {
@@ -20,7 +29,9 @@ function MyApp({ Component, pageProps }) {
       <StoreProvider>
         <Layout>
           <GoogleAnalytics trackPageViews />
-          <Component {...pageProps} />
+          <ApolloProvider client={client}>
+            <Component {...pageProps} />
+          </ApolloProvider>
         </Layout>
       </StoreProvider>
     </ThemeProvider>

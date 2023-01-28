@@ -42,7 +42,7 @@ const ProductList = ({ products, convertedSeriesData }): React.ReactElement => {
 
   const displayProduct = displayFilteredProduct().map(
     (product: ProductProps) => (
-      <Link href={`steeringwheels/${product.slug}`} key={product.id}>
+      <Link href={`shop/${product.slug}`} key={product.id}>
         <a>
           <motion.div
             whileHover={{ scale: 1.02 }}

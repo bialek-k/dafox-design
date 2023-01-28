@@ -21,7 +21,8 @@ const EmptyCart = () => {
       <div className="w-48">
         <Button
           addedClassName="mt-4 w-full"
-          onClick={() => router.push("/shop")}>
+          onClick={() => router.push("/shop")}
+        >
           Go to shop
         </Button>
       </div>

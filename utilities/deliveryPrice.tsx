@@ -29,7 +29,7 @@ export const deliveryPriceArr = [
   { country: "Turkey", price: 150 },
   { country: "Hungary", price: 20 },
   { country: "Greate Britain", price: 30 },
-  { country: "Italy", price: 150 },
+  { country: "Italy", price: 30 },
   { country: "United States", price: 50 },
   { country: "Cyprus", price: 30 },
-];
+].sort((a, b) => a.country.localeCompare(b.country));

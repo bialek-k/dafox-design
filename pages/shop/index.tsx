@@ -1,16 +1,14 @@
 import ProductList from "../../components/ProductList";
 
-import { getAllProducts } from "../../lib/DatocmsApiCall";
-
-// Old
+import { gql } from "@apollo/client";
+import { client } from "../../lib/apollo";
 import {
-  getTotalProductsNumber,
-  getPaginatedProductsSummaries,
-  config,
-} from "../../lib/queryApi";
+  getAllProducts,
+  getAllPathsProducts,
+  getSingleProduct,
+} from "../../lib/DatocmsApiCall";
 
-const Shop = ({ products, newProducts }): React.ReactElement => {
-  console.log(newProducts);
+const Shop = ({ products }): React.ReactElement => {
   return (
     <div className="container mx-auto py-20 mb-20">
       <div>
@@ -21,19 +19,11 @@ const Shop = ({ products, newProducts }): React.ReactElement => {
 };
 
 export async function getStaticProps() {
-  const { allProducts, allCategories } = await getPaginatedProductsSummaries(1);
-  const totalProductsNumber = await getTotalProductsNumber();
-  const totalPages = totalProductsNumber / config.pagination.pageSize;
-
-  const newProducts = await getAllProducts();
+  const products = await getAllProducts();
 
   return {
     props: {
-      newProducts,
-      products: allProducts,
-      allCategories,
-      totalPages,
-      currentPage: "1",
+      products,
     },
   };
 }

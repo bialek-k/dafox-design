@@ -112,12 +112,17 @@ const ProductList = ({ products }): React.ReactElement => {
         setSelected={setSelected}
       />
       <div className="wrapper">
-        <div className="py- px-2 lg:px-6 flex mx-4 gap-4 mb-4 lg:justify-end ">
+        <div className="py- px-2 lg:px-6 flex mx-4 gap-4 mb-4 lg:justify-between items-center ">
           <MobileProductFilter
             convertedSeriesData={finalCategories}
             selected={selected}
             setSelected={setSelected}
           />
+          <p className="text-neutral-600">
+            There is <strong>{displayProduct.length}</strong>
+            {displayProduct.length > 1 ? " products" : " product"} availble
+          </p>
+
           <SortingProducts
             setSortingMethod={setSortingMethod}
             sortingMethod={sortingMethod}

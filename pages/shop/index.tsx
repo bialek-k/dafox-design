@@ -1,12 +1,6 @@
 import ProductList from "../../components/ProductList";
 
-import { gql } from "@apollo/client";
-import { client } from "../../lib/apollo";
-import {
-  getAllProducts,
-  getAllPathsProducts,
-  getSingleProduct,
-} from "../../lib/DatocmsApiCall";
+import { getAllProducts } from "../../lib/DatocmsApiCall";
 
 const Shop = ({ products }): React.ReactElement => {
   return (

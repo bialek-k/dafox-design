@@ -3,13 +3,12 @@ import {
   getSingleProduct,
 } from "../../lib/DatocmsApiCall";
 
-const singleProductPage = ({ singleProduct }) => {
+const SingleProduct = ({ singleProduct }) => {
   console.log(singleProduct);
   return (
     <div className="container mx-auto py-20 mb-20">
       <div>
-        <h1>siema</h1>
-        {/* <ProductList products={products} /> */}
+        <h1>{singleProduct.name}</h1>
       </div>
     </div>
   );
@@ -20,6 +19,7 @@ export async function getStaticPaths() {
 
   let paths = [];
   slugs.allProducts.map((s) => paths.push(`/shop/${s.slug}`));
+  console.log(paths);
 
   return {
     paths,
@@ -37,4 +37,4 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default singleProductPage;
+export default SingleProduct;

@@ -47,72 +47,68 @@ const slugQuery = gql`
     }
   }
 `;
-const singleProductQuery = (params) => {
-  return {
-    query: gql`
-      query MyQuery($slug: String) {
-        product(filter: { slug: { eq: $slug } }) {
-          id
-          name
-          price
-          freeShipping
-          promotion
-          slug
-          inStock
-          boki {
-            price
-            name
-          }
-          category {
-            name
-          }
-          shortDescription {
-            value
-          }
-          description {
-            value
-          }
-          goraIDol {
-            name
-            price
-          }
-          image {
-            responsiveImage {
-              alt
-              base64
-              bgColor
-              title
-              aspectRatio
-              height
-              sizes
-              src
-              srcSet
-              webpSrcSet
-              width
-            }
-          }
-          gallery {
-            id
-            responsiveImage {
-              alt
-              base64
-              bgColor
-              title
-              aspectRatio
-              height
-              sizes
-              src
-              srcSet
-              webpSrcSet
-              width
-            }
-          }
+
+const singleProductQuery = gql`
+  query MyQuery($slug: String) {
+    product(filter: { slug: { eq: $slug } }) {
+      id
+      name
+      price
+      freeShipping
+      promotion
+      slug
+      inStock
+      boki {
+        price
+        name
+      }
+      category {
+        name
+      }
+      shortDescription {
+        value
+      }
+      description {
+        value
+      }
+      goraIDol {
+        name
+        price
+      }
+      image {
+        responsiveImage {
+          alt
+          base64
+          bgColor
+          title
+          aspectRatio
+          height
+          sizes
+          src
+          srcSet
+          webpSrcSet
+          width
         }
       }
-    `,
-    variables: { slug: params.slug },
-  };
-};
+      gallery {
+        id
+        responsiveImage {
+          alt
+          base64
+          bgColor
+          title
+          aspectRatio
+          height
+          sizes
+          src
+          srcSet
+          webpSrcSet
+          width
+        }
+      }
+    }
+  }
+`;
 
 export const getAllProducts = async () => {
   const { data } = await client.query({ query: allProducts });
@@ -125,6 +121,9 @@ export const getAllPathsProducts = async () => {
 };
 
 export const getSingleProduct = async (slug) => {
-  const { data } = await client.query(singleProductQuery(slug));
+  const { data } = await client.query({
+    query: singleProductQuery,
+    variables: { slug },
+  });
   return data.product;
 };

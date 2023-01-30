@@ -123,7 +123,7 @@ export const getAllPathsProducts = async () => {
 export const getSingleProduct = async (slug) => {
   const { data } = await client.query({
     query: singleProductQuery,
-    variables: { slug },
+    variables: { slug: slug },
   });
   return data.product;
 };

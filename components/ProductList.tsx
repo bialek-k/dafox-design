@@ -1,17 +1,20 @@
 import { useState, useEffect, useContext } from "react";
-import Product from "./Product";
-import Link from "next/link";
+
 import { Store } from "../store/Store";
 
-import { useRouter } from "next/router";
-
-import { motion } from "framer-motion";
+import Product from "./Product";
 import ProductFilter from "./ProductFilter";
 import MobileProductFilter from "./MobileProductFilter";
 import SortingProducts from "./SortingProducts";
 
-import { getSortingMethod } from "../utilities/getSortingMethod";
+import Link from "next/link";
 
+import { getFinalCategory } from "../utilities/categoryHandler";
+import { getSortingMethod } from "../utilities/getSortingMethod";
+import { paginate } from "../utilities/paginate";
+
+import { motion } from "framer-motion";
+import Pagination from "./UI/Pagination";
 interface ProductProps {
   name?: string;
   title?: string;
@@ -29,37 +32,19 @@ const ProductList = ({ products }): React.ReactElement => {
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const filtered_products = getSortingMethod(sortingMethod, products);
   const { dispatch } = useContext(Store);
-  const router = useRouter();
 
-  const categories = products
-    .map((prod) => prod.category)
-    .flat()
-    .sort()
-    .reduce((finalArray, current) => {
-      let obj = finalArray.find((item) => item.name === current.name);
-      return obj ? finalArray : finalArray.concat([current]);
-    }, []);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selected]);
 
-  const existingCategories = categories
-    .map((category) => category.series)
-    .filter((item, index, arr) => arr.indexOf(item) === index);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 20;
 
-  let id = 1;
-  const convertSeriesToDisplay = (categories, seriesName) => {
-    let seriesItems = categories
-      .filter((cat) => cat.series === seriesName)
-      .map((s) => s.name);
-
-    return {
-      name: seriesName,
-      id: id++,
-      series: [...seriesItems],
-    };
+  const onPageChange = (page) => {
+    setCurrentPage(page);
   };
 
-  const finalCategories = existingCategories
-    .map((item) => convertSeriesToDisplay(categories, item))
-    .sort((a, b) => (a.name < b.name ? -1 : 1));
+  const finalCategories = getFinalCategory(products);
 
   useEffect(() => {
     dispatch({
@@ -79,40 +64,45 @@ const ProductList = ({ products }): React.ReactElement => {
       );
       products.push(...existingProduct);
     }
+
+    // return [...paginatedProducts];
     return [...products];
   };
-
-  const displayProduct = displayFilteredProduct().map(
-    (product: ProductProps) => (
-      <Link href={`shop/${product.slug}`} key={product.id}>
-        <a>
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.95 }}
-            className="dark:border-2 dark:rounded-md dark:border-neutral-800"
-          >
-            <Product
-              data={product}
-              title={product.name}
-              price={product.price}
-              promotion={product.promotion}
-              freeShipping={product.freeShipping}
-            />
-          </motion.div>
-        </a>
-      </Link>
-    )
+  const paginatedProducts = paginate(
+    displayFilteredProduct(),
+    currentPage,
+    pageSize
   );
 
+  const displayProduct = paginatedProducts.map((product: ProductProps) => (
+    <Link href={`shop/${product.slug}`} key={product.id}>
+      <a>
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.95 }}
+          className="dark:border-2 dark:rounded-md dark:border-neutral-800"
+        >
+          <Product
+            data={product}
+            title={product.name}
+            price={product.price}
+            promotion={product.promotion}
+            freeShipping={product.freeShipping}
+          />
+        </motion.div>
+      </a>
+    </Link>
+  ));
+
   return (
-    <div className=" container flex justify-center">
+    <div className=" container flex justify-center my-24">
       <ProductFilter
         convertedSeriesData={finalCategories}
         selected={selected}
         setSelected={setSelected}
       />
       <div className="wrapper">
-        <div className="py- px-2 lg:px-6 flex mx-4 gap-4 mb-4 lg:justify-between items-center ">
+        <div className="px-2 lg:px-6 flex mx-4 gap-4 mb-4 lg:justify-between items-center ">
           <MobileProductFilter
             convertedSeriesData={finalCategories}
             selected={selected}
@@ -131,9 +121,13 @@ const ProductList = ({ products }): React.ReactElement => {
         <div className="grid gap-6 grid-cols-1 max-w-5xl sm:grid-cols-2 md:grid-cols-3 mx-auto px-6 ">
           {displayProduct}
         </div>
-        <div className="flex gap-5 w-full items-center justify-center mt-20">
-          <Link href={`${router.asPath}/${"2"}`}>NEXT PAGE</Link>
-        </div>
+        <Pagination
+          items={products.length}
+          pageSize={pageSize}
+          onPageChange={onPageChange}
+          currentPage={currentPage}
+          availbleProducts={displayProduct.length}
+        />
       </div>
     </div>
   );

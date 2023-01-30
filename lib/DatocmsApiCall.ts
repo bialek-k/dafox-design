@@ -42,7 +42,7 @@ const allProducts = gql`
 
 const slugQuery = gql`
   query MyQuery {
-    allProducts {
+    allProducts(first: 100) {
       slug
     }
   }

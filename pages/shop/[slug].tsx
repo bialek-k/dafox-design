@@ -1,17 +1,27 @@
+import { useContext, useEffect } from "react";
+
+import { SingleProductItem } from "../../components/SingleProduct/SingleProductItem";
+
+import { Store } from "../../store/Store";
+
 import {
   getAllPathsProducts,
   getSingleProduct,
 } from "../../lib/DatocmsApiCall";
 
-const SingleProduct = ({ singleProduct }) => {
-  console.log(singleProduct);
-  return (
-    <div className="container mx-auto py-20 mb-20">
-      <div>
-        <h1>{singleProduct.name}</h1>
-      </div>
-    </div>
-  );
+const SingleProductPage = ({ singleProduct }) => {
+  const { state, dispatch } = useContext(Store);
+
+  useEffect(() => {
+    dispatch({
+      type: "SET_PRODUCT_DATA",
+      payload: { ...singleProduct },
+    });
+  }, [dispatch, singleProduct]);
+
+  if (state.ctxProductData.id !== undefined) {
+    return <SingleProductItem />;
+  }
 };
 
 export async function getStaticPaths() {
@@ -19,7 +29,6 @@ export async function getStaticPaths() {
 
   let paths = [];
   slugs.allProducts.map((s) => paths.push(`/shop/${s.slug}`));
-  console.log(paths);
 
   return {
     paths,
@@ -37,4 +46,4 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default SingleProduct;
+export default SingleProductPage;

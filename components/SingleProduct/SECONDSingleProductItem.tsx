@@ -3,19 +3,21 @@ import { useRouter } from "next/router";
 import { Store } from "../../store/Store";
 import { StructuredText } from "react-datocms";
 import Button from "../UI/Button";
+
 import { Divider } from "@mui/material";
+
 import Gallery from "../Gallery";
 import RelatedProducts from "./RelatedProducts";
 
-export const SingleProductItem = ({}): React.ReactElement => {
+const SingleProduct = ({ allProductsData }): React.ReactElement => {
   const { state, dispatch } = useContext(Store);
   const { ctxProductData } = state;
   const router = useRouter();
   const [active, setActive] = useState(null);
 
-  // const relatedProducts = allProductsData.filter((prod) =>
-  //   prod.category.some((cat) => cat.name === ctxProductData.category[0].name)
-  // );
+  const relatedProducts = allProductsData.filter((prod) =>
+    prod.category.some((cat) => cat.name === ctxProductData.category[0].name)
+  );
 
   useEffect(() => {
     setActive(ctxProductData.gallery[0].id);
@@ -100,8 +102,10 @@ export const SingleProductItem = ({}): React.ReactElement => {
         <div className="mt-24">
           <Divider />
         </div>
-        {/* <RelatedProducts relatedCategoryProducts={relatedProducts} /> */}
+        <RelatedProducts relatedCategoryProducts={relatedProducts} />
       </div>
     </>
   );
 };
+
+export default SingleProduct;

@@ -29,7 +29,7 @@ const Welcome = ({ heroImagesArr }): React.ReactElement => {
   // }, [index, heroImagesArr.length]);
 
   return (
-    <div className="bg-black h-min lg:h-screen relative py-24 px-6 lg:px-48 flex justify-center lg:items-center drop-shadow-clg">
+    <div className="bg-black h-min lg:h-screen relative py-24 mb-12 w-full px-6 lg:px-48 flex justify-center lg:items-center drop-shadow-clg">
       <div className="flex flex-col md:flex-row w-full md:h-min  ">
         <DatoImage
           data={heroImagesArr[8].responsiveImage}

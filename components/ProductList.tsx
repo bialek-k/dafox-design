@@ -54,20 +54,15 @@ const ProductList = ({ products }): React.ReactElement => {
   }, [dispatch, products]);
 
   const displayFilteredProduct = () => {
-    let products = [];
     if (selected === "all") {
-      products = [...filtered_products];
+      return [...filtered_products];
     } else {
-      const existingProduct = filtered_products.filter(
-        (product: ProductProps) =>
-          product.category.some((category) => category.name === selected)
+      return filtered_products.filter((product: ProductProps) =>
+        product.category.some((category) => category.name === selected)
       );
-      products.push(...existingProduct);
     }
-
-    // return [...paginatedProducts];
-    return [...products];
   };
+
   const paginatedProducts = paginate(
     displayFilteredProduct(),
     currentPage,
@@ -94,6 +89,8 @@ const ProductList = ({ products }): React.ReactElement => {
     </Link>
   ));
 
+  console.log();
+
   return (
     <div className=" container flex justify-center my-24">
       <ProductFilter
@@ -109,8 +106,11 @@ const ProductList = ({ products }): React.ReactElement => {
             setSelected={setSelected}
           />
           <p className="text-neutral-600">
-            There is <strong>{displayProduct.length}</strong>
-            {displayProduct.length > 1 ? " products" : " product"} availble
+            There is <strong>{displayFilteredProduct().length}</strong>
+            {displayFilteredProduct().length > 1
+              ? " products"
+              : " product"}{" "}
+            availble
           </p>
 
           <SortingProducts
@@ -122,11 +122,10 @@ const ProductList = ({ products }): React.ReactElement => {
           {displayProduct}
         </div>
         <Pagination
-          items={products.length}
+          items={displayFilteredProduct().length}
           pageSize={pageSize}
           onPageChange={onPageChange}
           currentPage={currentPage}
-          availbleProducts={displayProduct.length}
         />
       </div>
     </div>
@@ -134,3 +133,17 @@ const ProductList = ({ products }): React.ReactElement => {
 };
 
 export default ProductList;
+
+// const displayFilteredProduct = () => {
+//   let products = [];
+//   if (selected === "all") {
+//     products = [...filtered_products];
+//   } else {
+//     const existingProduct = filtered_products.filter(
+//       (product: ProductProps) =>
+//         product.category.some((category) => category.name === selected)
+//     );
+//     products.push(...existingProduct);
+//   }
+//   return [...products];
+// };

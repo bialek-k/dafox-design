@@ -1,19 +1,11 @@
 import React from "react";
 
-const Pagination = ({
-  items,
-  pageSize,
-  onPageChange,
-  currentPage,
-  availbleProducts,
-}) => {
+const Pagination = ({ items, pageSize, onPageChange, currentPage }) => {
   const pagesCount = Math.ceil(items / pageSize);
+
   if (pagesCount === 1) return null;
 
-  const pages = Array.from(
-    { length: availbleProducts >= pageSize ? pagesCount : 1 },
-    (_, i) => i + 1
-  );
+  const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
 
   return (
     <div className=" my-24 flex flex-col items-center justify-center">

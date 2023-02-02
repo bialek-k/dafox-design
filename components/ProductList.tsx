@@ -1,13 +1,21 @@
-import React, { useState } from "react";
-import Product from "./Product";
-import Link from "next/link";
+import { useState, useEffect, useContext } from "react";
 
-import { motion } from "framer-motion";
+import { Store } from "../store/Store";
+
+import Product from "./Product";
 import ProductFilter from "./ProductFilter";
 import MobileProductFilter from "./MobileProductFilter";
 import SortingProducts from "./SortingProducts";
 
+import { PaginationWrapper } from "./PaginationWrapper";
+
+import Link from "next/link";
+
+import { getFinalCategory } from "../utilities/categoryHandler";
 import { getSortingMethod } from "../utilities/getSortingMethod";
+import { paginate } from "../utilities/paginate";
+
+import { motion } from "framer-motion";
 
 interface ProductProps {
   name?: string;
@@ -21,61 +29,92 @@ interface ProductProps {
   id?: any;
 }
 
-const ProductList = ({ products, convertedSeriesData }): React.ReactElement => {
+const ProductList = ({ products }): React.ReactElement => {
   const [selected, setSelected] = useState("all");
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const filtered_products = getSortingMethod(sortingMethod, products);
+  const { dispatch } = useContext(Store);
 
-  const displayFilteredProduct = () => {
-    let products = [];
-    if (selected === "all") {
-      products = [...filtered_products];
-    } else {
-      const existingProduct = filtered_products.filter(
-        (product: ProductProps) =>
-          product.category.some((category) => category.name === selected)
-      );
-      products.push(...existingProduct);
-    }
-    return [...products];
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selected]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 20;
+
+  const onPageChange = (_, page) => {
+    setCurrentPage(page);
   };
 
-  const displayProduct = displayFilteredProduct().map(
-    (product: ProductProps) => (
-      <Link href={`steeringwheels/${product.slug}`} key={product.id}>
-        <a>
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.95 }}
-            className="dark:border-2 dark:rounded-md dark:border-neutral-800"
-          >
-            <Product
-              data={product}
-              title={product.name}
-              price={product.price}
-              promotion={product.promotion}
-              freeShipping={product.freeShipping}
-            />
-          </motion.div>
-        </a>
-      </Link>
-    )
+  const finalCategories = getFinalCategory(products);
+
+  useEffect(() => {
+    dispatch({
+      type: "SET_ALL_PRODUCTS",
+      payload: products,
+    });
+  }, [dispatch, products]);
+
+  const displayFilteredProduct = () => {
+    if (selected === "all") {
+      return [...filtered_products];
+    } else {
+      return filtered_products.filter((product: ProductProps) =>
+        product.category.some((category) => category.name === selected)
+      );
+    }
+  };
+
+  const paginatedProducts = paginate(
+    displayFilteredProduct(),
+    currentPage,
+    pageSize
   );
 
+  const displayProduct = paginatedProducts.map((product: ProductProps) => (
+    <Link href={`shop/${product.slug}`} key={product.id}>
+      <a>
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.95 }}
+          className="dark:border-2 dark:rounded-md dark:border-neutral-800"
+        >
+          <Product
+            data={product}
+            title={product.name}
+            price={product.price}
+            promotion={product.promotion}
+            freeShipping={product.freeShipping}
+          />
+        </motion.div>
+      </a>
+    </Link>
+  ));
+
+  console.log();
+
   return (
-    <div className=" container flex justify-center">
+    <div className="container flex justify-center my-24">
       <ProductFilter
-        convertedSeriesData={convertedSeriesData}
+        convertedSeriesData={finalCategories}
         selected={selected}
         setSelected={setSelected}
       />
       <div className="wrapper">
-        <div className="py- px-2 lg:px-6 flex mx-4 gap-4 mb-4 lg:justify-end ">
+        <div className="px-2 lg:px-6 flex mx-4 gap-4 mb-4 lg:justify-between items-center ">
           <MobileProductFilter
-            convertedSeriesData={convertedSeriesData}
+            convertedSeriesData={finalCategories}
             selected={selected}
             setSelected={setSelected}
           />
+          <p className="text-neutral-600">
+            There is <strong>{displayFilteredProduct().length}</strong>
+            {displayFilteredProduct().length > 1
+              ? " products"
+              : " product"}{" "}
+            availble
+          </p>
+
           <SortingProducts
             setSortingMethod={setSortingMethod}
             sortingMethod={sortingMethod}
@@ -84,9 +123,28 @@ const ProductList = ({ products, convertedSeriesData }): React.ReactElement => {
         <div className="grid gap-6 grid-cols-1 max-w-5xl sm:grid-cols-2 md:grid-cols-3 mx-auto px-6 ">
           {displayProduct}
         </div>
+        <PaginationWrapper
+          items={displayFilteredProduct().length}
+          pageSize={pageSize}
+          onPageChange={onPageChange}
+        />
       </div>
     </div>
   );
 };
 
 export default ProductList;
+
+// const displayFilteredProduct = () => {
+//   let products = [];
+//   if (selected === "all") {
+//     products = [...filtered_products];
+//   } else {
+//     const existingProduct = filtered_products.filter(
+//       (product: ProductProps) =>
+//         product.category.some((category) => category.name === selected)
+//     );
+//     products.push(...existingProduct);
+//   }
+//   return [...products];
+// };

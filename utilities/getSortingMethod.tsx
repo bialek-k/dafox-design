@@ -17,4 +17,5 @@ export const getSortingMethod = (sortingMethod, products) => {
   if (sortingMethod === "Sort by latest") {
     return products;
   }
+  return products;
 };

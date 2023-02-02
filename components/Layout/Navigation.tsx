@@ -29,10 +29,10 @@ const Navigation = (): React.ReactElement => {
           </Link>
         </li>
         <li>
-          <Link href="/shop/steeringwheels">
+          <Link href={{ pathname: "/shop" }}>
             <a
               className={`${
-                router.pathname.startsWith("/shop") && underline
+                router.pathname.includes("/shop") && underline
               } relative`}
             >
               Shop

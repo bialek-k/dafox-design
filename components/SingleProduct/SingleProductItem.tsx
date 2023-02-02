@@ -9,13 +9,13 @@ import RelatedProducts from "./RelatedProducts";
 
 export const SingleProductItem = ({}): React.ReactElement => {
   const { state, dispatch } = useContext(Store);
-  const { ctxProductData } = state;
+  const { ctxProductData, ctxAllProducts } = state;
   const router = useRouter();
   const [active, setActive] = useState(null);
 
-  // const relatedProducts = allProductsData.filter((prod) =>
-  //   prod.category.some((cat) => cat.name === ctxProductData.category[0].name)
-  // );
+  const relatedProducts = ctxAllProducts.filter((prod) =>
+    prod.category.some((cat) => cat.name === ctxProductData.category[0].name)
+  );
 
   useEffect(() => {
     setActive(ctxProductData.gallery[0].id);
@@ -100,7 +100,7 @@ export const SingleProductItem = ({}): React.ReactElement => {
         <div className="mt-24">
           <Divider />
         </div>
-        {/* <RelatedProducts relatedCategoryProducts={relatedProducts} /> */}
+        <RelatedProducts relatedCategoryProducts={relatedProducts} />
       </div>
     </>
   );

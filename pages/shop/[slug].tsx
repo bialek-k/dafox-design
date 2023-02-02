@@ -1,7 +1,5 @@
 import { useContext, useEffect } from "react";
-
 import { SingleProductItem } from "../../components/SingleProduct/SingleProductItem";
-
 import { Store } from "../../store/Store";
 
 import {

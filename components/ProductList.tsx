@@ -7,6 +7,8 @@ import ProductFilter from "./ProductFilter";
 import MobileProductFilter from "./MobileProductFilter";
 import SortingProducts from "./SortingProducts";
 
+import { PaginationWrapper } from "./PaginationWrapper";
+
 import Link from "next/link";
 
 import { getFinalCategory } from "../utilities/categoryHandler";
@@ -14,7 +16,7 @@ import { getSortingMethod } from "../utilities/getSortingMethod";
 import { paginate } from "../utilities/paginate";
 
 import { motion } from "framer-motion";
-import Pagination from "./UI/Pagination";
+
 interface ProductProps {
   name?: string;
   title?: string;
@@ -40,7 +42,7 @@ const ProductList = ({ products }): React.ReactElement => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 20;
 
-  const onPageChange = (page) => {
+  const onPageChange = (_, page) => {
     setCurrentPage(page);
   };
 
@@ -92,7 +94,7 @@ const ProductList = ({ products }): React.ReactElement => {
   console.log();
 
   return (
-    <div className=" container flex justify-center my-24">
+    <div className="container flex justify-center my-24">
       <ProductFilter
         convertedSeriesData={finalCategories}
         selected={selected}
@@ -121,11 +123,10 @@ const ProductList = ({ products }): React.ReactElement => {
         <div className="grid gap-6 grid-cols-1 max-w-5xl sm:grid-cols-2 md:grid-cols-3 mx-auto px-6 ">
           {displayProduct}
         </div>
-        <Pagination
+        <PaginationWrapper
           items={displayFilteredProduct().length}
           pageSize={pageSize}
           onPageChange={onPageChange}
-          currentPage={currentPage}
         />
       </div>
     </div>

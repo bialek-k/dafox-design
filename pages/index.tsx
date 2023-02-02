@@ -2,14 +2,14 @@ import React, { useEffect, useContext } from "react";
 import Welcome from "../components/Welcome";
 
 import { client } from "../lib/apollo";
-import { allProductsQuery, heroImagesQuery } from "../lib/queries";
+import { heroImagesQuery } from "../lib/queries";
 import ProductList from "../components/ProductList";
 
 import { Store } from "../store/Store";
 import { getAllProducts } from "../lib/DatocmsApiCall";
 
-const Home = ({ data, heroImagesArr, products }): React.ReactElement => {
-  const { dispatch, state } = useContext(Store);
+const Home = ({ heroImagesArr, products }): React.ReactElement => {
+  const { dispatch } = useContext(Store);
 
   useEffect(() => {
     dispatch({
@@ -19,9 +19,8 @@ const Home = ({ data, heroImagesArr, products }): React.ReactElement => {
   }, [dispatch, products]);
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="relative flex flex-col justify-center items-center">
       <Welcome heroImagesArr={heroImagesArr} />
-      <h1 className="text-3xl font-bold mt-12">Shop</h1>
       <ProductList products={products} />
     </div>
   );

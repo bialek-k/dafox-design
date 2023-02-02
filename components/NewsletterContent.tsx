@@ -4,8 +4,21 @@ export const NewsletterContent = () => {
   const [email, setEmail] = useState(null);
   const [submitted, setSubmitted] = useState(false);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+
+    if (email === null) return;
+
+    await fetch("/api/subscribeUser", {
+      body: JSON.stringify({
+        email: email,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+
     setSubmitted(true);
   };
 

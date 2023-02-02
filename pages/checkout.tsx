@@ -16,7 +16,6 @@ import BillingDetails from "../components/OrderDetails/BillingDetails";
 import Final from "../components/OrderDetails/Final";
 
 import createCheckoutSession from "../utilities/createCheckoutSession";
-import { deliveryPrice } from "../utilities/deliveryPriceSetter";
 
 import Spinner from "../components/UI/Spinner";
 

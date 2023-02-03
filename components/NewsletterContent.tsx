@@ -43,7 +43,7 @@ export const NewsletterContent = () => {
       <div className="content bg-black flex flex-col px-6 text-center md:text-left md:flex-row justify-between items-center rounded-lg shadow-lg py-6 md:w-2/3 md:px-10">
         <div className="description md:w-1/2 flex flex-col items-center md:items-start ">
           <h2 className="md:text-2xl text-xl text-white mb-2 md:mb-0">
-            subscribe to our newsletter
+            Join our newsletter
           </h2>
           <p className="text-neutral-500 text-xs md:text-sm w-3/4 md:w-3/2">
             Get access to the world of exclusive steering wheels and stay

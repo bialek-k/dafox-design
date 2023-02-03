@@ -69,7 +69,7 @@ export const NewsletterContent = () => {
                 required: "email is required",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "email must contain @",
+                  message: "email must contains @",
                 },
               })}
               placeholder="your eamil"

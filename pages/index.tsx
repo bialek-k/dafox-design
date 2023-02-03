@@ -29,7 +29,6 @@ const Home = ({ heroImagesArr, products }): React.ReactElement => {
 export async function getStaticProps() {
   const heroImages = await client.query(heroImagesQuery);
   const heroImagesArr = heroImages.data.heroSection.heroGallery;
-
   const products = await getAllProducts();
 
   return {

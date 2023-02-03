@@ -40,7 +40,6 @@
     "react-spring": "^9.5.5",
     "stripe": "^10.2.0",
     "swiper": "^8.3.2",
-    "three": "^0.145.0",
     "zod": "^3.19.0"
   },
   "devDependencies": {

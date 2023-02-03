@@ -36,15 +36,3 @@ export const PaginationWrapper = ({ items, pageSize, onPageChange }) => {
     </div>
   );
 };
-
-// const theme = useMemo(
-//   () =>
-//     createTheme({
-//       palette: {
-//         primary: {
-//           main: "#eab308",
-//         },
-//       },
-//     }),
-//   [prefersDarkMode]
-// );

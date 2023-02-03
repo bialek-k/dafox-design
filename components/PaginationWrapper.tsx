@@ -1,16 +1,24 @@
 import { Pagination } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React from "react";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#eab308",
-    },
-  },
-});
+import { useMemo } from "react";
 
 export const PaginationWrapper = ({ items, pageSize, onPageChange }) => {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? "dark" : "light",
+          primary: {
+            main: "#eab308",
+          },
+        },
+      }),
+    [prefersDarkMode]
+  );
+
   const pagesCount = Math.ceil(items / pageSize);
   if (pagesCount === 1) return null;
 
@@ -28,3 +36,15 @@ export const PaginationWrapper = ({ items, pageSize, onPageChange }) => {
     </div>
   );
 };
+
+// const theme = useMemo(
+//   () =>
+//     createTheme({
+//       palette: {
+//         primary: {
+//           main: "#eab308",
+//         },
+//       },
+//     }),
+//   [prefersDarkMode]
+// );

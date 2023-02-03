@@ -1,5 +1,5 @@
-import Welcome from "../components/Welcome";
-import { Newsletter } from "../components/Newsletter";
+import Welcome from "./Welcome";
+import { Newsletter } from "./Newsletter";
 
 const Hero = ({ heroImagesArr }) => {
   return (

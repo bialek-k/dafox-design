@@ -6,7 +6,7 @@ import ProductList from "../components/ProductList";
 
 import { Store } from "../store/Store";
 import { getAllProducts } from "../lib/DatocmsApiCall";
-import Hero from "./Hero";
+import Hero from "../components/Hero";
 
 const Home = ({ heroImagesArr, products }): React.ReactElement => {
   const { dispatch } = useContext(Store);

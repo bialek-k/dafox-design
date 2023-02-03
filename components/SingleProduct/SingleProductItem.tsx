@@ -100,7 +100,7 @@ export const SingleProductItem = ({}): React.ReactElement => {
         <div className="mt-24">
           <Divider />
         </div>
-        <RelatedProducts relatedCategoryProducts={relatedProducts} />
+        {/* <RelatedProducts relatedCategoryProducts={relatedProducts} /> */}
       </div>
     </>
   );

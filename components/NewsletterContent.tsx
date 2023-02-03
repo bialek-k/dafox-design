@@ -17,6 +17,7 @@ export const NewsletterContent = () => {
     fetch("/api/subscribeUser", {
       body: JSON.stringify({
         email: data.email,
+        name: data.name,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -54,16 +55,34 @@ export const NewsletterContent = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col md:flex-row items-center md:items-stretch gap-3 justify-center mt-6 md:mt-0 h-10 md:h-12"
         >
-          <ErrorMessage
-            errors={errors}
-            name="email"
-            render={({ message }) => (
-              <div className=" flex items-center">
-                <p className="text-red-500 font-bold">{message}</p>
-              </div>
-            )}
-          />
-          <div className="flex justify-center">
+          <div className="errors flex md:flex-col gap-2">
+            <ErrorMessage
+              errors={errors}
+              name="name"
+              render={({ message }) => (
+                <div className=" flex items-center">
+                  <p className="text-red-500 font-bold">{message}</p>
+                </div>
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="email"
+              render={({ message }) => (
+                <div className=" flex items-center">
+                  <p className="text-red-500 font-bold">{message}</p>
+                </div>
+              )}
+            />
+          </div>
+          <div className="flex md:flex-row text-sm md:text-base justify-center gap-2">
+            <input
+              {...register("name", {
+                required: "name is required",
+              })}
+              placeholder="name"
+              className="rounded-l-lg text-center h-10 md:h-auto w-1/2 md:w-full"
+            />
             <input
               {...register("email", {
                 required: "email is required",
@@ -72,8 +91,8 @@ export const NewsletterContent = () => {
                   message: "email must contains @",
                 },
               })}
-              placeholder="your eamil"
-              className="rounded-l-lg text-center h-10 md:h-auto w-1/2 md:w-full"
+              placeholder="email"
+              className=" text-center h-10 md:h-auto w-1/2 md:w-full"
             />
 
             <button

@@ -2,9 +2,9 @@ import axios from "axios";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req, res) => {
-  const { email } = req.body;
+  const { name, email } = req.body;
 
-  if (!email || !email.length) {
+  if (!email || !email.length || !name || !name.length) {
     return res.status(400).json({ error: "Email is required" });
   }
 
@@ -16,6 +16,9 @@ export default async (req, res) => {
 
   const data = {
     email_address: email,
+    merge_fields: {
+      FNAME: name,
+    },
     status: "subscribed",
   };
 

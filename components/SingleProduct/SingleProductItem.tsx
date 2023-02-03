@@ -13,9 +13,9 @@ export const SingleProductItem = ({}): React.ReactElement => {
   const router = useRouter();
   const [active, setActive] = useState(null);
 
-  // const relatedProducts = ctxAllProducts.filter((prod) =>
-  //   prod.category.some((cat) => cat.name === ctxProductData.category[0].name)
-  // );
+  const relatedProducts = ctxAllProducts.filter((prod) =>
+    prod.category.some((cat) => cat.name === ctxProductData.category[0].name)
+  );
 
   useEffect(() => {
     setActive(ctxProductData.gallery[0].id);

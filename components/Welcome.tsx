@@ -3,7 +3,7 @@ import { Image as DatoImage } from "react-datocms";
 
 const Welcome = ({ heroImagesArr }): React.ReactElement => {
   return (
-    <div className="bg-black h-min lg:h-2/4 py-24 mb-12 w-full px-6 lg:px-48 flex justify-center lg:items-center drop-shadow-clg">
+    <div className="bg-black h-min lg:h-2/4 py-24 mb-12 w-full px-6 lg:px-48 flex justify-center lg:items-center drop-shadow-clg relative">
       <DatoImage
         data={heroImagesArr[8].responsiveImage}
         objectFit="cover"

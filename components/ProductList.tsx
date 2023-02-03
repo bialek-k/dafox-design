@@ -101,19 +101,19 @@ const ProductList = ({ products }): React.ReactElement => {
         setSelected={setSelected}
       />
       <div className="wrapper">
-        <div className="px-2 lg:px-6 flex mx-4 gap-4 mb-4 lg:justify-between items-center ">
-          <MobileProductFilter
-            convertedSeriesData={finalCategories}
-            selected={selected}
-            setSelected={setSelected}
-          />
-          <p className="text-neutral-600">
+        <div className="px-2 lg:px-6 flex flex-col md:flex-row mx-4 gap-4 mb-4 lg:justify-between items-center ">
+          <p className="text-neutral-600 w-full">
             There is <strong>{displayFilteredProduct().length}</strong>
             {displayFilteredProduct().length > 1
               ? " products"
               : " product"}{" "}
             availble
           </p>
+          <MobileProductFilter
+            convertedSeriesData={finalCategories}
+            selected={selected}
+            setSelected={setSelected}
+          />
 
           <SortingProducts
             setSortingMethod={setSortingMethod}

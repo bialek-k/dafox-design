@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import Welcome from "../components/Welcome";
 
 import { client } from "../lib/apollo";
 import { heroImagesQuery } from "../lib/queries";
@@ -7,8 +6,7 @@ import ProductList from "../components/ProductList";
 
 import { Store } from "../store/Store";
 import { getAllProducts } from "../lib/DatocmsApiCall";
-import { Newsletter } from "../components/Newsletter";
-import { Hero } from "./Hero";
+import Hero from "./Hero";
 
 const Home = ({ heroImagesArr, products }): React.ReactElement => {
   const { dispatch } = useContext(Store);

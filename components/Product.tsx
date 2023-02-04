@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+
+import { Store } from "../store/Store";
 
 import { Image as DatoImage } from "react-datocms";
 
 import { FaShoppingCart } from "react-icons/fa";
 
 interface ProductProps {
-  name?: string;
-  title?: string;
-  price?: number;
-  data?: any;
-  promotion?: any;
-  freeShipping?: any;
-  category?: any;
-  slug?: string;
-  id?: any;
+  title: string;
+  price: number;
+  data: any;
+  promotion: any;
+  freeShipping: any;
 }
 
 const Product = ({
@@ -23,16 +21,36 @@ const Product = ({
   promotion,
   freeShipping,
 }: ProductProps): React.ReactElement => {
+  const [changeImage, setChangeImage] = useState(false);
+
+  const mouseEnterHandler = () => {
+    if (data.gallery[1] === undefined) return;
+    setChangeImage(true);
+  };
+  const mouseLeaveHandler = () => {
+    setChangeImage(false);
+  };
+
   return (
     <div className="single-product p-4 flex flex-col justify-between ease-in-out duration-200 shadow-xl sm:h-128 rounded-md">
       <div className="content">
-        <div className="photo mb-3 w-full aspect-square">
+        <div
+          className="photo mb-3 w-full aspect-square"
+          onMouseOver={mouseEnterHandler}
+          onMouseOut={mouseLeaveHandler}
+        >
           {data?.image && (
             <DatoImage
               className="rounded-lg h-full"
               objectFit="cover"
               layout="responsive"
-              data={data.image.responsiveImage}
+              data={
+                changeImage
+                  ? data.gallery[
+                      Math.floor(Math.random() * data.gallery.length)
+                    ].responsiveImage
+                  : data.image.responsiveImage
+              }
             />
           )}
         </div>

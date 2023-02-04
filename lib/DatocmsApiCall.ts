@@ -36,6 +36,22 @@ const allProducts = gql`
           width
         }
       }
+      gallery {
+        id
+        responsiveImage {
+          aspectRatio
+          alt
+          base64
+          bgColor
+          height
+          sizes
+          src
+          srcSet
+          title
+          webpSrcSet
+          width
+        }
+      }
     }
   }
 `;

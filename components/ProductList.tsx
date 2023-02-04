@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
 
 import { Store } from "../store/Store";
 
@@ -34,6 +35,7 @@ const ProductList = ({ products }): React.ReactElement => {
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const filtered_products = getSortingMethod(sortingMethod, products);
   const { dispatch } = useContext(Store);
+  const router = useRouter();
 
   useEffect(() => {
     setCurrentPage(1);
@@ -90,8 +92,6 @@ const ProductList = ({ products }): React.ReactElement => {
       </a>
     </Link>
   ));
-
-  console.log();
 
   return (
     <div className="container flex justify-center my-24">

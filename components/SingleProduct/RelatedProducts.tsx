@@ -30,6 +30,7 @@ const RelatedProducts = ({ relatedCategoryProducts }) => {
                     price={singleProduct.price}
                     data={singleProduct}
                     promotion={singleProduct.promotion}
+                    freeShipping={singleProduct.freeShipping}
                   />
                 </motion.div>
               </a>

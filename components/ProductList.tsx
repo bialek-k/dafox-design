@@ -35,7 +35,6 @@ const ProductList = ({ products }): React.ReactElement => {
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const filtered_products = getSortingMethod(sortingMethod, products);
   const { dispatch } = useContext(Store);
-  const router = useRouter();
 
   useEffect(() => {
     setCurrentPage(1);

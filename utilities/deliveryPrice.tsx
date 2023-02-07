@@ -8,7 +8,7 @@ export const deliveryPriceArr = [
   { country: "Chech Republic", price: 20 },
   { country: "Denmark", price: 20 },
   { country: "Estonia", price: 20 },
-  { country: "Finland", price: 35 },
+  { country: "Finland", price: 20 },
   { country: "France", price: 30 },
   { country: "Greece", price: 35 },
   { country: "Spain", price: 30 },

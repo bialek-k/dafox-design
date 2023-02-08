@@ -12,11 +12,10 @@ import logoBlack from "../../../assets/dafox_logo_black.png";
 import HamburgerButton from "./HamburgerButton";
 import MobileMenu from "./MobileMenu";
 import CloseHamButton from "./CloseHamButton";
-import Search from "./Search/Search";
+// import Search from "./Search/Search";
 
 const Header = (): React.ReactElement => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
-  const router = useRouter();
 
   return (
     <>
@@ -41,9 +40,9 @@ const Header = (): React.ReactElement => {
                 </a>
               </Link>
             </div>
-            <div className="search">
+            {/* <div className="search">
               <Search />
-            </div>
+            </div> */}
             <div className="hidden md:flex">
               <Navigation />
             </div>

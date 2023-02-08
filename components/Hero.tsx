@@ -1,10 +1,10 @@
 import Welcome from "./Welcome";
 import { Newsletter } from "./Newsletter";
 
-const Hero = ({ heroImagesArr }) => {
+const Hero = () => {
   return (
     <div className="flex flex-col w-full items-center relative">
-      <Welcome heroImagesArr={heroImagesArr} />
+      <Welcome />
       <Newsletter />
     </div>
   );

@@ -1,25 +1,70 @@
 import ProductList from "../../components/ProductList";
+import { client } from "../../lib/apollo";
+import { gql } from "@apollo/client";
 
-import { getAllProducts } from "../../lib/DatocmsApiCall";
+import Hero from "../../components/Hero";
 
-const Shop = ({ products }): React.ReactElement => {
+const Shop = ({ products, totalProductNumber }): React.ReactElement => {
   return (
-    <div className="container mx-auto py-20 mb-20">
-      <div>
-        <ProductList products={products} />
-      </div>
+    <div className="flex flex-col justify-center items-center">
+      <Hero />
+      <ProductList
+        products={products}
+        currentPage={1}
+        totalProducts={totalProductNumber}
+      />
     </div>
   );
 };
 
 export async function getStaticProps() {
-  const products = await getAllProducts();
+  const paginatedProductsLists = gql`
+    query AllProducts($first: IntType, $skip: IntType) {
+      _allProductsMeta {
+        count
+      }
+      allProducts(first: $first, skip: $skip) {
+        name
+        id
+        slug
+        price
+        freeShipping
+        promotion
+        inStock
+        category {
+          id
+          series
+          name
+        }
+        image {
+          responsiveImage {
+            alt
+            base64
+            bgColor
+            title
+            aspectRatio
+            height
+            sizes
+            src
+            srcSet
+            webpSrcSet
+            width
+          }
+        }
+      }
+    }
+  `;
+
+  const { data } = await client.query({
+    query: paginatedProductsLists,
+    variables: { first: 15, skip: 0 },
+  });
 
   return {
     props: {
-      products,
+      products: data.allProducts,
+      totalProductNumber: data._allProductsMeta.count,
     },
   };
 }
-
 export default Shop;

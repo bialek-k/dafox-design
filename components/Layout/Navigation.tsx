@@ -28,7 +28,7 @@ const Navigation = (): React.ReactElement => {
             </a>
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link href={{ pathname: "/shop" }}>
             <a
               className={`${
@@ -38,7 +38,7 @@ const Navigation = (): React.ReactElement => {
               Shop
             </a>
           </Link>
-        </li>
+        </li> */}
 
         <li>
           <Link href="/about">

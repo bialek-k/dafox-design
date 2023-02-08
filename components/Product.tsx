@@ -23,23 +23,29 @@ const Product = ({
 }: ProductProps): React.ReactElement => {
   const [changeImage, setChangeImage] = useState(false);
 
-  const mouseEnterHandler = () => {
-    if (data.gallery[1] === undefined) return;
-    setChangeImage(true);
-  };
-  const mouseLeaveHandler = () => {
-    setChangeImage(false);
-  };
+  // const mouseEnterHandler = () => {
+  //   if (data.gallery[1] === undefined) return;
+  //   setChangeImage(true);
+  // };
+  // const mouseLeaveHandler = () => {
+  //   setChangeImage(false);
+  // };
 
   return (
-    <div className="single-product p-4 flex flex-col justify-between ease-in-out duration-200 shadow-xl sm:h-128 rounded-md">
+    <div className="single-product p-4 flex flex-col justify-between ease-in-out duration-200 shadow-xl h-96 rounded-md">
       <div className="content">
         <div
           className="photo mb-3 w-full aspect-square"
-          onMouseOver={mouseEnterHandler}
-          onMouseOut={mouseLeaveHandler}
+          // onMouseOver={mouseEnterHandler}
+          // onMouseOut={mouseLeaveHandler}
         >
-          {data?.image && (
+          <DatoImage
+            className="rounded-lg h-full"
+            objectFit="cover"
+            layout="responsive"
+            data={data.image.responsiveImage}
+          />
+          {/* {data?.image && (
             <DatoImage
               className="rounded-lg h-full"
               objectFit="cover"
@@ -52,7 +58,7 @@ const Product = ({
                   : data.image.responsiveImage
               }
             />
-          )}
+          )} */}
         </div>
         <div className="title font-bold text-md mb-24 md:mb-0">
           <p>{title}</p>

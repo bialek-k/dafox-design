@@ -7,7 +7,6 @@ import Product from "./Product";
 import ProductFilter from "./ProductFilter";
 import MobileProductFilter from "./MobileProductFilter";
 import SortingProducts from "./SortingProducts";
-
 import Link from "next/link";
 
 import { getFinalCategory } from "../utilities/categoryHandler";
@@ -28,16 +27,14 @@ interface ProductProps {
   id?: any;
 }
 
-const ProductList = ({
-  products,
-  currentPage,
-  totalProducts,
-}): React.ReactElement => {
+const ProductList = ({ products, totalProducts }): React.ReactElement => {
   const [selected, setSelected] = useState("all");
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const filtered_products = getSortingMethod(sortingMethod, products);
   const { dispatch } = useContext(Store);
   // const finalCategories = getFinalCategory(products);
+
+  const router = useRouter();
 
   const pageSize = 15;
   const pages = totalProducts / pageSize;
@@ -93,7 +90,8 @@ const ProductList = ({
           <p className="text-neutral-600 w-full">
             There is{" "}
             <strong>
-              {(totalProducts / pages) * currentPage} / {totalProducts}
+              {(totalProducts / pages) * Number(router.query.page)} /{" "}
+              {totalProducts}
             </strong>
             {displayFilteredProduct().length > 1 ? " products" : " product"}{" "}
             availble
@@ -112,11 +110,7 @@ const ProductList = ({
         <div className="grid gap-6 grid-cols-1 max-w-5xl sm:grid-cols-2 md:grid-cols-4 mx-auto px-6 ">
           {displayProduct}
         </div>
-        <Pagination
-          currentPage={currentPage}
-          totalProducts={totalProducts}
-          pageSize={pageSize}
-        />
+        <Pagination totalProducts={totalProducts} pageSize={pageSize} />
       </div>
     </div>
   );

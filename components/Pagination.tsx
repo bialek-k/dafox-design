@@ -2,17 +2,18 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export const Pagination = ({ totalProducts, currentPage, pageSize }) => {
+export const Pagination = ({ totalProducts, pageSize }) => {
   const router = useRouter();
   const totalProductNumber = totalProducts;
 
   const getNavigationLinks = () => {
     const totalPages = totalProductNumber / pageSize + 1;
-    let arr = [];
+    let arrOfPages = [];
+
     for (let i = 1; i < totalPages; i++) {
-      arr.push(i);
+      arrOfPages.push(i);
     }
-    return arr;
+    return arrOfPages;
   };
 
   const paginationLinks = getNavigationLinks().map((pageNumber) => {
@@ -21,16 +22,16 @@ export const Pagination = ({ totalProducts, currentPage, pageSize }) => {
         <Link href={`/shop/page/${pageNumber}`}>
           <div
             className={`${
-              router.asPath === `/shop/page/${pageNumber}` &&
-              "bg-yellow-500 font-bold "
-            } bg-red-400"
-          cursor-pointer w-8 h-8 flex items-center justify-center rounded-full bg-neutral-100`}
+              router.asPath === `/shop/page/${pageNumber}`
+                ? "bg-yellow-500"
+                : "bg-neutral-100"
+            } 
+          cursor-pointer w-8 h-8 flex items-center justify-center rounded-full`}
           >
             <p
               className={`${
-                router.asPath != `/shop/page/${pageNumber}` &&
-                "text-neutral-400 "
-              } text-md`}
+                router.asPath === `/shop/page/${pageNumber}` && "font-bold"
+              }`}
             >
               {pageNumber}
             </p>

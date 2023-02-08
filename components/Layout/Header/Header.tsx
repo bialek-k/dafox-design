@@ -29,7 +29,7 @@ const Header = (): React.ReactElement => {
         <div className=" container mx-auto">
           <header className="flex items-center justify-between py-4 ">
             <div>
-              <Link href="/">
+              <Link href="/shop/page/1">
                 <a>
                   <Image
                     src={logoWhite}

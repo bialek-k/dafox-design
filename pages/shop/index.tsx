@@ -1,18 +1,13 @@
 import ProductList from "../../components/ProductList";
 import { client } from "../../lib/apollo";
 import { gql } from "@apollo/client";
-
 import Hero from "../../components/Hero";
 
-const Shop = ({ products, totalProductNumber }): React.ReactElement => {
+const Page = ({ products, totalProductNumber }): React.ReactElement => {
   return (
     <div className="flex flex-col justify-center items-center">
       <Hero />
-      <ProductList
-        products={products}
-        currentPage={1}
-        totalProducts={totalProductNumber}
-      />
+      <ProductList products={products} totalProducts={totalProductNumber} />
     </div>
   );
 };
@@ -67,4 +62,4 @@ export async function getStaticProps() {
     },
   };
 }
-export default Shop;
+export default Page;

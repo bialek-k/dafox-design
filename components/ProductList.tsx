@@ -67,7 +67,7 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
             sortingMethod={sortingMethod}
           />
         </div>
-        <div className="grid gap-6 grid-cols-1 max-w-5xl sm:grid-cols-2 md:grid-cols-4 mx-auto  ">
+        <div className="grid gap-6 grid-cols-1 max-w-5xl sm:grid-cols-2 md:grid-cols-4 mx-auto">
           {queryProducts().map((product: ProductProps) => (
             <Link href={`/shop/${product.slug}`} key={product.id}>
               <a>
@@ -88,7 +88,9 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
             </Link>
           ))}
         </div>
-        <Pagination totalProducts={totalProducts} pageSize={pageSize} />
+        {router.query.page && (
+          <Pagination totalProducts={totalProducts} pageSize={pageSize} />
+        )}
       </div>
     </div>
   );

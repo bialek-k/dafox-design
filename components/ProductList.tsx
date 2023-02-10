@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 
 import { Store } from "../store/Store";
+import { sendSearchQuery } from "../utilities/sendSearchQuery";
 
 import Product from "./Product";
 import ProductFilter from "./ProductFilter";
@@ -14,6 +15,8 @@ import { getSortingMethod } from "../utilities/getSortingMethod";
 
 import { motion } from "framer-motion";
 import { Pagination } from "./Pagination";
+import { AmountOfProducts } from "./AmountOfProducts";
+import { SearchProducts } from "./SearchProducts";
 
 interface ProductProps {
   name?: string;
@@ -30,85 +33,60 @@ interface ProductProps {
 const ProductList = ({ products, totalProducts }): React.ReactElement => {
   const [selected, setSelected] = useState("all");
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
-  const filtered_products = getSortingMethod(sortingMethod, products);
-  const { dispatch } = useContext(Store);
-  // const finalCategories = getFinalCategory(products);
-
+  const finalCategories = getFinalCategory(products);
   const router = useRouter();
+  const {
+    state: { searchProducts },
+  } = useContext(Store);
 
-  const pageSize = 15;
-  const pages = totalProducts / pageSize;
-
-  useEffect(() => {
-    dispatch({
-      type: "SET_ALL_PRODUCTS",
-      payload: products,
-    });
-  }, [dispatch, products]);
-
-  const displayFilteredProduct = () => {
-    if (selected === "all") {
-      return [...filtered_products];
+  const queryProducts = () => {
+    if (searchProducts.length) {
+      return searchProducts;
     } else {
-      return filtered_products.filter((product: ProductProps) =>
-        product.category.some((category) => category.name === selected)
-      );
+      return products;
     }
   };
 
-  const displayProduct = displayFilteredProduct().map(
-    (product: ProductProps) => (
-      <Link href={`/shop/${product.slug}`} key={product.id}>
-        <a>
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.95 }}
-            className="dark:border-2 dark:rounded-md dark:border-neutral-800"
-          >
-            <Product
-              data={product}
-              title={product.name}
-              price={product.price}
-              promotion={product.promotion}
-              freeShipping={product.freeShipping}
-            />
-          </motion.div>
-        </a>
-      </Link>
-    )
-  );
+  const pageSize = 15;
+  const pages = totalProducts / pageSize;
+  const currentPage = Number(router.query.page);
 
   return (
     <div className="container flex justify-center my-24">
-      {/* <ProductFilter
-        convertedSeriesData={finalCategories}
-        selected={selected}
-        setSelected={setSelected}
-      /> */}
-      <div className="wrapper">
-        <div className="px-2 lg:px-6 flex flex-col md:flex-row mx-4 gap-4 mb-4 lg:justify-between items-center ">
-          <p className="text-neutral-600 w-full">
-            There is{" "}
-            <strong>
-              {(totalProducts / pages) * Number(router.query.page)} /{" "}
-              {totalProducts}
-            </strong>
-            {displayFilteredProduct().length > 1 ? " products" : " product"}{" "}
-            availble
-          </p>
-          {/* <MobileProductFilter
-            convertedSeriesData={finalCategories}
-            selected={selected}
-            setSelected={setSelected}
-          /> */}
-
+      <div className="wrapper px-6">
+        <SearchProducts />
+        <div className="flex flex-col md:flex-row gap-4 mb-4 lg:justify-between items-center ">
+          <AmountOfProducts
+            products={products}
+            totalProducts={totalProducts}
+            currentPage={currentPage}
+            pageSize={pageSize}
+          />
           <SortingProducts
             setSortingMethod={setSortingMethod}
             sortingMethod={sortingMethod}
           />
         </div>
-        <div className="grid gap-6 grid-cols-1 max-w-5xl sm:grid-cols-2 md:grid-cols-4 mx-auto px-6 ">
-          {displayProduct}
+        <div className="grid gap-6 grid-cols-1 max-w-5xl sm:grid-cols-2 md:grid-cols-4 mx-auto  ">
+          {queryProducts().map((product: ProductProps) => (
+            <Link href={`/shop/${product.slug}`} key={product.id}>
+              <a>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="dark:border-2 dark:rounded-md dark:border-neutral-800"
+                >
+                  <Product
+                    data={product}
+                    title={product.name}
+                    price={product.price}
+                    promotion={product.promotion}
+                    freeShipping={product.freeShipping}
+                  />
+                </motion.div>
+              </a>
+            </Link>
+          ))}
         </div>
         <Pagination totalProducts={totalProducts} pageSize={pageSize} />
       </div>
@@ -137,4 +115,26 @@ export default ProductList;
   //   currentPage,
   //   pageSize
   // );
+
+
+    const filtered_products = getSortingMethod(sortingMethod, products);
+  const { dispatch } = useContext(Store);
+
+  
+  useEffect(() => {
+    dispatch({
+      type: "SET_ALL_PRODUCTS",
+      payload: products,
+    });
+  }, [dispatch, products]);
+
+  const displayFilteredProduct = () => {
+    if (selected === "all") {
+      return [...filtered_products];
+    } else {
+      return filtered_products.filter((product: ProductProps) =>
+        product.category.some((category) => category.name === selected)
+      );
+    }
+  };
 */

@@ -10,10 +10,16 @@ const initialState = {
   ctxProductData: {},
   ctxAllProducts: [],
   faqContent: [],
+  searchProducts: [],
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_SEARCH_PRODUCTS": {
+      const searchProducts = action.payload;
+      return { ...state, searchProducts };
+    }
+
     case "SET_FAQ_CONTENT": {
       const storedFaqContent = action.payload;
       return { ...state, faqContent: storedFaqContent };

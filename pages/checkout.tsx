@@ -2,11 +2,7 @@ import React, { useContext } from "react";
 import { Store } from "../store/Store";
 
 import { z } from "zod";
-import {
-  basicForm,
-  extendsForm,
-  defaultValues,
-} from "../utilities/zod/zodObjects";
+import { basicForm, extendsForm } from "../utilities/zod/zodObjects";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 
@@ -22,6 +18,25 @@ import Spinner from "../components/UI/Spinner";
 const FormSchema = z.discriminatedUnion("checkbox", [basicForm, extendsForm]);
 
 type CheckoutFormType = z.TypeOf<typeof FormSchema>;
+
+const defaultValues = {
+  name: "",
+  surname: "",
+  phone_number: "",
+  address: "",
+  city: "",
+  country: "Select Country",
+  zipcode: "",
+  email: "",
+  message: "",
+  shipping_name: "",
+  shipping_surname: "",
+  shipping_phone_number: "",
+  shipping_address: "",
+  shipping_city: "",
+  shipping_country: "Poland",
+  shipping_zipcode: "",
+};
 
 const Checkout = (): React.ReactElement => {
   const { state, dispatch } = useContext(Store);

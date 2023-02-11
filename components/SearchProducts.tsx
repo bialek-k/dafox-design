@@ -6,52 +6,20 @@ import Button from "./UI/Button";
 
 export const SearchProducts = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [queriesList, setQueriesList] = useState([]);
-  const [updateQuery, setUpdateQuery] = useState(false);
+  const [queryList, setQueryList] = useState([]);
   const router = useRouter();
-  const { dispatch } = useContext(Store);
-
-  const handleInputChange = (e) => {
-    if (e.target.value) {
-      setSearchQuery(e.target.value);
-    }
-  };
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    if (searchQuery === "") return;
 
-    fetch("/api/search-products", {
-      method: "POST",
-      body: JSON.stringify(searchQuery),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({
-          type: "SET_SEARCH_PRODUCTS",
-          payload: data,
-        });
-      });
-
+    console.log(queryList);
     setSearchQuery("");
-    setQueriesList([...queriesList, searchQuery]);
+
+    router.push(`/shop/search?query=${searchQuery}`);
   };
 
-  console.log(queriesList.length);
-
-  if (queriesList.length) {
-    router.push({
-      pathname: "/shop/search",
-      query: { query: `${queriesList}` },
-    });
-  }
-
-  const removeQueryHandler = (index) => {
-    const filteredQuery = queriesList.filter((_, i) => i !== index);
-    setQueriesList(filteredQuery);
-    router.push({
-      pathname: `/shop/page/1`,
-    });
-  };
+  console.log(router);
 
   return (
     <div className="mb-12">
@@ -59,9 +27,9 @@ export const SearchProducts = () => {
         <input
           type="text"
           className="border-2 border-neutral-300 rounded-r-none rounded-l-md w-full px-4 py-3"
-          onChange={handleInputChange}
-          value={searchQuery}
           placeholder="Search product"
+          onChange={(e) => setSearchQuery(e.target.value)}
+          value={searchQuery}
         />
         <Button
           type="submit"
@@ -85,3 +53,13 @@ export const SearchProducts = () => {
     </div>
   );
 };
+
+/*
+  const removeQueryHandler = (index) => {
+    const filteredQuery = queriesList.filter((_, i) => i !== index);
+    setQueriesList(filteredQuery);
+    router.push({
+      pathname: `/shop/page/1`,
+    });
+  };
+*/

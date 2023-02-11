@@ -29,10 +29,7 @@ export const PaginationWrapper = ({ items, pageSize, onPageChange }) => {
       <ThemeProvider theme={theme}>
         <Pagination
           count={pages.length}
-          onChange={() => {
-            window.scrollTo({ top: 520, left: 0, behavior: "smooth" });
-            onPageChange;
-          }}
+          onChange={onPageChange}
           color="primary"
         />
       </ThemeProvider>

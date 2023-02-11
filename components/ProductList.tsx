@@ -35,15 +35,15 @@ const ProductList = ({ products }): React.ReactElement => {
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const filtered_products = getSortingMethod(sortingMethod, products);
   const { dispatch } = useContext(Store);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 20;
 
   useEffect(() => {
     setCurrentPage(1);
   }, [selected]);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 20;
-
   const onPageChange = (_, page) => {
+    window.scrollTo({ top: 520, left: 0, behavior: "smooth" });
     setCurrentPage(page);
   };
 

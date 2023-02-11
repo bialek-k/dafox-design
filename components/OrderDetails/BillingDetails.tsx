@@ -21,7 +21,7 @@ const BillingDetails = (): React.ReactElement => {
             <div className="div flex">
               <InputText name="name" label="Name" />
               <InputText name="surname" label="Surname" />
-              <InputText name="phone_number" label="Phone numer" />
+              <InputText name="phone_number" label="Phone number" />
             </div>
             <InputText name="city" label="City" />
             <InputText name="address" label="Address" />

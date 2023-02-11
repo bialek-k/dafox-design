@@ -6,7 +6,7 @@ import { basicForm, extendsForm } from "../utilities/zod/zodObjects";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 
-import { deliveryPriceArr } from "../utilities/deliveryPrice";
+import { deliveryPriceArr } from "../utilities/deliveryCountries";
 
 import BillingDetails from "../components/OrderDetails/BillingDetails";
 import Final from "../components/OrderDetails/Final";

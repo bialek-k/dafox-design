@@ -88,7 +88,7 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
             </Link>
           ))}
         </div>
-        {router.query.page && (
+        {!searchProducts && (
           <Pagination totalProducts={totalProducts} pageSize={pageSize} />
         )}
       </div>

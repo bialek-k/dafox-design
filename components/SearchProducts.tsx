@@ -1,25 +1,37 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Store } from "../store/Store";
-import { useRouter } from "next/router";
 
 import Button from "./UI/Button";
 
 export const SearchProducts = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [queryList, setQueryList] = useState([]);
-  const router = useRouter();
+  const [queryArray, setQueryArray] = useState([]);
+  const { dispatch } = useContext(Store);
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (searchQuery === "") return;
 
-    console.log(queryList);
-    setSearchQuery("");
+    fetch("/api/search-products", {
+      method: "POST",
+      body: JSON.stringify(searchQuery),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({
+          type: "SET_SEARCH_PRODUCTS",
+          payload: data,
+        });
+      });
 
-    router.push(`/shop/search?query=${searchQuery}`);
+    setQueryArray([...queryArray, searchQuery]);
+    setSearchQuery("");
   };
 
-  console.log(router);
+  const removeQueryHandler = (index) => {
+    const filteredQuery = queryArray.filter((_, i) => i !== index);
+    setQueryArray(filteredQuery);
+  };
 
   return (
     <div className="mb-12">
@@ -39,8 +51,7 @@ export const SearchProducts = () => {
         </Button>
       </form>
       <ul className="flex gap-2 my-2">
-        {router.query.query && <p>{router.query.query}</p>}
-        {/* {queriesList.map((query, index) => (
+        {queryArray.map((query, index) => (
           <div
             key={query}
             className="cursor-pointer bg-gray-300 px-3 py-2 rounded-md hover:bg-yellow-500"
@@ -48,18 +59,8 @@ export const SearchProducts = () => {
           >
             <p>{query}</p>
           </div>
-        ))} */}
+        ))}
       </ul>
     </div>
   );
 };
-
-/*
-  const removeQueryHandler = (index) => {
-    const filteredQuery = queriesList.filter((_, i) => i !== index);
-    setQueriesList(filteredQuery);
-    router.push({
-      pathname: `/shop/page/1`,
-    });
-  };
-*/

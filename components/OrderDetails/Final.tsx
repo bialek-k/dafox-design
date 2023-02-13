@@ -17,24 +17,6 @@ const Final = () => {
   const formData = watch();
   const totalAmount = cartItems.reduce((total, item) => item.price + total, 0);
 
-  // const getDeliveryCost = (country) => {
-  //   const data = deliveryPriceArr.filter((item) => item.country === country);
-  //   if (cartItems[0].freeShipping) {
-  //     return "FREE SHIPPING";
-  //   }
-  //   return data[0].price;
-  // };
-
-  // const deliveryCost = getDeliveryCost(formData.country);
-
-  // const totalAmountPrice = () => {
-  //   if (deliveryCost === "FREE SHIPPING") {
-  //     return totalAmount;
-  //   } else {
-  //     return totalAmount + deliveryCost;
-  //   }
-  // };
-
   return (
     <div className="finall w-full border-[1px] rounded-md shadow-md p-6">
       <h1 className="font-bold text-xl mb-2">3. Summary</h1>
@@ -66,7 +48,7 @@ const Final = () => {
           </div>
           <div className="price flex justify-between my-3 text-green-400">
             <p>Delivery:</p>
-            <p className="font-bold  text-md">IT'S FREE SHIPPING</p>
+            <p className="font-bold  text-md">FREE SHIPPING</p>
           </div>
           <div className="price flex justify-between my-3">
             <p className="font-bold">Total:</p>

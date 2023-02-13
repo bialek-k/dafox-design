@@ -6,8 +6,6 @@ import { basicForm, extendsForm } from "../utilities/zod/zodObjects";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 
-import { deliveryPriceArr } from "../utilities/deliveryCountries";
-
 import BillingDetails from "../components/OrderDetails/BillingDetails";
 import Final from "../components/OrderDetails/Final";
 
@@ -50,13 +48,6 @@ const Checkout = (): React.ReactElement => {
   });
 
   const checkoutProduct = (data) => {
-    console.log(data);
-    const deliveryTotalPrice = () => {
-      const price = deliveryPriceArr.filter(
-        (item) => item.country === data.country
-      );
-      return price[0].price;
-    };
     const totalAmount = cartItems.reduce(
       (total, item) => item.price + total,
       0
@@ -66,7 +57,7 @@ const Checkout = (): React.ReactElement => {
     const item = {
       name: productNames,
       quantity: cartItems.length,
-      price: totalAmount + deliveryTotalPrice(),
+      price: totalAmount,
       metadata: data,
     };
 

@@ -2,7 +2,7 @@ import { InputText } from "../Form/InputText";
 import { InputSelect } from "../Form/InputSelect";
 import { InputCheckbox } from "../Form/InputCheckbox";
 
-import { deliveryPriceArr } from "../../utilities/deliveryPrice";
+import { deliveryCountries } from "../../utilities/deliveryCountries";
 
 import { useFormContext } from "react-hook-form";
 
@@ -10,7 +10,7 @@ const BillingDetails = (): React.ReactElement => {
   const { watch } = useFormContext();
   const checkbox = watch("checkbox");
 
-  const countries = deliveryPriceArr.map((item) => item.country);
+  const countries = deliveryCountries.map((item) => item.country);
 
   return (
     <div className="deliveryAddres w-full  border-[1px] shadow-md rounded-md p-6">

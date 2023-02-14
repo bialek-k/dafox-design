@@ -5,7 +5,7 @@ import Image from "next/image";
 import Button from "../UI/Button";
 
 import { Store } from "../../store/Store";
-import { deliveryPriceArr } from "../../utilities/deliveryPrice";
+import { deliveryCountries } from "../../utilities/deliveryCountries";
 
 const Final = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -16,24 +16,6 @@ const Final = () => {
   const { watch } = useFormContext();
   const formData = watch();
   const totalAmount = cartItems.reduce((total, item) => item.price + total, 0);
-
-  const getDeliveryCost = (country) => {
-    const data = deliveryPriceArr.filter((item) => item.country === country);
-    if (cartItems[0].freeShipping) {
-      return "FREE SHIPPING";
-    }
-    return data[0].price;
-  };
-
-  const deliveryCost = getDeliveryCost(formData.country);
-
-  const totalAmountPrice = () => {
-    if (deliveryCost === "FREE SHIPPING") {
-      return totalAmount;
-    } else {
-      return totalAmount + deliveryCost;
-    }
-  };
 
   return (
     <div className="finall w-full border-[1px] rounded-md shadow-md p-6">
@@ -66,11 +48,11 @@ const Final = () => {
           </div>
           <div className="price flex justify-between my-3 text-green-400">
             <p>Delivery:</p>
-            <p className="font-bold  text-md">${deliveryCost}</p>
+            <p className="font-bold  text-md">FREE SHIPPING</p>
           </div>
           <div className="price flex justify-between my-3">
             <p className="font-bold">Total:</p>
-            <p className="font-bold  text-xl">${totalAmountPrice()}</p>
+            <p className="font-bold  text-xl">${totalAmount}</p>
           </div>
         </div>
       </div>

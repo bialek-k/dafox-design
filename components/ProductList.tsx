@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 
 import { Store } from "../store/Store";
-import { sendSearchQuery } from "../utilities/sendSearchQuery";
 
 import Product from "./Product";
 import ProductFilter from "./ProductFilter";
@@ -31,8 +30,8 @@ interface ProductProps {
 }
 
 const ProductList = ({ products, totalProducts }): React.ReactElement => {
-  const [selected, setSelected] = useState("all");
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
+  const filtered_products = getSortingMethod(sortingMethod, products);
   const finalCategories = getFinalCategory(products);
   const router = useRouter();
   const {
@@ -48,20 +47,19 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
   };
 
   const pageSize = 15;
-  const pages = totalProducts / pageSize;
-  const currentPage = Number(router.query.page);
+  // const currentPage = Number(router.query.page);
 
   return (
     <div className="container flex justify-center my-24">
       <div className="wrapper px-6">
         <SearchProducts />
-        <div className="flex flex-col md:flex-row gap-4 mb-4 lg:justify-between items-center ">
-          <AmountOfProducts
+        <div className="flex flex-col md:flex-row gap-4 mb-4 lg:justify-end items-center ">
+          {/* <AmountOfProducts
             products={products}
             totalProducts={totalProducts}
             currentPage={currentPage}
             pageSize={pageSize}
-          />
+          /> */}
           <SortingProducts
             setSortingMethod={setSortingMethod}
             sortingMethod={sortingMethod}
@@ -88,7 +86,7 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
             </Link>
           ))}
         </div>
-        {!searchProducts && (
+        {products.length >= pageSize && (
           <Pagination totalProducts={totalProducts} pageSize={pageSize} />
         )}
       </div>

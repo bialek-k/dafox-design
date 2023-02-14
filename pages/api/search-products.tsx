@@ -7,8 +7,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const query = gql`
-    query MyQuery($pattern: String!) {
-      allProducts(filter: { name: { matches: { pattern: $pattern } } }) {
+    query MyQuery($regexp: String!) {
+      allProducts(filter: { name: { matches: { regexp: "$regexp" } } }) {
         name
         id
         slug
@@ -45,7 +45,7 @@ export default async function handler(
   try {
     const { data } = await client.query({
       query,
-      variables: { pattern: body },
+      variables: { regexp: body },
     });
     res.status(200).json(data.allProducts);
   } catch (error) {

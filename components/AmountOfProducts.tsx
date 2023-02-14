@@ -3,6 +3,7 @@ interface AmountOfProductsProps {
   totalProducts: number;
   currentPage: number;
   pageSize: number;
+  searchPage: boolean;
 }
 
 export const AmountOfProducts = ({

@@ -1,36 +1,40 @@
 import { useState, useContext } from "react";
 import { Store } from "../store/Store";
 
+import { getSearchQuery } from "../utilities/getSearchQuery";
+
+import { useRouter } from "next/router";
+
 import Button from "./UI/Button";
+import Link from "next/link";
 
 export const SearchProducts = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [queryArray, setQueryArray] = useState([]);
-  const { dispatch } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
+  const router = useRouter();
+
+  console.log(state.filterQueries);
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (searchQuery === "") return;
 
-    fetch("/api/search-products", {
-      method: "POST",
-      body: JSON.stringify(searchQuery),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({
-          type: "SET_SEARCH_PRODUCTS",
-          payload: data,
-        });
-      });
+    dispatch({
+      type: "ADD_FILTER_QUERY",
+      payload: searchQuery,
+    });
 
-    setQueryArray([...queryArray, searchQuery]);
-    setSearchQuery("");
+    router.push({
+      pathname: "/shop/search",
+      query: { query: getSearchQuery(searchQuery) },
+    });
   };
 
-  const removeQueryHandler = (index) => {
-    const filteredQuery = queryArray.filter((_, i) => i !== index);
-    setQueryArray(filteredQuery);
+  const removeFilterHandler = () => {
+    router.push("/shop/page/1");
+    dispatch({
+      type: "REMOVE_FILTER_QUERY",
+    });
   };
 
   return (
@@ -39,7 +43,7 @@ export const SearchProducts = () => {
         <input
           type="text"
           className="border-2 border-neutral-300 rounded-r-none rounded-l-md w-full px-4 py-3"
-          placeholder="Search product"
+          placeholder="Find something for You"
           onChange={(e) => setSearchQuery(e.target.value)}
           value={searchQuery}
         />
@@ -50,17 +54,16 @@ export const SearchProducts = () => {
           Search
         </Button>
       </form>
-      <ul className="flex gap-2 my-2">
-        {queryArray.map((query, index) => (
-          <div
-            key={query}
-            className="cursor-pointer bg-gray-300 px-3 py-2 rounded-md hover:bg-yellow-500"
-            onClick={() => removeQueryHandler(index)}
-          >
-            <p>{query}</p>
-          </div>
-        ))}
-      </ul>
+      {state.filterQueries !== "" && (
+        <div className=" flex gap-2 items my-4">
+          <p className="font-bold text-xl">Search: </p>
+          <button onClick={removeFilterHandler}>
+            <p className="bg-gray-200 px-3 py-1 rounded-md hover:bg-yellow-500 text-sm cursor-pointer">
+              {state.filterQueries}
+            </p>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

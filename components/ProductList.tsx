@@ -34,9 +34,12 @@ interface ProductProps {
 const ProductList = ({ products, totalProducts }): React.ReactElement => {
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const finalCategories = getFinalCategory(products);
+  const [selectedCategories, setSelectedCategories] = useState("all");
   const {
     state: { searchProducts },
   } = useContext(Store);
+
+  console.log(selectedCategories);
 
   const queryProducts = () => {
     if (searchProducts.length) {
@@ -61,7 +64,11 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
             currentPage={currentPage}
             pageSize={pageSize}
           /> */}
-          <FilterProducts finalCategories={finalCategories} />
+          <FilterProducts
+            finalCategories={finalCategories}
+            setSelectedCategories={setSelectedCategories}
+            selectedCategories={selectedCategories}
+          />
           <SortingProducts
             setSortingMethod={setSortingMethod}
             sortingMethod={sortingMethod}

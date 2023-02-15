@@ -9,6 +9,8 @@ import MobileProductFilter from "./MobileProductFilter";
 import SortingProducts from "./SortingProducts";
 import Link from "next/link";
 
+import FilterProducts from "./FilterProducts";
+
 import { getFinalCategory } from "../utilities/categoryHandler";
 import { getSortingMethod } from "../utilities/getSortingMethod";
 
@@ -31,18 +33,17 @@ interface ProductProps {
 
 const ProductList = ({ products, totalProducts }): React.ReactElement => {
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
-  const filtered_products = getSortingMethod(sortingMethod, products);
   const finalCategories = getFinalCategory(products);
-  const router = useRouter();
   const {
     state: { searchProducts },
   } = useContext(Store);
 
   const queryProducts = () => {
     if (searchProducts.length) {
-      return searchProducts;
+      const prod = getSortingMethod(sortingMethod, searchProducts);
+      return prod;
     } else {
-      return products;
+      return getSortingMethod(sortingMethod, products);
     }
   };
 
@@ -60,6 +61,7 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
             currentPage={currentPage}
             pageSize={pageSize}
           /> */}
+          <FilterProducts finalCategories={finalCategories} />
           <SortingProducts
             setSortingMethod={setSortingMethod}
             sortingMethod={sortingMethod}
@@ -95,46 +97,3 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
 };
 
 export default ProductList;
-
-/*
-
-  // useEffect(() => {
-  //   setCurrentPage(1);
-  // }, [selected]);
-
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const pageSize = 20;
-
-  // const onPageChange = (_, page) => {
-  //   setCurrentPage(page);
-  // };
-
-  
-  // const paginatedProducts = paginate(
-  //   displayFilteredProduct(),
-  //   currentPage,
-  //   pageSize
-  // );
-
-
-    const filtered_products = getSortingMethod(sortingMethod, products);
-  const { dispatch } = useContext(Store);
-
-  
-  useEffect(() => {
-    dispatch({
-      type: "SET_ALL_PRODUCTS",
-      payload: products,
-    });
-  }, [dispatch, products]);
-
-  const displayFilteredProduct = () => {
-    if (selected === "all") {
-      return [...filtered_products];
-    } else {
-      return filtered_products.filter((product: ProductProps) =>
-        product.category.some((category) => category.name === selected)
-      );
-    }
-  };
-*/

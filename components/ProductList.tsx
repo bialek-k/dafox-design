@@ -41,7 +41,6 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
       return getSortingMethod(sortingMethod, products);
     }
   };
-
   const pageSize = 15;
 
   if (!products.length) {
@@ -91,8 +90,19 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
             </Link>
           ))}
         </div>
-        {router.query.page && (
-          <Pagination totalProducts={totalProducts} pageSize={pageSize} />
+        {router.pathname === "/shop/page/[page]" && (
+          <Pagination
+            url={"/shop/page/"}
+            totalProducts={totalProducts}
+            pageSize={pageSize}
+          />
+        )}
+        {router.pathname === "/shop/category" && (
+          <Pagination
+            url={`/shop/category?filter=${router.query.filter}&id=${router.query.id}&page=`}
+            totalProducts={totalProducts}
+            pageSize={pageSize}
+          />
         )}
       </div>
     </div>

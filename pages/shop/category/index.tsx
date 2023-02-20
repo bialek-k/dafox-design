@@ -2,8 +2,6 @@ import React from "react";
 
 import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
-import { convertCategories } from "../../../utilities/categoryHandler copy";
-import Hero from "../../../components/Hero";
 import ProductList from "../../../components/ProductList";
 
 const CategoryPage = ({ data, totalProductNumber }) => {
@@ -18,11 +16,22 @@ const CategoryPage = ({ data, totalProductNumber }) => {
 
 export async function getServerSideProps(context) {
   const query = gql`
-    query MyQuery($allIn: [ItemId]) {
+    query MyQuery($allIn: [ItemId], $first: IntType, $skip: IntType) {
       _allProductsMeta {
         count
       }
-      allProducts(filter: { category: { allIn: $allIn } }) {
+      Products_count: allProducts(
+        filter: { category: { allIn: $allIn } }
+        first: "100"
+      ) {
+        id
+      }
+
+      Paginated: allProducts(
+        filter: { category: { allIn: $allIn } }
+        first: $first
+        skip: $skip
+      ) {
         name
         id
         slug
@@ -47,15 +56,19 @@ export async function getServerSideProps(context) {
     }
   `;
 
+  const another = 15 * (context.query.page - 1);
+
   const { data } = await client.query({
     query,
-    variables: { allIn: context.query.id },
+    variables: { allIn: context.query.id, first: 15, skip: another },
   });
+
+  const count = data.Products_count.length;
 
   return {
     props: {
-      data: data.allProducts,
-      totalProductNumber: data._allProductsMeta.count,
+      data: data.Paginated,
+      totalProductNumber: count,
     },
   };
 }

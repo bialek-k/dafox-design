@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export const Pagination = ({ totalProducts, pageSize }) => {
+export const Pagination = ({ totalProducts, pageSize, url }) => {
   const router = useRouter();
   const totalProductNumber = totalProducts;
 
@@ -19,10 +19,10 @@ export const Pagination = ({ totalProducts, pageSize }) => {
   const paginationLinks = getNavigationLinks().map((pageNumber) => {
     return (
       <div key={pageNumber}>
-        <Link href={`/shop/page/${pageNumber}`}>
+        <Link href={`${url}${pageNumber}`}>
           <div
             className={`${
-              router.asPath === `/shop/page/${pageNumber}`
+              router.asPath === `${url}${pageNumber}`
                 ? "bg-yellow-500"
                 : "bg-neutral-100"
             } 
@@ -30,7 +30,7 @@ export const Pagination = ({ totalProducts, pageSize }) => {
           >
             <p
               className={`${
-                router.asPath === `/shop/page/${pageNumber}` && "font-bold"
+                router.asPath === `${url}${pageNumber}` && "font-bold"
               }`}
             >
               {pageNumber}

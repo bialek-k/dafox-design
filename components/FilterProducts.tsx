@@ -12,16 +12,19 @@ import ListSubheader from "@mui/material/ListSubheader";
 
 export default function FilterProducts() {
   const [filters, setFilters] = useState([]);
-
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
 
   useEffect(() => {
-    fetch("/api/get-all-categories", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => setFilters(data));
+    try {
+      fetch("/api/get-all-categories", {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((data) => setFilters(data));
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const handleChange = (event) => {
@@ -39,7 +42,7 @@ export default function FilterProducts() {
 
     router.push({
       pathname: "/shop/category",
-      query: { filter, id: categoryID.id },
+      query: { filter, id: categoryID.id, page: 1 },
     });
   };
 

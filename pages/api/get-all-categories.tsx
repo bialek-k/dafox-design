@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { client } from "../../lib/apollo";
 import { gql } from "@apollo/client";
-import { getFilterArr } from "../../utilities/categoryHandler";
 
 export default async function handler(
   req: NextApiRequest,

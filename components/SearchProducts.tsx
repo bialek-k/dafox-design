@@ -36,7 +36,7 @@ export const SearchProducts = () => {
       <form onSubmit={handleSubmit} className="flex">
         <input
           type="text"
-          className="border-2 border-neutral-300 rounded-r-none rounded-l-md w-full px-4 py-3"
+          className="border border-black/30 rounded-r-none rounded-l-md w-full px-4 py-3"
           placeholder="Find something for You"
           onChange={(e) => setSearchQuery(e.target.value)}
           value={searchQuery}

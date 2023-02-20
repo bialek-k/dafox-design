@@ -12,6 +12,7 @@ const initialState = {
   faqContent: [],
   searchProducts: [],
   filterQueries: "",
+  filterCategory: { id: 0, name: "All Products" },
 };
 
 const reducer = (state, action) => {
@@ -19,6 +20,10 @@ const reducer = (state, action) => {
     case "SET_SEARCH_PRODUCTS": {
       const searchProducts = action.payload;
       return { ...state, searchProducts };
+    }
+
+    case "SET_FILTER_CATEGORY": {
+      return { ...state, filterCategory: action.payload };
     }
 
     case "SET_FAQ_CONTENT": {

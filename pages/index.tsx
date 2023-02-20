@@ -70,7 +70,7 @@ export async function getStaticProps() {
   });
 
   return {
-    props: {q
+    props: {
       products: data.allProducts,
       totalProductNumber: data._allProductsMeta.count,
     },

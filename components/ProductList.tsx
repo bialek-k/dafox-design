@@ -1,19 +1,14 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { Store } from "../store/Store";
 
 import Product from "./Product";
-import ProductFilter from "./ProductFilter";
-import MobileProductFilter from "./MobileProductFilter";
 import SortingProducts from "./SortingProducts";
 import Link from "next/link";
 
 import FilterProducts from "./FilterProducts";
-
-import { getFinalCategory } from "../utilities/categoryHandler";
 import { getSortingMethod } from "../utilities/getSortingMethod";
-
 import { motion } from "framer-motion";
 import { Pagination } from "./Pagination";
 import { AmountOfProducts } from "./AmountOfProducts";
@@ -33,13 +28,10 @@ interface ProductProps {
 
 const ProductList = ({ products, totalProducts }): React.ReactElement => {
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
-  const finalCategories = getFinalCategory(products);
-  const [selectedCategories, setSelectedCategories] = useState("all");
   const {
     state: { searchProducts },
   } = useContext(Store);
-
-  console.log(selectedCategories);
+  const router = useRouter();
 
   const queryProducts = () => {
     if (searchProducts.length) {
@@ -51,27 +43,31 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
   };
 
   const pageSize = 15;
-  // const currentPage = Number(router.query.page);
+
+  if (!products.length) {
+    return (
+      <div className="container flex flex-col items-center justify-center my-24">
+        <div className="description text-center mb-16">
+          <h1 className=" text-3xl font-bold">No items in this category</h1>
+          <p className="text-neutral-600">use search or change categories</p>
+        </div>
+        <div className="flex gap-5 w-full">
+          <SearchProducts />
+          <FilterProducts />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container flex justify-center my-24">
       <div className="wrapper px-6">
         <SearchProducts />
         <div className="flex flex-col md:flex-row gap-4 mb-4 lg:justify-end items-center ">
-          {/* <AmountOfProducts
-            products={products}
-            totalProducts={totalProducts}
-            currentPage={currentPage}
-            pageSize={pageSize}
-          /> */}
-          <FilterProducts
-            finalCategories={finalCategories}
-            setSelectedCategories={setSelectedCategories}
-            selectedCategories={selectedCategories}
-          />
+          <FilterProducts />
           <SortingProducts
-            setSortingMethod={setSortingMethod}
             sortingMethod={sortingMethod}
+            setSortingMethod={setSortingMethod}
           />
         </div>
         <div className="grid gap-6 grid-cols-1 max-w-5xl sm:grid-cols-2 md:grid-cols-4 mx-auto">
@@ -95,7 +91,7 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
             </Link>
           ))}
         </div>
-        {products.length >= pageSize && (
+        {router.query.page && (
           <Pagination totalProducts={totalProducts} pageSize={pageSize} />
         )}
       </div>
@@ -104,3 +100,11 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
 };
 
 export default ProductList;
+
+/*
+  <SortingProducts
+            setSortingMethod={setSortingMethod}
+            sortingMethod={sortingMethod}
+          />
+        
+*/

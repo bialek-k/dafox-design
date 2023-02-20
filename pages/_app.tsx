@@ -3,11 +3,18 @@ import { ThemeProvider } from "next-themes";
 import "../styles/globals.css";
 import { StoreProvider } from "../store/Store";
 
-import { ApolloProvider } from "@apollo/client";
+// import { ApolloProvider } from "@apollo/client";
 
-import { client } from "../lib/apollo";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+
+// import { client } from "../lib/apollo";
 
 import { GoogleAnalytics, event } from "nextjs-google-analytics";
+
+const client = new ApolloClient({
+  uri: "https://graphql.datocms.com/",
+  cache: new InMemoryCache(),
+});
 
 export function reportWebVitals({ id, name, label, value }) {
   event(name, {

@@ -1,19 +1,13 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Store } from "../store/Store";
-
 import { getSearchQuery } from "../utilities/getSearchQuery";
-
 import { useRouter } from "next/router";
-
 import Button from "./UI/Button";
-import Link from "next/link";
 
 export const SearchProducts = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
-
-  console.log(state.filterQueries);
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -38,7 +32,7 @@ export const SearchProducts = () => {
   };
 
   return (
-    <div className="mb-12">
+    <div className="mb-12 w-full">
       <form onSubmit={handleSubmit} className="flex">
         <input
           type="text"

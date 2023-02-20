@@ -1,4 +1,4 @@
-export const getFinalCategory = (products) => {
+export const convertCategories = (products) => {
   const categories = products
     .map((prod) => prod.category)
     .flat()
@@ -8,26 +8,47 @@ export const getFinalCategory = (products) => {
       return obj ? finalArray : finalArray.concat([current]);
     }, []);
 
-  const existingCategories = categories
-    .map((category) => category.series)
-    .filter((item, index, arr) => arr.indexOf(item) === index);
-
-  let id = 1;
-  const convertSeriesToDisplay = (categories, seriesName) => {
-    let seriesItems = categories
-      .filter((cat) => cat.series === seriesName)
-      .map((s) => s.name);
-
+  const convertData = Array.from(
+    new Set(categories.map((obj) => obj.series))
+  ).map((series) => {
     return {
-      name: seriesName,
-      id: id++,
-      series: [...seriesItems],
+      series: series,
+      models: categories
+        .filter((s) => s.series === series)
+        .map((model) => {
+          return {
+            id: model.id,
+            name: model.name,
+          };
+        }),
     };
-  };
+  });
+  return convertData;
+};
 
-  const finalCategories = existingCategories
-    .map((item) => convertSeriesToDisplay(categories, item))
-    .sort((a, b) => (a.name < b.name ? -1 : 1));
+export const getCategoryId = (categories, targetName) => {
+  const catArr = categories.filter((cat) =>
+    cat.models.find((model) => model.name === targetName)
+  );
 
-  return finalCategories;
+  if (!catArr[0]) {
+    return {
+      id: 0,
+      name: "All Products",
+    };
+  }
+  return catArr[0].models.filter((model) => model.name === targetName)[0];
+};
+
+export const getFilterArr = (filters) => {
+  const categories = filters
+    .map((prod) => prod.category)
+    .flat()
+    .sort()
+    .reduce((finalArray, current) => {
+      let obj = finalArray.find((item) => item.name === current.name);
+      return obj ? finalArray : finalArray.concat([current]);
+    }, []);
+
+  console.log(categories);
 };

@@ -38,23 +38,3 @@ export const extendsForm = z.object({
   shipping_city: z.string().min(1, "City is required"),
   checkbox: z.literal(true),
 });
-
-export const defaultValues = {
-  name: "",
-  surname: "",
-  phone_number: "",
-  address: "",
-  city: "",
-  country: "Select Country",
-  zipcode: "",
-  email: "",
-  message: "",
-  shipping_name: "",
-  shipping_surname: "",
-  shipping_phone_number: "",
-  shipping_address: "",
-  shipping_city: "",
-  shipping_country: "Poland",
-  shipping_zipcode: "",
-  checkbox: false,
-};

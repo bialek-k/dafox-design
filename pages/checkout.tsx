@@ -2,15 +2,9 @@ import React, { useContext } from "react";
 import { Store } from "../store/Store";
 
 import { z } from "zod";
-import {
-  basicForm,
-  extendsForm,
-  defaultValues,
-} from "../utilities/zod/zodObjects";
+import { basicForm, extendsForm } from "../utilities/zod/zodObjects";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
-
-import { deliveryPriceArr } from "../utilities/deliveryPrice";
 
 import BillingDetails from "../components/OrderDetails/BillingDetails";
 import Final from "../components/OrderDetails/Final";
@@ -22,6 +16,25 @@ import Spinner from "../components/UI/Spinner";
 const FormSchema = z.discriminatedUnion("checkbox", [basicForm, extendsForm]);
 
 type CheckoutFormType = z.TypeOf<typeof FormSchema>;
+
+const defaultValues = {
+  name: "",
+  surname: "",
+  phone_number: "",
+  address: "",
+  city: "",
+  country: "Select Country",
+  zipcode: "",
+  email: "",
+  message: "",
+  shipping_name: "",
+  shipping_surname: "",
+  shipping_phone_number: "",
+  shipping_address: "",
+  shipping_city: "",
+  shipping_country: "Poland",
+  shipping_zipcode: "",
+};
 
 const Checkout = (): React.ReactElement => {
   const { state, dispatch } = useContext(Store);
@@ -35,13 +48,6 @@ const Checkout = (): React.ReactElement => {
   });
 
   const checkoutProduct = (data) => {
-    console.log(data);
-    const deliveryTotalPrice = () => {
-      const price = deliveryPriceArr.filter(
-        (item) => item.country === data.country
-      );
-      return price[0].price;
-    };
     const totalAmount = cartItems.reduce(
       (total, item) => item.price + total,
       0
@@ -51,7 +57,7 @@ const Checkout = (): React.ReactElement => {
     const item = {
       name: productNames,
       quantity: cartItems.length,
-      price: totalAmount + deliveryTotalPrice(),
+      price: totalAmount,
       metadata: data,
     };
 

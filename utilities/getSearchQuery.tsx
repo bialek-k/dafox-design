@@ -5,5 +5,7 @@ export const getSearchQuery = (string) => {
     query = query.join("|");
   }
 
+  console.log(query);
+
   return query;
 };

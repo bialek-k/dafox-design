@@ -2,13 +2,17 @@ import React from "react";
 import ProductList from "../../../components/ProductList";
 import Hero from "../../../components/Hero";
 
+import { getSearchQuery } from "../../../utilities/getSearchQuery";
+
 import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
+
+import { filterQuerProducts } from "../../../utilities/filterQueryProducts";
 
 const SearchPage = ({ data, totalProductNumber }) => {
   return (
     <div className="flex flex-col justify-center items-center">
-      <Hero />
+      {/* <Hero /> */}
       <div>
         <ProductList products={data} totalProducts={totalProductNumber} />
       </div>
@@ -17,14 +21,15 @@ const SearchPage = ({ data, totalProductNumber }) => {
 };
 
 export async function getServerSideProps(context) {
-  const searchQuery = `(${context.query.query})`;
+  const searchQuery = `(${getSearchQuery(context.query.query)})`;
 
   const query = gql`
-    query MyQuery($pattern: String!) {
-      _allProductsMeta {
-        count
-      }
-      allProducts(filter: { name: { matches: { pattern: $pattern } } }) {
+    query MyQuery($pattern: String!, $skip: IntType, $first: IntType) {
+      allProducts(
+        filter: { name: { matches: { pattern: $pattern } } }
+        first: $first
+        skip: $skip
+      ) {
         name
         id
         slug
@@ -51,15 +56,42 @@ export async function getServerSideProps(context) {
 
   const { data } = await client.query({
     query,
-    variables: { pattern: searchQuery },
+    variables: {
+      pattern: searchQuery,
+      first: 100,
+      skip: 0,
+    },
+  });
+  const queryArray = context.query.query.split(" ");
+
+  const filteredArr = data.allProducts.filter((obj) => {
+    return queryArray.every((str) =>
+      obj.name.toLowerCase().includes(str.toLowerCase())
+    );
   });
 
   return {
     props: {
-      data: data.allProducts,
-      totalProductNumber: data._allProductsMeta.count,
+      data: filteredArr,
+      totalProductNumber: filteredArr.length,
     },
   };
 }
 
 export default SearchPage;
+
+/*
+ const simplifyString = (name) => {
+    const regex = /[(]|[)]|[/]/g;
+    const substr = "";
+    return name.replace(regex, substr.trim());
+  };
+
+  const filon = data.Paginated.filter((prod) => {
+    return queryArray.every((query) => {
+      return simplifyString(prod.name)
+        .toLowerCase()
+        .includes(query.toLowerCase());
+    });
+  });
+*/

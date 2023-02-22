@@ -1,8 +1,9 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Store } from "../store/Store";
-import { getSearchQuery } from "../utilities/getSearchQuery";
 import { useRouter } from "next/router";
 import Button from "./UI/Button";
+
+import { getSearchQuery } from "../utilities/getSearchQuery";
 
 export const SearchProducts = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -20,7 +21,7 @@ export const SearchProducts = () => {
 
     router.push({
       pathname: "/shop/search",
-      query: { query: getSearchQuery(searchQuery) },
+      query: { query: searchQuery },
     });
   };
 

@@ -104,6 +104,13 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
             pageSize={pageSize}
           />
         )}
+        {/* {router.pathname === "/shop/search" && (
+          <Pagination
+            url={`/shop/search?query=${router.query.query}&page=`}
+            totalProducts={totalProducts}
+            pageSize={pageSize}
+          />
+        )} */}
       </div>
     </div>
   );

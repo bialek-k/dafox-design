@@ -1,10 +1,19 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { FB_PIXEL_ID } from "../lib/fpixel";
 
 class MyDocument extends Document {
   render() {
     return (
       <Html>
         <Head>
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: "none" }}
+              src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
+            />
+          </noscript>
           <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;600&display=swap"
             rel="stylesheet"

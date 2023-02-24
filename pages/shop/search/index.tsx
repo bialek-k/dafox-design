@@ -1,13 +1,8 @@
 import React from "react";
 import ProductList from "../../../components/ProductList";
-import Hero from "../../../components/Hero";
-
-import { getSearchQuery } from "../../../utilities/getSearchQuery";
 
 import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
-
-import { filterQuerProducts } from "../../../utilities/filterQueryProducts";
 
 const SearchPage = ({ data, totalProductNumber }) => {
   return (
@@ -21,12 +16,29 @@ const SearchPage = ({ data, totalProductNumber }) => {
 };
 
 export async function getServerSideProps(context) {
-  const searchQuery = `(${getSearchQuery(context.query.query)})`;
+  const newRegex = (input) => {
+    const queryString = input
+      .split(" ")
+      .map((term) => `(?=.*${term})`)
+      .join("");
+    return `^${queryString}.*`;
+  };
+
+  const regexPattern = newRegex(context.query.query);
 
   const query = gql`
-    query MyQuery($pattern: String!, $skip: IntType, $first: IntType) {
-      allProducts(
-        filter: { name: { matches: { pattern: $pattern } } }
+    query MyQuery($regexPattern: String!, $skip: IntType, $first: IntType) {
+      _allProductsMeta(
+        filter: {
+          name: { matches: { pattern: $regexPattern, caseSensitive: false } }
+        }
+      ) {
+        count
+      }
+      paginatedSearchProducts: allProducts(
+        filter: {
+          name: { matches: { pattern: $regexPattern, caseSensitive: false } }
+        }
         first: $first
         skip: $skip
       ) {
@@ -54,44 +66,23 @@ export async function getServerSideProps(context) {
     }
   `;
 
+  const skip = 15 * (context.query.page - 1);
+
   const { data } = await client.query({
     query,
     variables: {
-      pattern: searchQuery,
-      first: 100,
-      skip: 0,
+      regexPattern,
+      first: 15,
+      skip,
     },
-  });
-  const queryArray = context.query.query.split(" ");
-
-  const filteredArr = data.allProducts.filter((obj) => {
-    return queryArray.every((str) =>
-      obj.name.toLowerCase().includes(str.toLowerCase())
-    );
   });
 
   return {
     props: {
-      data: filteredArr,
-      totalProductNumber: filteredArr.length,
+      data: data.paginatedSearchProducts,
+      totalProductNumber: data._allProductsMeta.count,
     },
   };
 }
 
 export default SearchPage;
-
-/*
- const simplifyString = (name) => {
-    const regex = /[(]|[)]|[/]/g;
-    const substr = "";
-    return name.replace(regex, substr.trim());
-  };
-
-  const filon = data.Paginated.filter((prod) => {
-    return queryArray.every((query) => {
-      return simplifyString(prod.name)
-        .toLowerCase()
-        .includes(query.toLowerCase());
-    });
-  });
-*/

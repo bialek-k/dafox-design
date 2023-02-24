@@ -41,7 +41,7 @@ export const SingleProductItem = ({}): React.ReactElement => {
 
   return (
     <>
-      <div className="container mx-auto px-6 md:px-12 mt-24 mb-96 ">
+      <div className="container mx-auto px-6 md:px-12 mt-24 mb-48 ">
         <div className="product flex flex-col lg:flex-row justify-center gap-6 mb-10  ">
           <div className="photo w-full mb-2 lg:mb-0 lg:w-1/3">
             <Gallery active={active} setActive={setActive} />
@@ -57,7 +57,7 @@ export const SingleProductItem = ({}): React.ReactElement => {
             </div>
             <div className="mb-2"></div>
             <div className="flex flex-col">
-              <p className="text-black/50 dark:invert">
+              <p className="text-black/50 dark:invert mb-4">
                 {ctxProductData.freeShipping && (
                   <p className="font-bold text-2xl text-yellow-400">
                     FREE SHIPPING
@@ -65,8 +65,8 @@ export const SingleProductItem = ({}): React.ReactElement => {
                 )}
                 in stock: <span>{ctxProductData.inStock}</span>
               </p>
-              <div className="action  flex items-center gap-4">
-                <div className="price">
+              <div className="action flex flex-col items-center gap-4">
+                <div className="price flex gap-2 items-end md:items-start w-full">
                   <p
                     className={` ${
                       ctxProductData.promotion &&
@@ -82,7 +82,7 @@ export const SingleProductItem = ({}): React.ReactElement => {
                   )}
                 </div>
                 <Button
-                  addedClassName="w-full px-8"
+                  addedClassName="w-full px-8 h-12"
                   onClick={() => addToCartHandler()}
                 >
                   Add to Cart
@@ -91,15 +91,15 @@ export const SingleProductItem = ({}): React.ReactElement => {
             </div>
           </div>
         </div>
-        <div className="mt-24">
+        <div className="mt-24 dark:invert">
           <Divider />
         </div>
         <div className="prose dark:prose-invert prose-h2:text-yellow-500 prose-h2:tracking-wider prose-h2:my-5 prose-p:m-1 mt-12 prose-li:my-0 ">
           <StructuredText data={ctxProductData.description} />
         </div>
-        <div className="mt-24">
+        {/* <div className="mt-24 dark:invert">
           <Divider />
-        </div>
+        </div> */}
         {/* <RelatedProducts relatedCategoryProducts={relatedProducts} /> */}
       </div>
     </>

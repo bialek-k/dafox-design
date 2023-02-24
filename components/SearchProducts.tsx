@@ -21,7 +21,7 @@ export const SearchProducts = () => {
 
     router.push({
       pathname: "/shop/search",
-      query: { query: searchQuery },
+      query: { query: searchQuery, page: 1 },
     });
   };
 

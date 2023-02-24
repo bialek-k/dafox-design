@@ -23,15 +23,15 @@ export const Pagination = ({ totalProducts, pageSize, url }) => {
           <div
             className={`${
               router.asPath === `${url}${pageNumber}`
-                ? "bg-yellow-500"
-                : "bg-neutral-100"
+                ? "bg-yellow-500  "
+                : "bg-neutral-100 dark:invert "
             } 
-          cursor-pointer w-8 h-8 flex items-center justify-center rounded-full`}
+          cursor-pointer w-8 h-8 flex items-center  justify-center rounded-full shadow-md `}
           >
             <p
               className={`${
                 router.asPath === `${url}${pageNumber}` && "font-bold"
-              }`}
+              } dark:invert`}
             >
               {pageNumber}
             </p>
@@ -43,7 +43,7 @@ export const Pagination = ({ totalProducts, pageSize, url }) => {
 
   return (
     <div className="flex flex-col gap-5 justify-center items-center w-full my-24">
-      <p className="text-neutral-800">Page</p>
+      <p className="text-neutral-800 dark:invert drop-shadow-md">Page</p>
       <div className="flex flex-row gap-4">{paginationLinks}</div>
     </div>
   );

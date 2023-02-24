@@ -59,17 +59,17 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
   }
 
   return (
-    <div className="container flex justify-center my-24">
+    <div className="container flex justify-center my-12 ">
       <div className="wrapper px-6">
         <SearchProducts />
-        <div className="flex flex-col md:flex-row gap-4 mb-4 lg:justify-end items-center ">
+        <div className="flex flex-col md:flex-row gap-4 lg:justify-end items-center py-4 ">
           <FilterProducts />
           <SortingProducts
             sortingMethod={sortingMethod}
             setSortingMethod={setSortingMethod}
           />
         </div>
-        <div className="grid gap-6 grid-cols-1 max-w-5xl sm:grid-cols-2 md:grid-cols-4 mx-auto">
+        <div className="grid gap-4 gap-y-8 grid-cols-1 max-w-5xl my-12 sm:grid-cols-2 md:grid-cols-4 mx-auto">
           {queryProducts().map((product: ProductProps) => (
             <Link href={`/shop/${product.slug}`} key={product.id}>
               <a>
@@ -104,13 +104,13 @@ const ProductList = ({ products, totalProducts }): React.ReactElement => {
             pageSize={pageSize}
           />
         )}
-        {/* {router.pathname === "/shop/search" && (
+        {router.pathname === "/shop/search" && (
           <Pagination
             url={`/shop/search?query=${router.query.query}&page=`}
             totalProducts={totalProducts}
             pageSize={pageSize}
           />
-        )} */}
+        )}
       </div>
     </div>
   );

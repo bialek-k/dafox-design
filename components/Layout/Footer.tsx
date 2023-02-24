@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Newsletter } from "../Newsletter";
+
 import { IconContext } from "react-icons";
 import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";
 
@@ -15,7 +17,10 @@ const Footer = (): React.ReactElement => {
   const router = useRouter();
 
   return (
-    <div className="bg-black mt-auto w-full items-center border-t border-neutral-800 py-8">
+    <div className="bg-black mt-auto w-full items-center">
+      <div className="newsletter mb-8">
+        <Newsletter />
+      </div>
       <div className="container mx-auto flex flex-col justify-center gap-12 md:flex-row md:justify-between md:py-12 ">
         <div className="information flex flex-col items-center">
           <p className="text-white font-bold tracking-widest text-xl mb-6">

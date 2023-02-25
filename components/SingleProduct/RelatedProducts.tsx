@@ -20,7 +20,7 @@ const RelatedProducts = ({ relatedCategoryProducts, relatedLinkData }) => {
       </div>
       <div className="action flex justify-center mb-4">
         <Link
-          href={`/shop/category?filter=${relatedLinkData.name}&id=${relatedLinkData.id}&page=1`}
+          href={`/shop/category?filter=${relatedLinkData[0].name}&id=${relatedLinkData[0].id}&page=1`}
           className="w-1/2 px-8 h-12 drop-shadow-md"
         >
           <motion.a

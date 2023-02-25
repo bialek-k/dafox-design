@@ -22,8 +22,6 @@ export const SingleProductItem = ({
     };
   });
 
-  console.log(relatedLinkData[0].name);
-
   useEffect(() => {
     setActive(singleProduct.gallery[0].id);
   }, [singleProduct.gallery]);
@@ -111,12 +109,10 @@ export const SingleProductItem = ({
         <div className="mt-24 dark:invert">
           <Divider />
         </div>
-        {relatedLinkData[0].name && (
-          <RelatedProducts
-            relatedCategoryProducts={relatedProducts}
-            relatedLinkData={relatedLinkData[0]}
-          />
-        )}
+        <RelatedProducts
+          relatedCategoryProducts={relatedProducts}
+          relatedLinkData={relatedLinkData}
+        />
       </div>
     </>
   );

@@ -3,6 +3,8 @@ import { Store } from "../store/Store";
 import { useRouter } from "next/router";
 import Button from "./UI/Button";
 
+import { FaMinusCircle } from "react-icons/fa";
+
 import { getSearchQuery } from "../utilities/getSearchQuery";
 
 export const SearchProducts = () => {
@@ -33,7 +35,7 @@ export const SearchProducts = () => {
   };
 
   return (
-    <div className="mb-12 w-full shadow-md">
+    <div className="mb-12 w-full drop-shadow-md">
       <form onSubmit={handleSubmit} className="flex">
         <input
           type="text"
@@ -50,13 +52,20 @@ export const SearchProducts = () => {
         </Button>
       </form>
       {state.filterQueries !== "" && (
-        <div className=" flex gap-2 items my-4">
-          <p className="font-bold text-xl">Search: </p>
-          <button onClick={removeFilterHandler}>
-            <p className="bg-gray-200 px-3 py-1 rounded-md hover:bg-yellow-500 text-sm cursor-pointer">
+        <div className=" flex py-4 justify-between my-4">
+          <div className="flex gap-2">
+            <p className="font-bold text-xl">Search: </p>
+            <p className="bg-yellow-500 text-white px-3 py-1 rounded-md hover: text-sm">
               {state.filterQueries}
             </p>
-          </button>
+          </div>
+          <div
+            className=" flex items-center gap-1 cursor cursor-pointer"
+            onClick={removeFilterHandler}
+          >
+            <FaMinusCircle className="text-black/40 " />
+            <p>remove filter</p>
+          </div>
         </div>
       )}
     </div>

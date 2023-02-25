@@ -42,7 +42,7 @@ const Product = ({
         </div>
         <div className="content flex flex-col justify-between px-2 py-2 h-full ">
           <div className="title">
-            <p className="text-xs md:text-sm">{title}</p>
+            <p className="text-xs md:text-sm dark:invert">{title}</p>
           </div>
           {freeShipping && (
             <p className="font-bold py-2 text-sm md:text-xl text-yellow-400">

@@ -56,7 +56,7 @@ export const NewsletterContent = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="px-5 w-full md:h-full md:w-auto md:flex md:justify-end"
         >
-          {/* <div className="errors flex md:flex-col gap-2">
+          <div className="errors flex md:flex-col gap-2">
             <ErrorMessage
               errors={errors}
               name="name"
@@ -75,7 +75,7 @@ export const NewsletterContent = () => {
                 </div>
               )}
             />
-          </div> */}
+          </div>
           <div className="flex flex-col md:flex-row w-full justify-center items-center gap-1 z-20 ">
             <input
               {...register("name", {

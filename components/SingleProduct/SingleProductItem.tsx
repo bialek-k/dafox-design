@@ -27,7 +27,7 @@ export const SingleProductItem = ({
   useEffect(() => {
     setActive(singleProduct.gallery[0].id);
   }, [singleProduct.gallery]);
-
+  //save
   const addToCartHandler = () => {
     const exsistItem = state.cart.cartItems.find(
       (item) => item.slug === singleProduct.slug

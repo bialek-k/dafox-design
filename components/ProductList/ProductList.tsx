@@ -24,7 +24,7 @@ export const ProductList = ({ queryProducts }) => {
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.95 }}
-              className="dark:border-2 dark:rounded-md dark:border-neutral-800"
+              className="dark:border dark:rounded-md dark:border-neutral-900 dark:shadow-lg"
             >
               <Product
                 data={product}

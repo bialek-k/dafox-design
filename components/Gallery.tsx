@@ -4,9 +4,8 @@ import Backdrop from "@mui/material/Backdrop";
 
 import { Image as DatoImage } from "react-datocms";
 
-const Gallery = ({ active, setActive }) => {
+const Gallery = ({ active, setActive, singleProduct }) => {
   const { state } = useContext(Store);
-  const { ctxProductData } = state;
   const [selectedImg, setSelectedImg] = useState();
   const [open, setOpen] = useState(false);
 
@@ -34,7 +33,7 @@ const Gallery = ({ active, setActive }) => {
             <DatoImage
               data={
                 !selectedImg
-                  ? ctxProductData.gallery[0].responsiveImage
+                  ? singleProduct.gallery[0].responsiveImage
                   : selectedImg["responsiveImage"]
               }
             />
@@ -46,14 +45,14 @@ const Gallery = ({ active, setActive }) => {
           data={
             selectedImg
               ? selectedImg["responsiveImage"]
-              : ctxProductData.gallery[0].responsiveImage
+              : singleProduct.gallery[0].responsiveImage
           }
           className="rounded-md"
           layout="responsive"
         />
       </div>
       <div className="thumbs grid grid-cols-4 gap-3 mt-4">
-        {ctxProductData.gallery.map((singleThumb) => {
+        {singleProduct.gallery.map((singleThumb) => {
           return (
             <a
               key={singleThumb.id}

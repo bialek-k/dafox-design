@@ -1,6 +1,8 @@
 import React from "react";
 import { ButtonHTMLAttributes, DOMAttributes } from "react";
 
+import { motion } from "framer-motion";
+
 interface ButtonProps {
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   disabled?: boolean;
@@ -17,7 +19,9 @@ const Button = ({
   addedClassName,
 }: ButtonProps): React.ReactElement => {
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.95 }}
       type={type}
       disabled={disabled}
       onClick={onClick}
@@ -26,7 +30,7 @@ const Button = ({
       } ${addedClassName}`}
     >
       {children}
-    </button>
+    </motion.button>
   );
 };
 

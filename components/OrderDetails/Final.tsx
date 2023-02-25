@@ -18,7 +18,7 @@ const Final = () => {
   const totalAmount = cartItems.reduce((total, item) => item.price + total, 0);
 
   return (
-    <div className="finall w-full border-[1px] rounded-md shadow-md p-6">
+    <div className="finall w-full border rounded-md shadow-md p-6">
       <h1 className="font-bold text-xl mb-2">3. Summary</h1>
       <div className="content">
         {cartItems.map((item) => {

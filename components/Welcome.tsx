@@ -1,16 +1,21 @@
 import arrow from "../assets/arrowDown.svg";
 import { Image as DatoImage } from "react-datocms";
+import Image from "next/image";
 
-const Welcome = ({ heroImagesArr }): React.ReactElement => {
+import hero_image from "../assets/hero_image.jpg";
+
+const Welcome = (): React.ReactElement => {
   return (
     <div className="bg-black h-min lg:h-2/4 py-24 mb-12 w-full px-6 lg:px-48 flex justify-center lg:items-center drop-shadow-clg relative">
-      <DatoImage
-        data={heroImagesArr[8].responsiveImage}
+      <Image
+        src={hero_image}
         objectFit="cover"
+        alt="bmw steering wheel"
         layout="fill"
         className="rounded-lg opacity-50"
         objectPosition="bottom"
       />
+
       <div className="content drop-shadow-lg font-light relative text-center w-full flex flex-col justify-between items-center">
         <h1 className="text-white text-2xl lg:text-5xl mb-8 ">
           Welcome to the world of{" "}

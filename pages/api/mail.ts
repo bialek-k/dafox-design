@@ -10,7 +10,6 @@ export default async function handler(
 ) {
   const body = JSON.parse(req.body);
 
-  console.log(body);
   const message = `
     Name: ${body.name}\r\n
     Email: ${body.email}\r\n
@@ -18,8 +17,8 @@ export default async function handler(
   `;
 
   const data = {
-    to: "bialekdev@gmail.com",
-    from: "krzysztof.bialek1@gmail.com",
+    to: "info@dafoxdesign.com",
+    from: "info@dafoxdesign.com",
     subject: `Wiadomość od ${body.name}`,
     text: message,
     html: message.replace(/\r\n/g, "<br>"),

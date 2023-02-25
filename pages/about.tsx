@@ -9,7 +9,7 @@ import { StructuredText } from "react-datocms";
 const About = ({ data }): React.ReactElement => {
   return (
     <div className=" container mx-auto flex flex-col items-center px-6 my-24 ">
-      <div className="prose prose-h1:text-6xl  prose-h1:text-yellow-500 dark:prose-invert prose-h6:text-center prose-h6:my-24 prose-h6:tracking-widest prose-h6:text-3xl prose-h6:font-light prose-h6:text-yellow-500 prose-h6:italic">
+      <div className="prose prose-h1:text-6xl prose-h1:text-yellow-500 dark:prose-invert prose-h6:text-center prose-h6:my-24 prose-h6:tracking-widest prose-h6:text-3xl prose-h6:font-light prose-h6:text-yellow-500 prose-h6:italic text-sm leading-5 md:text-base ">
         <StructuredText
           data={data.allAbouts[0].content}
           renderBlock={({ record }: any) => {

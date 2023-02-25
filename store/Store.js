@@ -7,26 +7,41 @@ const initialState = {
     cartItems: [],
     totalPrice: 0,
   },
-  ctxProductData: {},
   ctxAllProducts: [],
   faqContent: [],
+  searchProducts: [],
+  filterQueries: "",
+  filterCategory: { id: 0, name: "All Products" },
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_SEARCH_PRODUCTS": {
+      const searchProducts = action.payload;
+      return { ...state, searchProducts };
+    }
+
+    case "SET_FILTER_CATEGORY": {
+      return { ...state, filterCategory: action.payload };
+    }
+
     case "SET_FAQ_CONTENT": {
       const storedFaqContent = action.payload;
       return { ...state, faqContent: storedFaqContent };
     }
 
-    case "SET_PRODUCT_DATA": {
-      const storeProductData = action.payload;
-      return { ...state, ctxProductData: { ...storeProductData } };
-    }
-
     case "SET_ALL_PRODUCTS": {
       const storedAllProducts = action.payload;
       return { ...state, ctxAllProducts: [...storedAllProducts] };
+    }
+
+    case "ADD_FILTER_QUERY": {
+      const query = action.payload;
+      return { ...state, filterQueries: query };
+    }
+
+    case "REMOVE_FILTER_QUERY": {
+      return { ...state, filterQueries: "" };
     }
 
     case "CART_ADD_ITEM": {

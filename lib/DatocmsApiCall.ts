@@ -80,6 +80,8 @@ const singleProductQuery = gql`
       }
       category {
         name
+        id
+        series
       }
       shortDescription {
         value

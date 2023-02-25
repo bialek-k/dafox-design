@@ -42,20 +42,7 @@ const MobileMenu = ({ setOpenMobileMenu }) => {
             </div>
           </Link>
         </div>
-        <Link href="/">
-          <motion.li
-            whileTap={{ scale: 0.85 }}
-            onClick={() =>
-              setTimeout(() => {
-                setOpenMobileMenu(false);
-              }, 1000)
-            }
-            className="hover:text-orange-300 bg-yellow-500 w-full text-center py-4"
-          >
-            <a>Home</a>
-          </motion.li>
-        </Link>
-        <Link href="/shop">
+        <Link href="/shop/page/1">
           <motion.li
             whileTap={{ scale: 0.85 }}
             onClick={() =>

@@ -18,28 +18,26 @@ const SortingProducts = ({ sortingMethod, setSortingMethod }) => {
   };
 
   return (
-    <div className="lg:w-48 w-full ">
-      <Box sx={{ maxWidth: "80vw" }}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label" className="dark:invert">
-            Sorting
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            className=" h-12  dark:invert lg:w-48  dark:border-2 dark:border-white/10 dark:mt-2   "
-            id="demo-simple-select"
-            label="Sorting"
-            value={sortingMethod}
-            onChange={handleChange}
-          >
-            {sortingMethodArray.map((method) => (
-              <MenuItem value={method} key={method} className="bg-white ">
-                <span className="truncate">{method}</span>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
+    <div className="lg:w-48 w-full shadow-md ">
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label" className="dark:invert">
+          Sorting
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          className="dark:invert lg:w-48 dark:border-2 dark:border-white/10 dark:mt-2"
+          id="demo-simple-select"
+          label="Sorting"
+          value={sortingMethod}
+          onChange={handleChange}
+        >
+          {sortingMethodArray.map((method) => (
+            <MenuItem value={method} key={method} className="bg-white ">
+              <span className="truncate">{method}</span>
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 };

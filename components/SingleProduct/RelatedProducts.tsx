@@ -1,14 +1,14 @@
 import React from "react";
-import Product from "../Product";
 import Link from "next/link";
 
 import { motion } from "framer-motion";
+import { ProductList } from "../ProductList/ProductList";
 
-const RelatedProducts = ({ relatedCategoryProducts }) => {
+const RelatedProducts = ({ relatedCategoryProducts, relatedLinkData }) => {
   return (
-    <div className="container mt-32">
+    <div className="container my-12">
       <h2 className="text-2xl font-bold text-center mb-6">
-        Product from{" "}
+        Products from{" "}
         <span className="text-yellow-500 text-3xl">
           {" "}
           {relatedCategoryProducts[0].category[0].name}
@@ -16,27 +16,21 @@ const RelatedProducts = ({ relatedCategoryProducts }) => {
         category
       </h2>
       <div className="wrapper flex justify-center">
-        <div className="grid md:grid-cols-2  lg:grid-cols-4 gap-4 md:max-w-5xl ">
-          {relatedCategoryProducts.map((singleProduct) => (
-            <Link href={`${singleProduct.slug}`} key={singleProduct.id}>
-              <a>
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="dark:border-2 dark:rounded-md dark:border-neutral-800"
-                >
-                  <Product
-                    title={singleProduct.name}
-                    price={singleProduct.price}
-                    data={singleProduct}
-                    promotion={singleProduct.promotion}
-                    freeShipping={singleProduct.freeShipping}
-                  />
-                </motion.div>
-              </a>
-            </Link>
-          ))}
-        </div>
+        <ProductList queryProducts={relatedCategoryProducts} />
+      </div>
+      <div className="action flex justify-center mb-4">
+        <Link
+          href={`/shop/category?filter=${relatedLinkData.name}&id=${relatedLinkData.id}&page=1`}
+          className="w-1/2 px-8 h-12 drop-shadow-md"
+        >
+          <motion.a
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-yellow-500 px-3 py-2 text-white rounded-md cursor-pointer"
+          >
+            See more from this category
+          </motion.a>
+        </Link>
       </div>
     </div>
   );

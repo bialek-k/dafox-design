@@ -12,11 +12,10 @@ import logoBlack from "../../../assets/dafox_logo_black.png";
 import HamburgerButton from "./HamburgerButton";
 import MobileMenu from "./MobileMenu";
 import CloseHamButton from "./CloseHamButton";
-import Search from "./Search/Search";
+// import Search from "./Search/Search";
 
 const Header = (): React.ReactElement => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
-  const router = useRouter();
 
   return (
     <>
@@ -30,7 +29,7 @@ const Header = (): React.ReactElement => {
         <div className=" container mx-auto">
           <header className="flex items-center justify-between py-4 ">
             <div>
-              <Link href="/">
+              <Link href="/shop/page/1">
                 <a>
                   <Image
                     src={logoWhite}
@@ -40,9 +39,6 @@ const Header = (): React.ReactElement => {
                   />
                 </a>
               </Link>
-            </div>
-            <div className="search">
-              <Search />
             </div>
             <div className="hidden md:flex">
               <Navigation />

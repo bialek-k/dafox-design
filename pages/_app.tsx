@@ -1,20 +1,14 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import Layout from "../components//Layout/Layout";
 import { ThemeProvider } from "next-themes";
 import "../styles/globals.css";
 import { StoreProvider } from "../store/Store";
 
-import Script from "next/script";
-
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-
 import * as fbq from "../lib/fpixel";
 
-import { ApolloProvider } from "@apollo/client";
-
-import { client } from "../lib/apollo";
-
 import { GoogleAnalytics, event } from "nextjs-google-analytics";
+import Script from "next/script";
 
 export function reportWebVitals({ id, name, label, value }) {
   event(name, {
@@ -47,12 +41,11 @@ function MyApp({ Component, pageProps }) {
       <StoreProvider>
         <Layout>
           <GoogleAnalytics trackPageViews />
-          <ApolloProvider client={client}>
-            <Script
-              id="fb-pixel"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
+          <Script
+            id="fb-pixel"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -63,10 +56,9 @@ function MyApp({ Component, pageProps }) {
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', ${fbq.FB_PIXEL_ID});
           `,
-              }}
-            />
-            <Component {...pageProps} />
-          </ApolloProvider>
+            }}
+          />
+          <Component {...pageProps} />
         </Layout>
       </StoreProvider>
     </ThemeProvider>

@@ -45,9 +45,7 @@ const ListOfProducts = () => {
               </div>
             </td>
             <td className="py-2 font-bold text-sm  text-center w-1/3">
-              <Link href={`/shop/steeringwheels/${item.slug}`}>
-                {item.name}
-              </Link>
+              <Link href={`/shop/${item.slug}`}>{item.name}</Link>
             </td>
 
             <td className="px-5 font-bold py-2 text-center ">$ {item.price}</td>

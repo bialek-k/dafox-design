@@ -22,24 +22,14 @@ const Navigation = (): React.ReactElement => {
     <nav>
       <ul className=" sm:flex flex-row gap-4 text-white items-center ">
         <li>
-          <Link href="/">
-            <a className={`${router.pathname === "/" && underline} relative`}>
-              Home
-            </a>
-          </Link>
-        </li>
-        <li>
-          <Link href={{ pathname: "/shop" }}>
+          <Link href="/shop/page/1">
             <a
-              className={`${
-                router.pathname.includes("/shop") && underline
-              } relative`}
+              className={`${router.pathname === "/shop" && underline} relative`}
             >
               Shop
             </a>
           </Link>
         </li>
-
         <li>
           <Link href="/about">
             <a

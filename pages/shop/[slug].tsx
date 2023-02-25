@@ -10,18 +10,10 @@ import {
 } from "../../lib/DatocmsApiCall";
 
 const SingleProductPage = ({ singleProduct, relatedProducts }) => {
-  const relatedLinkData = singleProduct.category.map((cat) => {
-    return {
-      id: cat.id,
-      name: cat.name,
-    };
-  });
-
   return (
     <SingleProductItem
       singleProduct={singleProduct}
       relatedProducts={relatedProducts}
-      relatedLinkData={relatedLinkData[0]}
     />
   );
 };

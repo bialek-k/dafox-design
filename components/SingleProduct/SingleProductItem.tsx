@@ -10,12 +10,19 @@ import RelatedProducts from "./RelatedProducts";
 export const SingleProductItem = ({
   singleProduct,
   relatedProducts,
-  relatedLinkData,
 }): React.ReactElement => {
   const { state, dispatch } = useContext(Store);
-  const { ctxProductData } = state;
   const router = useRouter();
   const [active, setActive] = useState(null);
+
+  const relatedLinkData = singleProduct.category.map((cat) => {
+    return {
+      id: cat.id,
+      name: cat.name,
+    };
+  });
+
+  console.log(relatedLinkData);
 
   useEffect(() => {
     setActive(singleProduct.gallery[0].id);

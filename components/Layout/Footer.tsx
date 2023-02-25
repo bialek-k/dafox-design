@@ -48,12 +48,7 @@ const Footer = (): React.ReactElement => {
           <nav>
             <ul className=" flex md:flex-col md:items-center gap-4 text-white/90">
               <li>
-                <Link href="/">
-                  <a>Home</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop">
+                <Link href="/shop/page/1">
                   <a>Shop</a>
                 </Link>
               </li>

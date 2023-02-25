@@ -64,8 +64,14 @@ const Checkout = (): React.ReactElement => {
     createCheckoutSession(item);
   };
 
+  const slug = cartItems.map((item) => item.slug);
+
   const onSubmit = (data) => {
-    checkoutProduct(data);
+    const newData = {
+      ...data,
+      productLink: `https://www.dafoxdesign.com/shop/${slug[0]}`,
+    };
+    checkoutProduct(newData);
 
     dispatch({
       type: "CART_REMOVE_ITEM",

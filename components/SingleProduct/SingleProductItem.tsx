@@ -22,8 +22,6 @@ export const SingleProductItem = ({
     };
   });
 
-  console.log(relatedLinkData);
-
   useEffect(() => {
     setActive(singleProduct.gallery[0].id);
   }, [singleProduct.gallery]);
@@ -113,7 +111,7 @@ export const SingleProductItem = ({
         </div>
         <RelatedProducts
           relatedCategoryProducts={relatedProducts}
-          relatedLinkData={relatedLinkData}
+          relatedLinkData={relatedLinkData[0]}
         />
       </div>
     </>

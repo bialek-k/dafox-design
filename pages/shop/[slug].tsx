@@ -40,7 +40,7 @@ export async function getStaticProps({ params }) {
 
   const categoryId = singleProduct.category.map((id) => id.id);
 
-  const relatedLinkData = singleProduct.category.map((cat) => {
+  const relatedLinkData = await singleProduct.category.map((cat) => {
     return {
       id: cat.id,
       name: cat.name,

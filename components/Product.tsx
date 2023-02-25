@@ -60,12 +60,14 @@ const Product = ({
                 className={` ${
                   promotion &&
                   " text-sm text-neutral-500 line-through font-normal"
-                } font-bold text-xl text-yellow-500`}
+                } font-bold text-xl `}
               >
                 ${price}
               </p>
               {promotion && (
-                <p className="text-xl text-red-500 font-bold">${promotion}</p>
+                <p className="text-xl text-yellow-500 font-bold">
+                  ${promotion}
+                </p>
               )}
             </div>
           </div>

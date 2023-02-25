@@ -109,10 +109,12 @@ export const SingleProductItem = ({
         <div className="mt-24 dark:invert">
           <Divider />
         </div>
-        <RelatedProducts
-          relatedCategoryProducts={relatedProducts}
-          relatedLinkData={relatedLinkData[0]}
-        />
+        {relatedLinkData[0].name && (
+          <RelatedProducts
+            relatedCategoryProducts={relatedProducts}
+            relatedLinkData={relatedLinkData[0]}
+          />
+        )}
       </div>
     </>
   );

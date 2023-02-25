@@ -7,33 +7,33 @@ import { Divider } from "@mui/material";
 import Gallery from "../Gallery";
 import RelatedProducts from "./RelatedProducts";
 
-export const SingleProductItem = ({}): React.ReactElement => {
+export const SingleProductItem = ({
+  singleProduct,
+  relatedProducts,
+  relatedLinkData,
+}): React.ReactElement => {
   const { state, dispatch } = useContext(Store);
-  const { ctxProductData, ctxAllProducts } = state;
+  const { ctxProductData } = state;
   const router = useRouter();
   const [active, setActive] = useState(null);
 
-  // const relatedProducts = ctxAllProducts.filter((prod) =>
-  //   prod.category.some((cat) => cat.name === ctxProductData.category[0].name)
-  // );
-
   useEffect(() => {
-    setActive(ctxProductData.gallery[0].id);
-  }, [ctxProductData.gallery]);
+    setActive(singleProduct.gallery[0].id);
+  }, [singleProduct.gallery]);
 
   const addToCartHandler = () => {
     const exsistItem = state.cart.cartItems.find(
-      (item) => item.slug === ctxProductData.slug
+      (item) => item.slug === singleProduct.slug
     );
     const quantity = exsistItem ? exsistItem.quantity + 1 : 1;
     dispatch({
       type: "CART_ADD_ITEM",
       payload: {
-        ...ctxProductData,
+        ...singleProduct,
         quantity,
-        price: ctxProductData.promotion
-          ? ctxProductData.promotion
-          : ctxProductData.price,
+        price: singleProduct.promotion
+          ? singleProduct.promotion
+          : singleProduct.price,
       },
     });
     router.push("/cart");
@@ -44,40 +44,44 @@ export const SingleProductItem = ({}): React.ReactElement => {
       <div className="container mx-auto px-6 md:px-12 mt-24 mb-48 ">
         <div className="product flex flex-col lg:flex-row justify-center gap-6 mb-10  ">
           <div className="photo w-full mb-2 lg:mb-0 lg:w-1/3 ">
-            <Gallery active={active} setActive={setActive} />
+            <Gallery
+              active={active}
+              setActive={setActive}
+              singleProduct={singleProduct}
+            />
           </div>
           <div className="productContent lg:w-1/3 flex flex-col justify-between">
             <div className="title">
               <h1 className="font-bold text-2xl md:text-4xl mb-12">
-                {ctxProductData.name}
+                {singleProduct.name}
               </h1>
               <div className="prose mb-12 text-sm leading-5 md:text-lg dark:prose-invert ">
-                <StructuredText data={ctxProductData.shortDescription} />
+                <StructuredText data={singleProduct.shortDescription} />
               </div>
             </div>
             <div className="mb-2"></div>
             <div className="flex flex-col">
               <p className="text-black/50 dark:invert">
-                {ctxProductData.freeShipping && (
+                {singleProduct.freeShipping && (
                   <p className="font-bold text-2xl text-yellow-400">
                     FREE SHIPPING
                   </p>
                 )}
-                in stock: <span>{ctxProductData.inStock}</span>
+                in stock: <span>{singleProduct.inStock}</span>
               </p>
               <div className="action flex flex-col items-center gap-4">
                 <div className="price flex gap-2 items-end md:items-start w-full">
                   <p
                     className={` ${
-                      ctxProductData.promotion &&
+                      singleProduct.promotion &&
                       "line-through text-1xl font-normal text-black/40 dark:text-white"
                     } font-bold text-3xl`}
                   >
-                    ${ctxProductData.price}
+                    ${singleProduct.price}
                   </p>
-                  {ctxProductData.promotion && (
+                  {singleProduct.promotion && (
                     <p className="text-red-500 text-4xl font-bold">
-                      ${ctxProductData.promotion}
+                      ${singleProduct.promotion}
                     </p>
                   )}
                 </div>
@@ -95,12 +99,15 @@ export const SingleProductItem = ({}): React.ReactElement => {
           <Divider />
         </div>
         <div className="prose dark:prose-invert prose-h2:text-yellow-500 prose-h2:tracking-wider prose-h2:my-5 prose-p:m-1 mt-12 prose-li:my-0 text-sm leading-5 ">
-          <StructuredText data={ctxProductData.description} />
+          <StructuredText data={singleProduct.description} />
         </div>
-        {/* <div className="mt-24 dark:invert">
+        <div className="mt-24 dark:invert">
           <Divider />
-        </div> */}
-        {/* <RelatedProducts relatedCategoryProducts={relatedProducts} /> */}
+        </div>
+        <RelatedProducts
+          relatedCategoryProducts={relatedProducts}
+          relatedLinkData={relatedLinkData}
+        />
       </div>
     </>
   );

@@ -7,7 +7,6 @@ const initialState = {
     cartItems: [],
     totalPrice: 0,
   },
-  ctxProductData: {},
   ctxAllProducts: [],
   faqContent: [],
   searchProducts: [],
@@ -29,11 +28,6 @@ const reducer = (state, action) => {
     case "SET_FAQ_CONTENT": {
       const storedFaqContent = action.payload;
       return { ...state, faqContent: storedFaqContent };
-    }
-
-    case "SET_PRODUCT_DATA": {
-      const storeProductData = action.payload;
-      return { ...state, ctxProductData: { ...storeProductData } };
     }
 
     case "SET_ALL_PRODUCTS": {

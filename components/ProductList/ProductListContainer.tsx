@@ -81,7 +81,7 @@ export const ProductListContainer = ({
         <div className=" my-4   dark:invert">
           <Divider />
         </div>
-        <ProductList queryProducts={queryProducts} />
+        <ProductList queryProducts={queryProducts()} />
         {router.pathname === "/shop/page/[page]" && (
           <Pagination
             url={"/shop/page/"}

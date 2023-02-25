@@ -9,16 +9,19 @@ import {
   getSingleProduct,
 } from "../../lib/DatocmsApiCall";
 
-const SingleProductPage = ({
-  singleProduct,
-  relatedProducts,
-  relatedLinkData,
-}) => {
+const SingleProductPage = ({ singleProduct, relatedProducts }) => {
+  const relatedLinkData = singleProduct.category.map((cat) => {
+    return {
+      id: cat.id,
+      name: cat.name,
+    };
+  });
+
   return (
     <SingleProductItem
       singleProduct={singleProduct}
       relatedProducts={relatedProducts}
-      relatedLinkData={relatedLinkData}
+      relatedLinkData={relatedLinkData[0]}
     />
   );
 };
@@ -39,14 +42,6 @@ export async function getStaticProps({ params }) {
   const singleProduct = await getSingleProduct(params.slug);
 
   const categoryId = singleProduct.category.map((id) => id.id);
-
-  const relatedLinkData = await singleProduct.category.map((cat) => {
-    return {
-      id: cat.id,
-      name: cat.name,
-    };
-  });
-
   const query = gql`
     query MyQuery($allIn: [ItemId]) {
       allProducts(filter: { category: { allIn: $allIn } }) {
@@ -82,7 +77,6 @@ export async function getStaticProps({ params }) {
     props: {
       singleProduct,
       relatedProducts: relatedProducts.data.allProducts.slice(0, 4),
-      relatedLinkData: relatedLinkData[0],
     },
   };
 }

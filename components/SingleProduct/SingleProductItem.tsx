@@ -15,12 +15,12 @@ export const SingleProductItem = ({
   const router = useRouter();
   const [active, setActive] = useState(null);
 
-  const relatedLinkData = singleProduct.category.map((cat) => {
-    return {
-      id: cat.id,
-      name: cat.name,
-    };
-  });
+  // const relatedLinkData = singleProduct.category.map((cat) => {
+  //   return {
+  //     id: cat.id,
+  //     name: cat.name,
+  //   };
+  // });
 
   useEffect(() => {
     setActive(singleProduct.gallery[0].id);
@@ -109,10 +109,7 @@ export const SingleProductItem = ({
         <div className="mt-24 dark:invert">
           <Divider />
         </div>
-        <RelatedProducts
-          relatedCategoryProducts={relatedProducts}
-          relatedLinkData={relatedLinkData}
-        />
+        <RelatedProducts relatedCategoryProducts={relatedProducts} />
       </div>
     </>
   );

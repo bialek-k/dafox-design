@@ -18,7 +18,7 @@ const SortingProducts = ({ sortingMethod, setSortingMethod }) => {
   };
 
   return (
-    <div className="lg:w-48 w-full ">
+    <div className="lg:w-48 w-full shadow-md ">
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label" className="dark:invert">
           Sorting

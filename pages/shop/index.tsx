@@ -1,4 +1,4 @@
-import ProductList from "../../components/ProductList";
+import { ProductListContainer } from "../../components/ProductList/ProductListContainer";
 import { client } from "../../lib/apollo";
 import { gql } from "@apollo/client";
 import Hero from "../../components/Hero";
@@ -7,7 +7,10 @@ const Page = ({ products, totalProductNumber }): React.ReactElement => {
   return (
     <div className="flex flex-col justify-center items-center">
       <Hero />
-      <ProductList products={products} totalProducts={totalProductNumber} />
+      <ProductListContainer
+        products={products}
+        totalProducts={totalProductNumber}
+      />
     </div>
   );
 };

@@ -1,13 +1,12 @@
 interface AmountOfProductsProps {
-  products: any;
+  amountOfProducts: number;
   totalProducts: number;
   currentPage: number;
   pageSize: number;
-  searchPage: boolean;
 }
 
 export const AmountOfProducts = ({
-  products,
+  amountOfProducts,
   totalProducts,
   currentPage,
   pageSize,
@@ -15,12 +14,10 @@ export const AmountOfProducts = ({
   const pages = totalProducts / pageSize;
 
   return (
-    <p className="text-neutral-600 font-normal w-full">
+    <p className="text-neutral-500 w-full">
       There are{" "}
-      <span className="font-bold">
-        {(totalProducts / pages) * currentPage} / {totalProducts}
-      </span>
-      {products.length > 1 ? " products" : " product"} availble
+      <span className="font-bold text-yellow-500">{totalProducts}</span>
+      {amountOfProducts > 1 ? " products" : " product"} availble
     </p>
   );
 };

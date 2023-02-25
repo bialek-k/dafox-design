@@ -61,7 +61,7 @@ export default function FilterProducts() {
   };
 
   return (
-    <div className="w-full lg:w-64">
+    <div className="w-full lg:w-64 shadow-md">
       <FormControl fullWidth>
         <InputLabel id="filter-select-label" className="dark:invert">
           Categories

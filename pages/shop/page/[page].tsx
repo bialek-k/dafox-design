@@ -1,6 +1,6 @@
 import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
-import ProductList from "../../../components/ProductList";
+import { ProductListContainer } from "../../../components/ProductList/ProductListContainer";
 import Hero from "../../../components/Hero";
 
 const page = ({ data, totalProducts }) => {
@@ -8,7 +8,7 @@ const page = ({ data, totalProducts }) => {
     <div className="flex flex-col justify-center items-center">
       <Hero />
       <div>
-        <ProductList
+        <ProductListContainer
           products={data.allProducts}
           totalProducts={totalProducts}
         />

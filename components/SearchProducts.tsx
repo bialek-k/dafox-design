@@ -33,7 +33,7 @@ export const SearchProducts = () => {
   };
 
   return (
-    <div className="mb-12 w-full">
+    <div className="mb-12 w-full shadow-md">
       <form onSubmit={handleSubmit} className="flex">
         <input
           type="text"

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { gql } from "@apollo/client";
-import ProductList from "../components/ProductList";
+import { ProductListContainer } from "../components/ProductList/ProductListContainer";
 import { client } from "../lib/apollo";
 import { Store } from "../store/Store";
 import Hero from "../components/Hero";
@@ -19,7 +19,7 @@ const Shop = ({ products, totalProductNumber }): React.ReactElement => {
     <div className="flex flex-col justify-center items-center">
       <p>INDEX</p>
       <Hero />
-      {/* <ProductList
+      {/* <ProductListContainer
         currentPage={1}
         products={products}
         totalProducts={totalProductNumber}

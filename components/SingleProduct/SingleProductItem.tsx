@@ -43,21 +43,21 @@ export const SingleProductItem = ({}): React.ReactElement => {
     <>
       <div className="container mx-auto px-6 md:px-12 mt-24 mb-48 ">
         <div className="product flex flex-col lg:flex-row justify-center gap-6 mb-10  ">
-          <div className="photo w-full mb-2 lg:mb-0 lg:w-1/3">
+          <div className="photo w-full mb-2 lg:mb-0 lg:w-1/3 ">
             <Gallery active={active} setActive={setActive} />
           </div>
           <div className="productContent lg:w-1/3 flex flex-col justify-between">
             <div className="title">
-              <h1 className="font-bold text-4xl mb-12">
+              <h1 className="font-bold text-2xl md:text-4xl mb-12">
                 {ctxProductData.name}
               </h1>
-              <div className="prose content mb-12 dark:prose-invert ">
+              <div className="prose mb-12 text-sm leading-5 md:text-lg dark:prose-invert ">
                 <StructuredText data={ctxProductData.shortDescription} />
               </div>
             </div>
             <div className="mb-2"></div>
             <div className="flex flex-col">
-              <p className="text-black/50 dark:invert mb-4">
+              <p className="text-black/50 dark:invert">
                 {ctxProductData.freeShipping && (
                   <p className="font-bold text-2xl text-yellow-400">
                     FREE SHIPPING
@@ -82,7 +82,7 @@ export const SingleProductItem = ({}): React.ReactElement => {
                   )}
                 </div>
                 <Button
-                  addedClassName="w-full px-8 h-12"
+                  addedClassName="w-full px-8 h-12 drop-shadow-md"
                   onClick={() => addToCartHandler()}
                 >
                   Add to Cart
@@ -94,7 +94,7 @@ export const SingleProductItem = ({}): React.ReactElement => {
         <div className="mt-24 dark:invert">
           <Divider />
         </div>
-        <div className="prose dark:prose-invert prose-h2:text-yellow-500 prose-h2:tracking-wider prose-h2:my-5 prose-p:m-1 mt-12 prose-li:my-0 ">
+        <div className="prose dark:prose-invert prose-h2:text-yellow-500 prose-h2:tracking-wider prose-h2:my-5 prose-p:m-1 mt-12 prose-li:my-0 text-sm leading-5 ">
           <StructuredText data={ctxProductData.description} />
         </div>
         {/* <div className="mt-24 dark:invert">

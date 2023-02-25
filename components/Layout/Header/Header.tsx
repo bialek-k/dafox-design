@@ -40,9 +40,6 @@ const Header = (): React.ReactElement => {
                 </a>
               </Link>
             </div>
-            {/* <div className="search">
-              <Search />
-            </div> */}
             <div className="hidden md:flex">
               <Navigation />
             </div>

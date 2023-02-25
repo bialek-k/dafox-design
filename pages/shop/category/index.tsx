@@ -2,13 +2,16 @@ import React from "react";
 
 import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
-import ProductList from "../../../components/ProductList";
+import { ProductListContainer } from "../../../components/ProductList/ProductListContainer";
 
 const CategoryPage = ({ data, totalProductNumber }) => {
   return (
     <div className="flex flex-col justify-center items-center">
       <div>
-        <ProductList products={data} totalProducts={totalProductNumber} />
+        <ProductListContainer
+          products={data}
+          totalProducts={totalProductNumber}
+        />
       </div>
     </div>
   );

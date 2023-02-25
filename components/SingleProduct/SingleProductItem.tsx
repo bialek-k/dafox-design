@@ -22,6 +22,8 @@ export const SingleProductItem = ({
     };
   });
 
+  console.log(relatedLinkData[0].name);
+
   useEffect(() => {
     setActive(singleProduct.gallery[0].id);
   }, [singleProduct.gallery]);

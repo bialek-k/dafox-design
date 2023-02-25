@@ -10,7 +10,7 @@ const Layout = ({
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main className="dark:bg-neutral-800 dark:text-white">{children}</main>
       <div id="backdrop-root" />
       <Footer />
     </>

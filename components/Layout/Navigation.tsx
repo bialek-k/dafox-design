@@ -48,13 +48,11 @@ const Navigation = (): React.ReactElement => {
 
   const onBtnClick = (e) => {
     e.preventDefault();
-    const goto = e.target.getAttribute("goto");
+    const goto = e.target.getAttribute("name");
     setTimeout(() => {
       scroll2El(goto);
     }, 100);
   };
-
-  const ref = useRef();
   const router = useRouter();
 
   const underline =
@@ -64,7 +62,13 @@ const Navigation = (): React.ReactElement => {
     <nav>
       <ul className=" sm:flex flex-row gap-4 text-white items-center ">
         <li className="flex gap-2 items-center">
-          <SearchIcon onClick={onBtnClick}></SearchIcon>
+          <button
+            name="productList"
+            className="hover:scale-125  ease-in-out duration-150"
+            onClick={onBtnClick}
+          >
+            <FaSearch className="text-yellow-500 pointer-events-none" />
+          </button>
           <Link href="/shop/page/1">
             <a
               className={`${router.pathname === "/shop" && underline} relative`}

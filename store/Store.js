@@ -10,7 +10,7 @@ const initialState = {
   ctxAllProducts: [],
   faqContent: [],
   searchProducts: [],
-  filterQueries: "",
+  filterQuery: "",
   filterCategory: { id: 0, name: "All Products" },
 };
 
@@ -37,11 +37,11 @@ const reducer = (state, action) => {
 
     case "ADD_FILTER_QUERY": {
       const query = action.payload;
-      return { ...state, filterQueries: query };
+      return { ...state, filterQuery: query };
     }
 
     case "REMOVE_FILTER_QUERY": {
-      return { ...state, filterQueries: "" };
+      return { ...state, filterQuery: "" };
     }
 
     case "CART_ADD_ITEM": {

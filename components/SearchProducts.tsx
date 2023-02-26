@@ -2,12 +2,13 @@ import { useState, useContext } from "react";
 import { Store } from "../store/Store";
 import { useRouter } from "next/router";
 import Button from "./UI/Button";
-
 import { FaMinusCircle } from "react-icons/fa";
 
-import { getSearchQuery } from "../utilities/getSearchQuery";
+interface SearchProductsProps {
+  showFilter?: boolean;
+}
 
-export const SearchProducts = () => {
+export const SearchProducts = ({ showFilter }: SearchProductsProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
@@ -35,12 +36,12 @@ export const SearchProducts = () => {
   };
 
   return (
-    <div className="mb-12 w-full drop-shadow-md">
+    <div className="mb-2 w-full drop-shadow-md ">
       <form onSubmit={handleSubmit} className="flex">
         <input
           type="text"
-          className="border border-black/30 rounded-r-none rounded-l-md w-full px-4 py-3"
-          placeholder="Find something for You"
+          className="border border-black/30 rounded-r-none rounded-l-md w-full px-4 py-3 text-sm"
+          placeholder="Find your perfect steering wheel | ENG"
           onChange={(e) => setSearchQuery(e.target.value)}
           value={searchQuery}
         />
@@ -51,12 +52,12 @@ export const SearchProducts = () => {
           Search
         </Button>
       </form>
-      {state.filterQueries !== "" && (
+      {state.filterQuery !== "" && showFilter ? (
         <div className=" flex py-4 justify-between my-4">
           <div className="flex gap-2">
             <p className="font-bold text-xl">Search: </p>
             <p className="bg-yellow-500 text-white px-3 py-1 rounded-md hover: text-sm">
-              {state.filterQueries}
+              {state.filterQuery}
             </p>
           </div>
           <div
@@ -67,7 +68,7 @@ export const SearchProducts = () => {
             <p>remove filter</p>
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

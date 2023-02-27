@@ -30,7 +30,7 @@ const Welcome = (): React.ReactElement => {
           <p className="text-yellow-500 tracking-widest text-md lg:text-md italic font-light mb-4">
             Make your
             <strong className=" font-bold"> dream steering wheel</strong> a
-            reality. <strong className=" font-bold">Don't miss</strong> the
+            reality. <strong className=" font-bold">Don&apos;t miss</strong> the
             opportunity <strong className=" font-bold">to upgrade </strong>your
             driving game!
           </p>

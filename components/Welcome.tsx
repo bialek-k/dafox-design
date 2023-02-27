@@ -38,13 +38,19 @@ const Welcome = (): React.ReactElement => {
           </p>
           <div className="my-6  animate-pulse flex gap-4 mt-12 ">
             <button onClick={(e) => scrollToElement(e)} name="productList">
-              <p className="text-yellow-500 text-2xl font-bold pointer-events-none">
-                See more
-              </p>
+              <div className="div flex gap-2 pointer-events-none">
+                <p className="text-yellow-500 text-2xl font-bold pointer-events-none">
+                  See more
+                </p>
+                <div className="w-6">
+                  <DatoImage
+                    data={arrow}
+                    objectFit="contain"
+                    className="pointer-events-none"
+                  />
+                </div>
+              </div>
             </button>
-            <div className="w-6">
-              <DatoImage data={arrow} objectFit="contain" />
-            </div>
           </div>
         </div>
       </div>

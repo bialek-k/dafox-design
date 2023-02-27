@@ -1,5 +1,4 @@
 export const scrollToElement = (e) => {
-  console.log(e.target);
   e.preventDefault();
   setTimeout(() => {
     window.scrollTo({

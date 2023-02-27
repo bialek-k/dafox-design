@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "../components//Layout/Layout";
 import { ThemeProvider } from "next-themes";
@@ -21,6 +21,25 @@ export function reportWebVitals({ id, name, label, value }) {
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+
+  const [originalTitle, setOriginalTitle] = useState("");
+
+  useEffect(() => {
+    const handleTabChange = () => {
+      if (document.hidden) {
+        document.title = "Come back to us :)";
+      } else {
+        document.title = originalTitle;
+      }
+    };
+    if (!originalTitle) {
+      setOriginalTitle(document.title);
+    }
+
+    window.addEventListener("visibilitychange", handleTabChange);
+    return () =>
+      window.removeEventListener("visibilitychange", handleTabChange);
+  }, [originalTitle]);
 
   useEffect(() => {
     // This pageview only triggers the first time (it's important for Pixel to have real information)

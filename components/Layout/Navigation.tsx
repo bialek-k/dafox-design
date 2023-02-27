@@ -3,16 +3,56 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRef } from "react";
 import { useRouter } from "next/router";
+import { ButtonHTMLAttributes, DOMAttributes } from "react";
+
+import { FaSearch } from "react-icons/fa";
 
 import { Store } from "../../store/Store";
+import { motion } from "framer-motion";
 
 import cartShopping from "../../assets/cart-shopping.svg";
+
+interface SearchIconProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  goto: string;
+  onClick?: any | DOMAttributes<HTMLButtonElement>["onClick"];
+}
+
+const SearchIcon = ({
+  type = "button",
+  onClick,
+  children,
+}: SearchIconProps): React.ReactElement => {
+  return (
+    <motion.button
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.95 }}
+      type={type}
+      onClick={onClick}
+    >
+      {children}
+    </motion.button>
+  );
+};
 
 const Navigation = (): React.ReactElement => {
   const { state } = useContext(Store);
   const { cart } = state;
 
-  const ref = useRef();
+  const scroll2El = (elID) => {
+    window.scrollTo({
+      top: document.getElementById(elID).offsetTop - 40,
+      behavior: "smooth",
+    });
+  };
+
+  const onBtnClick = (e) => {
+    e.preventDefault();
+    const goto = e.target.getAttribute("name");
+    setTimeout(() => {
+      scroll2El(goto);
+    }, 100);
+  };
   const router = useRouter();
 
   const underline =
@@ -21,7 +61,14 @@ const Navigation = (): React.ReactElement => {
   return (
     <nav>
       <ul className=" sm:flex flex-row gap-4 text-white items-center ">
-        <li>
+        <li className="flex gap-2 items-center">
+          <button
+            name="productList"
+            className="hover:scale-125  ease-in-out duration-150"
+            onClick={onBtnClick}
+          >
+            <FaSearch className="text-yellow-500 pointer-events-none" />
+          </button>
           <Link href="/shop/page/1">
             <a
               className={`${router.pathname === "/shop" && underline} relative`}

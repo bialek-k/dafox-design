@@ -1,21 +1,13 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
-
 import { Divider } from "@mui/material";
-
 import { Store } from "../../store/Store";
-
-import Product from "../Product";
 import SortingProducts from "../SortingProducts";
-import Link from "next/link";
-
 import FilterProducts from "../FilterProducts";
 import { getSortingMethod } from "../../utilities/getSortingMethod";
-import { motion } from "framer-motion";
 import { Pagination } from "../Pagination";
 import { AmountOfProducts } from "../AmountOfProducts";
 import { SearchProducts } from "../SearchProducts";
-
 import { ProductList } from "./ProductList";
 
 export const ProductListContainer = ({
@@ -24,8 +16,9 @@ export const ProductListContainer = ({
 }): React.ReactElement => {
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const {
-    state: { searchProducts },
+    state: { searchProducts, filterCategory, filterQuery },
   } = useContext(Store);
+
   const router = useRouter();
 
   const queryProducts = () => {
@@ -38,6 +31,22 @@ export const ProductListContainer = ({
   };
   const pageSize = 15;
 
+  const listNameDisplay = () => {
+    if (filterQuery) {
+      return (
+        <h2 className="text-xl">
+          Search: <strong className="font-bold">{filterQuery}</strong>
+        </h2>
+      );
+    } else {
+      return (
+        <h2 className="text-xl">
+          Category: <strong className="font-bold">{filterCategory.name}</strong>
+        </h2>
+      );
+    }
+  };
+
   if (!products.length) {
     return (
       <div className="container flex flex-col items-center justify-center my-24">
@@ -46,7 +55,7 @@ export const ProductListContainer = ({
           <p className="text-neutral-600">use search or change categories</p>
         </div>
         <div className="flex gap-5 w-full">
-          <SearchProducts />
+          <SearchProducts showFilter />
           <FilterProducts />
         </div>
       </div>
@@ -54,14 +63,17 @@ export const ProductListContainer = ({
   }
 
   return (
-    <div className="container flex flex-col justify-center mb-12 ">
+    <div
+      className="container flex flex-col justify-center mb-12"
+      id="productList"
+    >
       <div className="title w-full my-16">
         <h1 className="text-center text-3xl font-bold">
           Custom Steering Wheels
         </h1>
       </div>
       <div className="wrapper px-6 ">
-        <SearchProducts />
+        <SearchProducts showFilter />
         <div className="flex flex-col lg:flex-row lg:items-center ">
           <AmountOfProducts
             amountOfProducts={products.length}
@@ -78,7 +90,8 @@ export const ProductListContainer = ({
             />
           </div>
         </div>
-        <div className=" my-4   dark:invert">
+        <div className="filter mt-12">{listNameDisplay()}</div>
+        <div className=" my-4 dark:invert">
           <Divider />
         </div>
         <ProductList queryProducts={queryProducts()} />

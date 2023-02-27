@@ -21,19 +21,18 @@ const Welcome = (): React.ReactElement => {
           Welcome to the world of{" "}
           <strong className="text-yellow-500 font-bold">
             {" "}
-            The Best Custom Steering Wheels{" "}
+            The Finest Steering Wheels{" "}
           </strong>{" "}
-          <br /> made by
+          <br /> crafted by
           <strong className="text-yellow-500 font-bold"> dafox_design</strong>
         </h1>
         <div className="action flex items-center  flex-col max-w-xl">
           <p className="text-yellow-500 tracking-widest text-md lg:text-md italic font-light mb-4">
-            <strong className=" font-bold">
-              Get yourself a bespoke steering wheel
-            </strong>{" "}
-            you’ve been always dreaming about and{" "}
-            <strong className=" font-bold">enjoy driving your car</strong> for
-            many years ahead!
+            Make your
+            <strong className=" font-bold"> dream steering wheel</strong> a
+            reality. <strong className=" font-bold">Don&apos;t miss</strong> the
+            opportunity <strong className=" font-bold">to upgrade </strong>your
+            driving game!
           </p>
           <div className="my-6  animate-pulse flex gap-4 mt-12 ">
             <p className="text-yellow-500 text-2xl font-bold">See more</p>

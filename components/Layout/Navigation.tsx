@@ -1,58 +1,17 @@
 import React, { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRef } from "react";
 import { useRouter } from "next/router";
-import { ButtonHTMLAttributes, DOMAttributes } from "react";
-
 import { FaSearch } from "react-icons/fa";
-
 import { Store } from "../../store/Store";
-import { motion } from "framer-motion";
+
+import { scrollToElement } from "../../utilities/scrollToElement";
 
 import cartShopping from "../../assets/cart-shopping.svg";
-
-interface SearchIconProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  goto: string;
-  onClick?: any | DOMAttributes<HTMLButtonElement>["onClick"];
-}
-
-const SearchIcon = ({
-  type = "button",
-  onClick,
-  children,
-}: SearchIconProps): React.ReactElement => {
-  return (
-    <motion.button
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.95 }}
-      type={type}
-      onClick={onClick}
-    >
-      {children}
-    </motion.button>
-  );
-};
 
 const Navigation = (): React.ReactElement => {
   const { state } = useContext(Store);
   const { cart } = state;
-
-  const scroll2El = (elID) => {
-    window.scrollTo({
-      top: document.getElementById(elID).offsetTop - 40,
-      behavior: "smooth",
-    });
-  };
-
-  const onBtnClick = (e) => {
-    e.preventDefault();
-    const goto = e.target.getAttribute("name");
-    setTimeout(() => {
-      scroll2El(goto);
-    }, 100);
-  };
   const router = useRouter();
 
   const underline =
@@ -65,7 +24,7 @@ const Navigation = (): React.ReactElement => {
           <button
             name="productList"
             className="hover:scale-125  ease-in-out duration-150"
-            onClick={onBtnClick}
+            onClick={(e) => scrollToElement(e)}
           >
             <FaSearch className="text-yellow-500 pointer-events-none" />
           </button>

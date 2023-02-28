@@ -119,8 +119,8 @@ export const ProductListContainer = ({
           />
         )}
       </div>
-      <div className="reviews">
-        <ElfsightWidget widgetID="9475a83a-2446-4ab1-9420-037c6e47a20b" />
+      <div className="reviews mt-12 mb-48 px-6">
+        <ElfsightWidget widgetID={process.env.ELFSIGHT_WIDGET_ID} />
       </div>
     </div>
   );

@@ -10,6 +10,8 @@ import { AmountOfProducts } from "../AmountOfProducts";
 import { SearchProducts } from "../SearchProducts";
 import { ProductList } from "./ProductList";
 
+import { ElfsightWidget } from "react-elfsight-widget";
+
 export const ProductListContainer = ({
   products,
   totalProducts,
@@ -116,6 +118,9 @@ export const ProductListContainer = ({
             pageSize={pageSize}
           />
         )}
+      </div>
+      <div className="reviews">
+        <ElfsightWidget widgetID="9475a83a-2446-4ab1-9420-037c6e47a20b" />
       </div>
     </div>
   );

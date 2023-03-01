@@ -62,7 +62,7 @@ const Contact = (): React.ReactElement => {
                 addedClassName="text-white px-10 mx-auto max-w-md"
                 type="submit"
               >
-                Wyślij
+                Send
               </Button>
             </form>
           </FormProvider>

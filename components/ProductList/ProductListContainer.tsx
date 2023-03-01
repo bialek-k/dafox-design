@@ -12,11 +12,14 @@ import { ProductList } from "./ProductList";
 
 import { ElfsightWidget } from "react-elfsight-widget";
 
+import ContactForm from "../Form/ContactForm";
+
 export const ProductListContainer = ({
   products,
   totalProducts,
 }): React.ReactElement => {
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
+  const [isSend, setIsSend] = useState(false);
   const {
     state: { searchProducts, filterCategory, filterQuery },
   } = useContext(Store);
@@ -119,6 +122,16 @@ export const ProductListContainer = ({
           />
         )}
       </div>
+      <Divider />
+      <div className="contact my-12">
+        <ContactForm
+          setIsSend={setIsSend}
+          title="Need a super specific steering wheel?"
+          subtitle="Leave us a message and we'll get in touch ASAP."
+        />
+      </div>
+      <Divider />
+
       <div className="reviews mt-12 mb-48 px-6 py-2 bg-white rounded-md">
         <ElfsightWidget widgetID={process.env.ELFSIGHT_WIDGET_ID} />
       </div>

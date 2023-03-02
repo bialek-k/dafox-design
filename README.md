@@ -5,7 +5,7 @@
 <br />
 <div align="center">
 
-<img width="650px" src="https://user-images.githubusercontent.com/57173170/208129909-bc0e2d9c-cf4a-4845-b596-311008f68b3e.jpg" />
+<img width="650px" src="https://user-images.githubusercontent.com/57173170/222343025-f11a1ae6-079b-47e1-8dd2-f72c912ce599.png" />
 
   <h3 align="center">dafoxdesign.com</h3>
 
@@ -36,7 +36,7 @@
 
 ## O projekcie
 
-E-commerce zbudowany na Next.js z wykorzystaniem DatoCMS do zarządzania produktami oraz kontentem na stronie. Sklep jest zintegrowany z systemem płatności Stripe oraz Sendgrid do obsługi formularza kontaktowego
+E-commerce zbudowany na Next.js z wykorzystaniem DatoCMS do zarządzania produktami oraz kontentem na stronie. Sklep jest zintegrowany z systemem płatności Stripe oraz Sendgrid do obsługi formularza kontaktowego.
 
 <p align="right">(<a href="#top">Powrót na górę</a>)</p>
 
@@ -49,7 +49,7 @@ Podczas budowy aplkacji wykorzystałem:
 - Sendgrid
 - Stripe
 - DatoCMS
-- React Hook Form 
+- Mailchimp
 - ZOD form validation
 
 <p align="right">(<a href="#top">Powrót na górę</a>)</p>
@@ -58,6 +58,7 @@ Podczas budowy aplkacji wykorzystałem:
 
 ## Planowane aktualizacje
 
+- [x] Dodanie możliwości zapisania do newsletter
 - [ ] Dodanie opcji rejestracji użytkownika
 - [ ] Dodanie opcji płatności przez PayPall (request uzytkownika)
 - [ ] Zmiana HeroSection z filmem w tle 

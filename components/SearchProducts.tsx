@@ -40,7 +40,7 @@ export const SearchProducts = ({ showFilter }: SearchProductsProps) => {
       <form onSubmit={handleSubmit} className="flex">
         <input
           type="text"
-          className="border border-black/30 rounded-r-none rounded-l-md w-full px-4 py-3 text-sm"
+          className="border border-black/30 rounded-r-none rounded-l-md w-full px-4 py-4 text-sm dark:text-black "
           placeholder="Find your perfect steering wheel | ENG"
           onChange={(e) => setSearchQuery(e.target.value)}
           value={searchQuery}

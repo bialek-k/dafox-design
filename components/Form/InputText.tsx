@@ -40,7 +40,8 @@ export const InputText = ({
             htmlFor={name}
             className={
               labelClassName || '"leading-7 text-sm text-grey-100 capitalize"'
-            }>
+            }
+          >
             {name}
           </label>
         )}
@@ -50,7 +51,8 @@ export const InputText = ({
           {...register(name)}
           placeholder={label}
           className={
-            inputClassName || "border px-4 py-2 rounded-md text-xs w-full"
+            inputClassName ||
+            "border px-4 py-2 rounded-md text-xs w-full dark:bg-neutral-700 "
           }
         />
         {error && <FormErrorMessage message={error.message} />}
@@ -63,7 +65,8 @@ export const InputText = ({
         {showLabel && (
           <label
             htmlFor={name}
-            className="leading-7 text-sm text-gray-100 capitalize">
+            className="leading-7 text-sm text-gray-100 capitalize"
+          >
             {label ?? name}
           </label>
         )}
@@ -73,7 +76,7 @@ export const InputText = ({
           placeholder={label ?? name}
           className={
             textAreaClassName ||
-            "border px-4 py-2 rounded-lg text-xs mb-2 h-24 w-full"
+            "border px-4 py-2 rounded-lg text-xs mb-2 h-24 w-full dark:bg-neutral-700"
           }
         />
         {error && <FormErrorMessage message={error.message} />}

@@ -22,7 +22,8 @@ export const InputSelect = ({
       {...register(name)}
       id={name}
       name={name}
-      className="border text-gray-400 px-3 py-2 rounded-md text-xs w-full">
+      className="border text-gray-400 px-3 py-2 rounded-md text-xs w-full dark:bg-neutral-700"
+    >
       {countries.map((country) => {
         return (
           <option key={country} value={country}>

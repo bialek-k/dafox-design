@@ -69,7 +69,7 @@ export default function FilterProducts() {
         <Select
           value={state.filterCategory.name}
           labelId="filter-select-label"
-          className="dark:invert dark:border-2 dark:border-white/10 dark:mt-2"
+          className="dark:bg-neutral-100 dark:mt-2"
           fullWidth
           onChange={handleChange}
           label="Categories"

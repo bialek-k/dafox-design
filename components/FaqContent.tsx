@@ -17,17 +17,20 @@ const FaqContent = ({ data }) => {
       <div className="content lg:w-3/4 lg:mx-auto">
         {data.allFaqs.map((faq) => {
           return (
-            <Accordion key={faq.id} className="my-4 shadow-lg dark:invert ">
+            <Accordion
+              key={faq.id}
+              className="my-4 shadow-lg dark:bg-neutral-700 dark:text-white "
+            >
               <AccordionSummary
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography className=" font-bold hover:text-yellow-500 ">
+                <Typography className=" font-bold hover:text-yellow-500  ">
                   {faq.question}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography className="text-black/80 text-sm leading-5 ">
+                <Typography className="text-black/80 text-sm leading-5 dark:text-white/80 ">
                   {faq.answer}
                 </Typography>
               </AccordionDetails>

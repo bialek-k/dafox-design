@@ -5,14 +5,12 @@ import Hero from "../../../components/Hero";
 
 const page = ({ data, totalProducts }) => {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col  justify-center items-center">
       <Hero />
-      <div>
-        <ProductListContainer
-          products={data.allProducts}
-          totalProducts={totalProducts}
-        />
-      </div>
+      <ProductListContainer
+        products={data.allProducts}
+        totalProducts={totalProducts}
+      />
     </div>
   );
 };

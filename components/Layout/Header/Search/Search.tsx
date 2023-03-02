@@ -58,7 +58,7 @@ const Search = () => {
         <input
           type="text"
           placeholder="Search..."
-          className="font-bold py-2 outline-none bg-white/50 dark:text-black w-72"
+          className="font-bold py-6 outline-none bg-white/50 dark:text-black w-72"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />

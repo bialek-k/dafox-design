@@ -26,7 +26,7 @@ const Cart = (): React.ReactElement => {
   }
 
   return (
-    <div className=" container mx-auto mb-96 justify-center pt-10">
+    <div className="container mx-auto mb-96 justify-center pt-10">
       <div className=" flex flex-col lg:flex-row items-center px-6 ">
         <div className="pt-24  w-full">
           <h1 className=" text-2xl mb-8 font-bold">Your order:</h1>

@@ -119,7 +119,7 @@ export const ProductListContainer = ({
           />
         )}
       </div>
-      <div className="reviews mt-12 mb-48 px-6 py-2 bg-white rounded-md">
+      <div className="mt-12 mb-48 px-6 py-2 bg-white rounded-md overflow-hidden ">
         <ElfsightWidget widgetID={process.env.ELFSIGHT_WIDGET_ID} />
       </div>
     </div>

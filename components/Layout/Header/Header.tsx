@@ -28,7 +28,7 @@ const Header = (): React.ReactElement => {
       </Head>
 
       <div className="bg-neutral-900 px-5">
-        <div className=" container mx-auto">
+        <div className="container mx-auto">
           <header className="flex items-center justify-between py-4 ">
             <div>
               <Link href="/shop/page/1">
@@ -45,7 +45,6 @@ const Header = (): React.ReactElement => {
             <div className="hidden md:flex">
               <Navigation />
             </div>
-            <div className="searchIcon flex gap-2"></div>
             <div className="hamburger flex gap-3 md:hidden z-50 ">
               {openMobileMenu ? (
                 <CloseHamButton setOpenMobileMenu={setOpenMobileMenu} />

@@ -23,7 +23,7 @@ const Navigation = (): React.ReactElement => {
         <li className="flex gap-2 items-center">
           <button
             name="productList"
-            className="hover:scale-125  ease-in-out duration-150"
+            className="hover:scale-125 ease-in-out duration-150"
             onClick={(e) => scrollToElement(e)}
           >
             <FaSearch className="text-yellow-500 pointer-events-none" />

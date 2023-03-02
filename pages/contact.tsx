@@ -13,7 +13,7 @@ const contactForm = z.object({
     .string()
     .min(1, "Email jest wymagany")
     .email({ message: "Email nie jest poprawny" }),
-  message: z.string(),
+  message: z.string().min(1, "Wiadomość jest wymagana"),
 });
 
 const defaultValues = {
@@ -35,6 +35,8 @@ const Contact = (): React.ReactElement => {
 
   const onSubmit = (values: ContactFormType) => {
     const data = values;
+
+    console.log(data);
     fetch("/api/mail/", {
       method: "POST",
       body: JSON.stringify(data),
@@ -57,7 +59,7 @@ const Contact = (): React.ReactElement => {
                 <InputText name="name" label="Name" />
                 <InputText name="email" label="Email" />
               </div>
-              <InputText name="Message" textarea />
+              <InputText name="message" textarea />
               <Button
                 addedClassName="text-white px-10 mx-auto max-w-md"
                 type="submit"

@@ -13,6 +13,9 @@ import HamburgerButton from "./HamburgerButton";
 import MobileMenu from "./MobileMenu";
 import CloseHamButton from "./CloseHamButton";
 
+import { FaSearch } from "react-icons/fa";
+import { scrollToElement } from "../../../utilities/scrollToElement";
+
 const Header = (): React.ReactElement => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
@@ -42,14 +45,23 @@ const Header = (): React.ReactElement => {
             <div className="hidden md:flex">
               <Navigation />
             </div>
-            <div className="hamburger  md:hidden z-50 ">
+            <div className="searchIcon flex gap-2"></div>
+            <div className="hamburger flex gap-3 md:hidden z-50 ">
               {openMobileMenu ? (
                 <CloseHamButton setOpenMobileMenu={setOpenMobileMenu} />
               ) : (
-                <HamburgerButton setOpenMobileMenu={setOpenMobileMenu} />
+                <>
+                  <button
+                    name="productList"
+                    className="ease-in-out duration-150 w-5 h-5"
+                    onClick={(e) => scrollToElement(e)}
+                  >
+                    <FaSearch className="text-yellow-500 pointer-events-none w-full h-full" />
+                  </button>
+                  <HamburgerButton setOpenMobileMenu={setOpenMobileMenu} />
+                </>
               )}
             </div>
-
             <AnimatePresence>
               {openMobileMenu && (
                 <motion.div

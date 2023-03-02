@@ -24,7 +24,7 @@ const Header = (): React.ReactElement => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="bg-black px-5">
+      <div className="bg-neutral-900 px-5">
         <div className=" container mx-auto">
           <header className="flex items-center justify-between py-4 ">
             <div>

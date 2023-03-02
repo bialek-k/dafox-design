@@ -31,7 +31,7 @@ export const NewsletterContent = () => {
 
   if (submitted) {
     return (
-      <div className="container bg-black flex flex-col px-6 text-center md:text-left md:flex-row justify-between items-center rounded-lg shadow-lg py-6 md:w-2/3 md:px-10">
+      <div className="container bg-neutral-900 flex flex-col px-6 text-center md:text-left md:flex-row justify-between items-center rounded-lg shadow-lg py-6 md:w-2/3 md:px-10">
         <h1 className="text-yellow-500 md:text-2xl py-7 w-full text-center font-bold">
           Thank you for being a valued customer. Hundreds of clients have
           trusted us, and we appreciate your continued support.{" "}
@@ -98,7 +98,7 @@ export const NewsletterContent = () => {
 
             <button
               type="submit"
-              className="bg-black px-4 text-white font-bold rounded-lg md:rounded-l-none md:rounded-r-lg shadow-lg text-center h-10 md:h-12 w-full md:w-1/2"
+              className="bg-neutral-900 px-4 text-white font-bold rounded-lg md:rounded-l-none md:rounded-r-lg shadow-lg text-center h-10 md:h-12 w-full md:w-1/2"
             >
               Send
             </button>

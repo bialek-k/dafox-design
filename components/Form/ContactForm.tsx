@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { InputText } from "./InputText";
 import Button from "../UI/Button";
 import Image from "next/image";
@@ -25,18 +26,19 @@ const defaultValues = {
 interface ContactFormProps {
   title: string;
   subtitle: string;
-  setIsSend: (boolean) => void;
 }
 
 type ContactFormType = z.TypeOf<typeof contactForm>;
 
-const ContactForm = ({ setIsSend, title, subtitle }: ContactFormProps) => {
+export const ContactForm = ({ title, subtitle }: ContactFormProps) => {
   const methods = useForm<ContactFormType>({
     defaultValues,
     resolver: zodResolver(contactForm),
   });
+  const [isSend, setIsSend] = useState(false);
+  const [name, setName] = useState("");
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit, reset, watch } = methods;
 
   const onSubmit = (values: ContactFormType) => {
     const data = values;
@@ -45,11 +47,26 @@ const ContactForm = ({ setIsSend, title, subtitle }: ContactFormProps) => {
       body: JSON.stringify(data),
     });
     reset();
+    setName(data.name);
     setIsSend(true);
   };
 
+  if (isSend) {
+    return (
+      <div className="container my-12 mx-auto gap-2 flex flex-col items-center">
+        <h1 className=" text-center text-2xl md:text-4xl">
+          Thanks <strong className="text-yellow-500">{name}</strong> for your
+          message
+        </h1>
+        <p className="text-neutral-600 text-center text-sm md:text-base tracking-wide">
+          we will reply as soon as possible
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <main className="container mt-24 mx-auto flex flex-col items-center">
+    <main className="container my-12 mx-auto flex flex-col items-center">
       <div className="title flex flex-col items-center gap-5 mb-6 px-6">
         <h1 className="font-bold text-center text-2xl md:text-4xl">{title}</h1>
         <p className="text-neutral-600 text-center text-sm md:text-base">
@@ -65,7 +82,7 @@ const ContactForm = ({ setIsSend, title, subtitle }: ContactFormProps) => {
             <InputText name="name" label="Name" />
             <InputText name="email" label="Email" />
           </div>
-          <InputText name="Message" textarea />
+          <InputText name="message" textarea />
           <Button
             addedClassName="text-white px-10 mx-auto max-w-md"
             type="submit"
@@ -98,5 +115,3 @@ const ContactForm = ({ setIsSend, title, subtitle }: ContactFormProps) => {
     </main>
   );
 };
-
-export default ContactForm;

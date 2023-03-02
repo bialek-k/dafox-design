@@ -17,7 +17,7 @@ const Footer = (): React.ReactElement => {
   const router = useRouter();
 
   return (
-    <div className="bg-black mt-auto w-full items-center">
+    <div className="bg-neutral-900 mt-auto w-full items-center">
       <div className="newsletter mb-8">
         <Newsletter />
       </div>

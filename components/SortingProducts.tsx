@@ -25,7 +25,7 @@ const SortingProducts = ({ sortingMethod, setSortingMethod }) => {
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"
-          className="dark:invert lg:w-48 dark:border-2 dark:border-white/10 dark:mt-2"
+          className="dark:bg-neutral-100 lg:w-48 dark:mt-2"
           id="demo-simple-select"
           label="Sorting"
           value={sortingMethod}

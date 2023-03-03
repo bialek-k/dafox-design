@@ -14,7 +14,7 @@ export const AmountOfProducts = ({
   const pages = totalProducts / pageSize;
 
   return (
-    <p className="text-neutral-500 w-full">
+    <p className="text-neutral-500 dark:text-neutral-100 w-full">
       There are{" "}
       <span className="font-bold text-yellow-500">{totalProducts}</span>
       {amountOfProducts > 1 ? " products" : " product"} availble

@@ -41,7 +41,7 @@ const Final = () => {
             </div>
           );
         })}
-        <div className="total bg-gray-100 dark:bg-black rounded-md p-4 my-6">
+        <div className="total bg-gray-100 dark:bg-neutral-900 rounded-md p-4 my-6">
           <div className="price flex justify-between my-3">
             <p>Price:</p>
             <p className="text-md">${totalAmount}</p>

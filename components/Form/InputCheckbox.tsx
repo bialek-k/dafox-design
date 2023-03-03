@@ -19,9 +19,9 @@ export const InputCheckbox = ({
         type="checkbox"
         id={name}
         name={name}
-        className="border-2 border-yellow-400 mr-2"
+        className="border-2 border-yellow-400 mr-2 "
       />
-      <span className="text-sm text-gray-500 dark:text-white/80">{label}</span>
+      <span className="text-sm text-gray-500 dark:text-white/80 ">{label}</span>
     </label>
   );
 };

@@ -5,7 +5,7 @@ import Hero from "../../../components/Hero";
 
 const page = ({ data, totalProducts }) => {
   return (
-    <div className="flex flex-col  justify-center items-center">
+    <div className="flex flex-col justify-center items-center">
       <Hero />
       <ProductListContainer
         products={data.allProducts}

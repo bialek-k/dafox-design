@@ -7,12 +7,10 @@ import { ProductListContainer } from "../../../components/ProductList/ProductLis
 const CategoryPage = ({ data, totalProductNumber }) => {
   return (
     <div className="flex flex-col justify-center items-center">
-      <div>
-        <ProductListContainer
-          products={data}
-          totalProducts={totalProductNumber}
-        />
-      </div>
+      <ProductListContainer
+        products={data}
+        totalProducts={totalProductNumber}
+      />
     </div>
   );
 };

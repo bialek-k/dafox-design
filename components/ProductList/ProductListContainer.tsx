@@ -127,7 +127,7 @@ export const ProductListContainer = ({
           subtitle="Leave us a message and we'll get in touch ASAP."
         />
       </div>
-      <div className="reviews my-24  dark:bg-white py-12 overflow-hidden">
+      <div className="reviews dark:bg-white py-32 overflow-hidden">
         <ElfsightWidget widgetID={process.env.ELFSIGHT_WIDGET_ID} />
       </div>
     </div>

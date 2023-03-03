@@ -46,9 +46,9 @@ export const SingleProductItem = ({
 
   return (
     <>
-      <div className="wrapper mt-24 mb-48 ">
+      <div className="wrapper mt-24 mb-48">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="product flex flex-col lg:flex-row justify-center gap-6 mb-10  ">
+          <div className="product w-full flex flex-col lg:flex-row justify-center gap-6 mb-10  ">
             <div className="photo w-full mb-2 lg:mb-0 lg:w-1/3 ">
               <Gallery
                 active={active}

@@ -3,17 +3,16 @@ import { ProductListContainer } from "../../../components/ProductList/ProductLis
 
 import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
+import Hero from "../../../components/Hero";
 
 const SearchPage = ({ data, totalProductNumber }) => {
   return (
     <div className="flex flex-col justify-center items-center">
       {/* <Hero /> */}
-      <div>
-        <ProductListContainer
-          products={data}
-          totalProducts={totalProductNumber}
-        />
-      </div>
+      <ProductListContainer
+        products={data}
+        totalProducts={totalProductNumber}
+      />
     </div>
   );
 };

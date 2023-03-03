@@ -17,7 +17,7 @@ interface ProductProps {
 
 export const ProductList = ({ queryProducts }) => {
   return (
-    <div className="grid gap-4 gap-y-8 grid-cols-2 max-w-5xl my-12 sm:grid-cols-2 md:grid-cols-4 mx-auto">
+    <div className="grid gap-5 gap-y-8 grid-cols-2 my-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
       {queryProducts.map((product: ProductProps) => (
         <Link href={`/shop/${product.slug}`} key={product.id}>
           <a>

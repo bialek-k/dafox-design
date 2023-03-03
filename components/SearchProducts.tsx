@@ -47,7 +47,7 @@ export const SearchProducts = ({ showFilter }: SearchProductsProps) => {
         />
         <Button
           type="submit"
-          addedClassName="w-1/4 rounded-r-md rounded-l-none"
+          addedClassName=" w-1/3 md:w-1/6 rounded-r-md rounded-l-none text-sm tracking-widest"
         >
           Search
         </Button>

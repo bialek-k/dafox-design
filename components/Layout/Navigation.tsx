@@ -19,7 +19,7 @@ const Navigation = (): React.ReactElement => {
 
   return (
     <nav>
-      <ul className=" sm:flex flex-row gap-4 text-white items-center ">
+      <ul className=" sm:flex flex-row gap-4 text-white items-center  text-sm ">
         <li className="flex gap-2 items-center">
           <button
             name="productList"

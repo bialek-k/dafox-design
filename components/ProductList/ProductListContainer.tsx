@@ -69,11 +69,21 @@ export const ProductListContainer = ({
 
   return (
     <div className="w-full justify-center mb-12" id="productList">
-      <div className="container mx-auto">
-        <div className="title w-full my-16">
+      <div className="container mx-auto my-20 ">
+        <div className="title flex items-center flex-col gap-6 w-full text-center mb-28 px-6">
           <h1 className="text-center text-3xl font-bold">
             Custom Steering Wheels
           </h1>
+          <p className="text-center dark:invert text-sm md:text-base md:w-2/3 text-neutral-500 tracking-wider">
+            Upgrade your vehicle&apos;s interior with a custom steering wheel
+            that reflects your personal style and enhances your driving
+            experience. Our product list features a wide range of custom
+            steering wheels designed to meet the{" "}
+            <strong className="text-yellow-500">unique</strong> preferences of
+            every driver. From classic leather-wrapped wheels to sleek carbon
+            fiber designs, our collection offers something for{" "}
+            <strong className="text-yellow-500">everyone.</strong>
+          </p>
         </div>
         <div className="px-6">
           <SearchProducts showFilter />
@@ -120,6 +130,20 @@ export const ProductListContainer = ({
             />
           )}
         </div>
+        <Divider />
+        <div className="description flex justify-center my-6">
+          <p className="text-center dark:invert text-sm md:text-base md:w-2/3 text-neutral-500 tracking-wider">
+            Not only do custom steering wheels add a touch of style to your
+            vehicle&apos;s interior, they can also improve your{" "}
+            <strong className="text-yellow-500">grip</strong> and{" "}
+            <strong className="text-yellow-500">control</strong> on the road. A
+            properly fitted custom steering wheel can provide a better grip and
+            more comfortable driving position, reducing fatigue and{" "}
+            <strong className="text-yellow-500">enhancing </strong>
+            your driving experience.
+          </p>
+        </div>
+        <Divider />
       </div>
       <div className="contact">
         <ContactForm

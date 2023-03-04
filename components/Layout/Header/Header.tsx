@@ -18,6 +18,7 @@ import { scrollToElement } from "../../../utilities/scrollToElement";
 
 const Header = (): React.ReactElement => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
+  const router = useRouter();
 
   return (
     <>
@@ -50,14 +51,15 @@ const Header = (): React.ReactElement => {
                 <CloseHamButton setOpenMobileMenu={setOpenMobileMenu} />
               ) : (
                 <>
-                  <button
-                    name="productList"
-                    className="ease-in-out duration-150 w-5 h-5"
-                    onClick={(e) => scrollToElement(e)}
-                  >
-                    <FaSearch className="text-yellow-500 pointer-events-none w-full h-full" />
-                  </button>
-                  <HamburgerButton setOpenMobileMenu={setOpenMobileMenu} />
+                  {router.pathname.includes("/shop") && (
+                    <button
+                      name="productList"
+                      className="ease-in-out duration-150 h-6"
+                      onClick={(e) => scrollToElement(e)}
+                    >
+                      <FaSearch className="text-yellow-500 pointer-events-none w-full h-full" />
+                    </button>
+                  )}
                 </>
               )}
             </div>

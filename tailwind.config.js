@@ -7,6 +7,12 @@ module.exports = {
     extend: {
       colors: {
         backdrop: "rgb(0, 0, 0, .9)",
+        primary: {
+          light: "#F5F5F5",
+          dark: "#2F2F2F",
+          darkMode: "#E7E7E7",
+        },
+        secondary: "#EAB308",
       },
       height: {
         1: "1px",

@@ -105,7 +105,7 @@ export const ContactForm = ({ title, subtitle }: ContactFormProps) => {
               />
             </div>
 
-            <div className="flex-1 dark:invert text-sm text-center text-neutral-700">
+            <div className="flex-1 text-sm text-center text-primary-dark">
               <a href="mailto:info@dafoxdesign.com">info@dafoxdesign.com</a>
               <p>Al. Piłsudskiego 23a</p>
               <p>Rzeszów 35-074</p>

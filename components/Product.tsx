@@ -46,7 +46,7 @@ const Product = ({
                 className={` ${
                   promotion &&
                   " text-sm text-neutral-500 line-through font-normal"
-                } font-bold text-xl `}
+                } font-bold text-md `}
               >
                 ${price}
               </p>

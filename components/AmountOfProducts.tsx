@@ -1,22 +1,20 @@
 interface AmountOfProductsProps {
   amountOfProducts: number;
   totalProducts: number;
-  currentPage: number;
   pageSize: number;
 }
 
 export const AmountOfProducts = ({
   amountOfProducts,
   totalProducts,
-  currentPage,
   pageSize,
 }: AmountOfProductsProps) => {
   const pages = totalProducts / pageSize;
 
   return (
-    <p className="text-neutral-500 dark:text-neutral-100 w-full">
+    <p className="text-primary-dark font-light dark:text-primary-darkMode w-full text-sm">
       There are{" "}
-      <span className="font-bold text-yellow-500">{totalProducts}</span>
+      <span className="font-bold text-secondary">{totalProducts}</span>
       {amountOfProducts > 1 ? " products" : " product"} availble
     </p>
   );

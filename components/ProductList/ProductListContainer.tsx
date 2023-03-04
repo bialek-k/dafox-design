@@ -70,40 +70,38 @@ export const ProductListContainer = ({
   return (
     <div className="w-full justify-center mb-12" id="productList">
       <div className="container mx-auto my-20 ">
-        <div className="title flex items-center flex-col gap-6 w-full text-center mb-28 px-6">
+        <div className="title flex items-center flex-col gap-6 w-full text-justify mb-28 px-6">
           <h1 className="text-center text-3xl font-bold">
             Custom Steering Wheels
           </h1>
-          <p className="text-center dark:invert text-sm md:text-base md:w-2/3 text-neutral-500 tracking-wider">
+          <p className="text-justify md:text-center text-sm md:text-base md:w-2/3  text-primary-dark dark:text-primary-darkMode tracking-wider">
             Upgrade your vehicle&apos;s interior with a custom steering wheel
             that reflects your personal style and enhances your driving
             experience. Our product list features a wide range of custom
             steering wheels designed to meet the{" "}
-            <strong className="text-yellow-500">unique</strong> preferences of
+            <strong className="text-secondary">unique</strong> preferences of
             every driver. From classic leather-wrapped wheels to sleek carbon
             fiber designs, our collection offers something for{" "}
-            <strong className="text-yellow-500">everyone.</strong>
+            <strong className="text-secondary">everyone.</strong>
           </p>
         </div>
         <div className="px-6">
           <SearchProducts showFilter />
-          <div className="flex flex-col lg:flex-row lg:items-center ">
+          <div className="flex flex-col my-12 gap-4 md:gap-2 md:justify-end lg:flex-row ">
+            <FilterProducts />
+            <SortingProducts
+              sortingMethod={sortingMethod}
+              setSortingMethod={setSortingMethod}
+            />
+          </div>
+          <div className="filter mt-12">
             <AmountOfProducts
               amountOfProducts={products.length}
               totalProducts={totalProducts}
-              currentPage={Number(router.query.page)}
               pageSize={pageSize}
             />
-
-            <div className="flex flex-col md:flex-row gap-4 my-6 ">
-              <FilterProducts />
-              <SortingProducts
-                sortingMethod={sortingMethod}
-                setSortingMethod={setSortingMethod}
-              />
-            </div>
+            {listNameDisplay()}
           </div>
-          <div className="filter mt-12">{listNameDisplay()}</div>
           <div className=" my-4 dark:invert">
             <Divider />
           </div>
@@ -130,9 +128,9 @@ export const ProductListContainer = ({
             />
           )}
         </div>
-        <Divider />
-        <div className="description flex justify-center my-6">
-          <p className="text-center dark:invert text-sm md:text-base md:w-2/3 text-neutral-500 tracking-wider">
+        <Divider className="dark:invert" />
+        <div className="description flex justify-center my-6 px-6">
+          <p className="text-justify md:text-center text-sm md:text-base md:w-2/3 text-primary-dark dark:text-primary-darkMode tracking-wider">
             Not only do custom steering wheels add a touch of style to your
             vehicle&apos;s interior, they can also improve your{" "}
             <strong className="text-yellow-500">grip</strong> and{" "}
@@ -143,7 +141,7 @@ export const ProductListContainer = ({
             your driving experience.
           </p>
         </div>
-        <Divider />
+        <Divider className="dark:invert" />
       </div>
       <div className="contact">
         <ContactForm

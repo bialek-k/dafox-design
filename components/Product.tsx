@@ -9,6 +9,7 @@ interface ProductProps {
   promotion: any;
   freeShipping: any;
   bestseller: boolean;
+  bestsellerProducts?: any;
 }
 
 const Product = ({

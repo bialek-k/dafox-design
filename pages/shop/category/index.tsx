@@ -4,12 +4,13 @@ import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
 import { ProductListContainer } from "../../../components/ProductList/ProductListContainer";
 
-const CategoryPage = ({ data, totalProductNumber }) => {
+const CategoryPage = ({ data, totalProductNumber, bestsellerProducts }) => {
   return (
     <div className="flex flex-col justify-center items-center">
       <ProductListContainer
         products={data}
         totalProducts={totalProductNumber}
+        bestsellerProducts={bestsellerProducts}
       />
     </div>
   );
@@ -57,6 +58,41 @@ export async function getServerSideProps(context) {
     }
   `;
 
+  const bestsellerQuery = gql`
+    query MyQuery {
+      bestsellerProducts: allProducts(filter: { bestseller: { eq: "true" } }) {
+        name
+        id
+        slug
+        bestseller
+        price
+        freeShipping
+        promotion
+        inStock
+        category {
+          id
+          series
+          name
+        }
+        image {
+          responsiveImage {
+            alt
+            base64
+            bgColor
+            title
+            aspectRatio
+            height
+            sizes
+            src
+            srcSet
+            webpSrcSet
+            width
+          }
+        }
+      }
+    }
+  `;
+
   const another = 15 * (context.query.page - 1);
 
   const { data } = await client.query({
@@ -64,11 +100,17 @@ export async function getServerSideProps(context) {
     variables: { allIn: context.query.id, first: 15, skip: another },
   });
 
+  const bestData = await client.query({
+    query: bestsellerQuery,
+  });
+
   const count = data.Products_count.length;
 
   return {
     props: {
       data: data.Paginated,
+      bestsellerProducts: bestData.data.bestsellerProducts,
+
       totalProductNumber: count,
     },
   };

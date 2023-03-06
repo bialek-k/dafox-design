@@ -1,11 +1,14 @@
 import { Image as DatoImage } from "react-datocms";
 
+import { FaStar } from "react-icons/fa";
+
 interface ProductProps {
   title: string;
   price: number;
   data: any;
   promotion: any;
   freeShipping: any;
+  bestseller: boolean;
 }
 
 const Product = ({
@@ -14,17 +17,21 @@ const Product = ({
   data,
   promotion,
   freeShipping,
+  bestseller,
 }: ProductProps): React.ReactElement => {
   return (
     <div className="wrapper bg-white dark:bg-neutral-900 rounded-md shadow-md h-80 sm:h-110 md:h-88 lg:h-100 ease-in-out duration-200 ">
-      <div className="cart h-full flex flex-col ">
-        <div className="aspect-square h-full">
+      <div className="cart h-full flex flex-col relative ">
+        <div className="aspect-square h-full ">
           <DatoImage
-            className="rounded-md h-full aspect-square"
+            className="rounded-md h-full aspect-square relative"
             objectFit="cover"
             layout="responsive"
             data={data.image.responsiveImage}
           />
+          {bestseller && (
+            <FaStar className="text-secondary p-2 w-12 h-12 absolute top-0 left-0" />
+          )}
         </div>
         <div className="content flex flex-col justify-between px-2 py-2 h-full ">
           <div className="title">

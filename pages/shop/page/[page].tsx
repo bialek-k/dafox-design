@@ -3,13 +3,14 @@ import { gql } from "@apollo/client";
 import { ProductListContainer } from "../../../components/ProductList/ProductListContainer";
 import Hero from "../../../components/Hero";
 
-const page = ({ data, totalProducts }) => {
+const page = ({ data, totalProducts, bestsellerProducts }) => {
   return (
     <div className="flex flex-col justify-center items-center">
       <Hero />
       <ProductListContainer
         products={data.allProducts}
         totalProducts={totalProducts}
+        bestsellerProducts={bestsellerProducts}
       />
     </div>
   );
@@ -51,6 +52,42 @@ export async function getStaticProps(context) {
         name
         id
         slug
+        bestseller
+        price
+        freeShipping
+        promotion
+        inStock
+        category {
+          id
+          series
+          name
+        }
+        image {
+          responsiveImage {
+            alt
+            base64
+            bgColor
+            title
+            aspectRatio
+            height
+            sizes
+            src
+            srcSet
+            webpSrcSet
+            width
+          }
+        }
+      }
+    }
+  `;
+
+  const bestsellerQuery = gql`
+    query MyQuery {
+      bestsellerProducts: allProducts(filter: { bestseller: { eq: "true" } }) {
+        name
+        id
+        slug
+        bestseller
         price
         freeShipping
         promotion
@@ -86,9 +123,14 @@ export async function getStaticProps(context) {
     variables: { first: 15, skip: another },
   });
 
+  const bestData = await client.query({
+    query: bestsellerQuery,
+  });
+
   return {
     props: {
       data,
+      bestsellerProducts: bestData.data.bestsellerProducts,
       totalProducts: data._allProductsMeta.count,
     },
   };

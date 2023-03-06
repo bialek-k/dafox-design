@@ -13,10 +13,12 @@ import { ProductList } from "./ProductList";
 import { ElfsightWidget } from "react-elfsight-widget";
 
 import { ContactForm } from "../Form/ContactForm";
+import { BestsellerContainer } from "./Bestseller/BestsellerContainer";
 
 export const ProductListContainer = ({
   products,
   totalProducts,
+  bestsellerProducts,
 }): React.ReactElement => {
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const {
@@ -67,8 +69,8 @@ export const ProductListContainer = ({
 
   return (
     <div className="w-full justify-center mb-12" id="productList">
-      <div className="container mx-auto my-20 ">
-        <div className="title flex items-center flex-col gap-6 w-full text-justify mb-28 px-6">
+      <div className="mx-auto my-20 ">
+        <section className="title container mx-auto flex items-center flex-col gap-6 w-full text-justify mb-28 px-6">
           <h1 className="text-center text-3xl font-bold">
             Custom Steering Wheels
           </h1>
@@ -82,8 +84,8 @@ export const ProductListContainer = ({
             fiber designs, our collection offers something for{" "}
             <strong className="text-secondary">everyone.</strong>
           </p>
-        </div>
-        <div className="px-6">
+        </section>
+        <section className="filterSection container mx-auto px-6">
           <SearchProducts showFilter />
           <div className="flex flex-col my-12 gap-4 md:gap-2 md:justify-end lg:flex-row ">
             <FilterProducts />
@@ -92,7 +94,12 @@ export const ProductListContainer = ({
               setSortingMethod={setSortingMethod}
             />
           </div>
-          <div className="filter mt-12">
+        </section>
+        <section className="bg-neutral-100 py-12 ">
+          <BestsellerContainer bestsellerProducts={bestsellerProducts} />
+        </section>
+        <section className="products container mx-auto px-6">
+          <div className="mt-12">
             <AmountOfProducts
               amountOfProducts={products.length}
               totalProducts={totalProducts}
@@ -125,7 +132,7 @@ export const ProductListContainer = ({
               pageSize={pageSize}
             />
           )}
-        </div>
+        </section>
         <Divider className="dark:invert" />
         <div className="description flex justify-center my-6 px-6">
           <p className="text-justify md:text-center text-sm md:text-base md:w-2/3 text-primary-dark dark:text-primary-darkMode tracking-wider">

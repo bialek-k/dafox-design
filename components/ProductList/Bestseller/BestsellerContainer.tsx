@@ -14,6 +14,7 @@ interface ProductProps {
   slug?: string;
   id?: any;
   bestseller: boolean;
+  bestsellerProducts: any;
 }
 
 export const BestsellerContainer = ({ bestsellerProducts }) => {

@@ -22,8 +22,6 @@ export const ProductListContainer = ({
   const {
     state: { searchProducts, filterCategory, filterQuery },
   } = useContext(Store);
-  const [name, setName] = useState("");
-
   const router = useRouter();
 
   const queryProducts = () => {

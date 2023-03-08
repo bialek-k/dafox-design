@@ -30,9 +30,6 @@ export const SearchProducts = ({ showFilter }: SearchProductsProps) => {
 
   const removeFilterHandler = () => {
     router.push("/shop/page/1");
-    dispatch({
-      type: "REMOVE_FILTER_QUERY",
-    });
   };
 
   return (
@@ -40,7 +37,7 @@ export const SearchProducts = ({ showFilter }: SearchProductsProps) => {
       <form onSubmit={handleSubmit} className="flex">
         <input
           type="text"
-          className="border border-black/30 rounded-r-none rounded-l-md w-full px-4 py-4 text-sm dark:text-black "
+          className="border border-black/30 rounded-r-none rounded-l-md w-full px-4 py-4 text-sm dark:text-primary-light dark:bg-neutral-700 "
           placeholder="Find your perfect steering wheel | ENG"
           onChange={(e) => setSearchQuery(e.target.value)}
           value={searchQuery}

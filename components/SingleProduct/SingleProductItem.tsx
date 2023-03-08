@@ -67,12 +67,12 @@ export const SingleProductItem = ({
               </div>
               <div className="mb-2"></div>
               <div className="flex flex-col">
-                <p className="text-black/50 dark:invert">
-                  {singleProduct.freeShipping && (
-                    <p className="font-bold text-2xl text-yellow-400">
-                      FREE SHIPPING
-                    </p>
-                  )}
+                {singleProduct.freeShipping && (
+                  <p className="font-bold text-2xl text-secondary mb-2">
+                    FREE SHIPPING
+                  </p>
+                )}
+                <p className="text-secondary dark:text-secondary">
                   in stock: <span>{singleProduct.inStock}</span>
                 </p>
                 <div className="action flex flex-col items-center gap-4">

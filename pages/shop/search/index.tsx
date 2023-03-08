@@ -8,7 +8,6 @@ import Hero from "../../../components/Hero";
 const SearchPage = ({ data, totalProductNumber }) => {
   return (
     <div className="flex flex-col justify-center items-center">
-      {/* <Hero /> */}
       <ProductListContainer
         products={data}
         totalProducts={totalProductNumber}
@@ -78,6 +77,8 @@ export async function getServerSideProps(context) {
       skip,
     },
   });
+
+  console.log(data);
 
   return {
     props: {

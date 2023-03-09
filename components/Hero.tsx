@@ -1,9 +1,9 @@
 import Welcome from "./Welcome";
 
-const Hero = () => {
+const Hero = ({ heroImagesArray }) => {
   return (
     <div className="flex flex-col w-full items-center relative">
-      <Welcome />
+      <Welcome heroImagesArray={heroImagesArray} />
     </div>
   );
 };

@@ -95,9 +95,11 @@ export const ProductListContainer = ({
             />
           </div>
         </section>
-        <section className="bg-neutral-100 py-12 ">
-          <BestsellerContainer bestsellerProducts={bestsellerProducts} />
-        </section>
+        {bestsellerProducts.length ? (
+          <section className="bg-neutral-100 dark:bg-neutral-700 py-12 ">
+            <BestsellerContainer bestsellerProducts={bestsellerProducts} />
+          </section>
+        ) : null}
         <section className="products container mx-auto px-6">
           <div className="mt-12">
             <AmountOfProducts

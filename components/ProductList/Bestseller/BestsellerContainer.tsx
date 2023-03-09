@@ -24,7 +24,7 @@ export const BestsellerContainer = ({ bestsellerProducts }) => {
         <h2 className="text-3xl text-center ">
           Our <strong className="text-secondary">Bestseller</strong>
         </h2>
-        <p className="text-center text-primary-dark">
+        <p className="text-center text-primary-dark dark:text-primary-light">
           Steering wheels from this collection are the most purchased items by
           customers{" "}
         </p>

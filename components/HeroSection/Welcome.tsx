@@ -1,11 +1,12 @@
-import arrow from "../assets/arrowDown.svg";
+import arrow from "../../assets/arrowDown.svg";
 import { Image as DatoImage } from "react-datocms";
+
 import Image from "next/image";
 
-import hero_image from "../assets/hero_image.jpg";
-import { scrollToElement } from "../utilities/scrollToElement";
+import hero_image from "../../assets/hero_image.jpg";
+import { scrollToElement } from "../../utilities/scrollToElement";
 
-const Welcome = (): React.ReactElement => {
+export const Welcome = (): React.ReactElement => {
   return (
     <div className="bg-black h-min lg:h-2/4 py-24 mb-12 w-full px-6 lg:px-48 flex justify-center lg:items-center drop-shadow-clg relative">
       <Image
@@ -57,5 +58,3 @@ const Welcome = (): React.ReactElement => {
     </div>
   );
 };
-
-export default Welcome;

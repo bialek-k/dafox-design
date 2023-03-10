@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { Divider } from "@mui/material";
 import { Store } from "../../store/Store";
 import SortingProducts from "../SortingProducts";
-import FilterProducts from "../FilterProducts";
+import { FilterProducts } from "./FilterProducts";
 import { getSortingMethod } from "../../utilities/getSortingMethod";
-import { Pagination } from "../Pagination";
-import { AmountOfProducts } from "../AmountOfProducts";
+import { Pagination } from "../Pagination/Pagination";
+import { AmountOfProducts } from "./AmountOfProducts";
 import { SearchProducts } from "../SearchProducts";
 import { ProductList } from "./ProductList";
 

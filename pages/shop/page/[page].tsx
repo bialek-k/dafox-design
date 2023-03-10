@@ -1,7 +1,7 @@
 import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
 import { ProductListContainer } from "../../../components/ProductList/ProductListContainer";
-import Hero from "../../../components/Hero";
+import { Hero } from "../../../components/HeroSection/Hero";
 
 const page = ({ data, totalProducts }) => {
   return (

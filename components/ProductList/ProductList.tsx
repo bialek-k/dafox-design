@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
-import Product from "../Product";
+import Product from "./Product";
 
 interface ProductProps {
   name?: string;

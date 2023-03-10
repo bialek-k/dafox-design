@@ -4,7 +4,7 @@ import { Store } from "../../store/Store";
 import { StructuredText } from "react-datocms";
 import Button from "../UI/Button";
 import { Divider } from "@mui/material";
-import Gallery from "../Gallery";
+import Gallery from "./Gallery";
 import RelatedProducts from "./RelatedProducts";
 
 export const SingleProductItem = ({

@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 import { ProductListContainer } from "../components/ProductList/ProductListContainer";
 import { client } from "../lib/apollo";
 import { Store } from "../store/Store";
-import Hero from "../components/Hero";
+import Hero from "../components/HeroSection/Hero";
 
 const Shop = ({ products, totalProductNumber }): React.ReactElement => {
   // const { dispatch, state } = useContext(Store);

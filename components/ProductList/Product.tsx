@@ -12,7 +12,7 @@ interface ProductProps {
   bestsellerProducts?: any;
 }
 
-const Product = ({
+export const Product = ({
   title,
   price,
   data,
@@ -23,7 +23,7 @@ const Product = ({
   return (
     <div className="wrapper bg-white dark:bg-neutral-900 rounded-md shadow-md h-80 sm:h-110 md:h-88 lg:h-100 ease-in-out duration-200 ">
       <div className="cart h-full flex flex-col relative ">
-        <div className="aspect-square h-full ">
+        <div className="aspect-square h-full">
           <DatoImage
             className="rounded-md h-full aspect-square relative"
             objectFit="cover"
@@ -70,5 +70,3 @@ const Product = ({
     </div>
   );
 };
-
-export default Product;

@@ -110,7 +110,6 @@ export async function getServerSideProps(context) {
     props: {
       data: data.Paginated,
       bestsellerProducts: bestData.data.bestsellerProducts,
-
       totalProductNumber: count,
     },
   };

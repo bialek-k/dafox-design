@@ -6,11 +6,13 @@ import { deliveryCountries } from "../../utilities/deliveryCountries";
 
 import { useFormContext } from "react-hook-form";
 
-const BillingDetails = (): React.ReactElement => {
+const BillingDetails = ({ deliveryCountriesData }): React.ReactElement => {
   const { watch } = useFormContext();
   const checkbox = watch("checkbox");
 
-  const countries = deliveryCountries.map((item) => item.country);
+  const countries = deliveryCountriesData
+    .sort((a, b) => a.country.localeCompare(b.country))
+    .map((item) => item.country);
 
   return (
     <div className="deliveryAddres w-full  border shadow-md rounded-md px-4 py-4">

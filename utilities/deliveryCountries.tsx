@@ -14,7 +14,7 @@ export const deliveryCountries = [
   { country: "Spain" },
   { country: "India" },
   { country: "Ireland" },
-  { country: "Izrael" },
+  { country: "Izrael", price: 50 },
   { country: "Lithuania" },
   { country: "Luxembourg" },
   { country: "Latvia" },

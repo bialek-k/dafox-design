@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Newsletter } from "../Newsletter";
+import { Newsletter } from "../Newsletter/Newsletter";
 
 import { IconContext } from "react-icons";
 import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";

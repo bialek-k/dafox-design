@@ -1,5 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Store } from "../store/Store";
+
+import { client } from "../lib/apollo";
+import { gql } from "@apollo/client";
 
 import { z } from "zod";
 import { basicForm, extendsForm } from "../utilities/zod/zodObjects";
@@ -32,11 +35,12 @@ const defaultValues = {
   shipping_phone_number: "",
   shipping_address: "",
   shipping_city: "",
-  shipping_country: "Poland",
+  shipping_country: "Select Country",
   shipping_zipcode: "",
 };
 
-const Checkout = (): React.ReactElement => {
+const Checkout = ({ deliveryCountriesData }): React.ReactElement => {
+  const [deliveryPrice, setDeliveryPrice] = useState(null);
   const { state, dispatch } = useContext(Store);
   const {
     cart: { cartItems },
@@ -46,18 +50,23 @@ const Checkout = (): React.ReactElement => {
     defaultValues,
     resolver: zodResolver(FormSchema),
   });
+  const totalAmount = cartItems.reduce((total, item) => item.price + total, 0);
+
+  const finalCosts = () => {
+    if (deliveryPrice) {
+      return totalAmount + deliveryPrice;
+    } else {
+      return totalAmount;
+    }
+  };
 
   const checkoutProduct = (data) => {
-    const totalAmount = cartItems.reduce(
-      (total, item) => item.price + total,
-      0
-    );
     const productNames = cartItems.map((item) => item.name).toString();
 
     const item = {
       name: productNames,
       quantity: cartItems.length,
-      price: totalAmount,
+      price: finalCosts(),
       metadata: data,
     };
 
@@ -95,8 +104,11 @@ const Checkout = (): React.ReactElement => {
           onSubmit={methods.handleSubmit(onSubmit)}
           className="flex flex-col md:flex-row gap-6"
         >
-          <BillingDetails />
-          <Final />
+          <BillingDetails deliveryCountriesData={deliveryCountriesData} />
+          <Final
+            deliveryCountriesData={deliveryCountriesData}
+            setDeliveryPrice={setDeliveryPrice}
+          />
         </form>
       </div>
     </FormProvider>
@@ -104,3 +116,23 @@ const Checkout = (): React.ReactElement => {
 };
 
 export default Checkout;
+
+export async function getStaticProps() {
+  const deliveryCountriesQuery = gql`
+    query MyQuery {
+      allDeliveryCountries(first: "100") {
+        id
+        price
+        country
+      }
+    }
+  `;
+
+  const { data } = await client.query({ query: deliveryCountriesQuery });
+
+  return {
+    props: {
+      deliveryCountriesData: data.allDeliveryCountries,
+    },
+  };
+}

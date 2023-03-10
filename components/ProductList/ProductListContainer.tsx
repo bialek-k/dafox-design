@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { Divider } from "@mui/material";
 import { Store } from "../../store/Store";
 import SortingProducts from "../SortingProducts";
-import FilterProducts from "../FilterProducts";
+import { FilterProducts } from "./FilterProducts";
 import { getSortingMethod } from "../../utilities/getSortingMethod";
-import { Pagination } from "../Pagination";
-import { AmountOfProducts } from "../AmountOfProducts";
+import { Pagination } from "../Pagination/Pagination";
+import { AmountOfProducts } from "./AmountOfProducts";
 import { SearchProducts } from "../SearchProducts";
 import { ProductList } from "./ProductList";
 
@@ -23,6 +23,7 @@ export const ProductListContainer = ({
   const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const {
     state: { searchProducts, filterCategory, filterQuery },
+    dispatch,
   } = useContext(Store);
   const router = useRouter();
 
@@ -35,6 +36,14 @@ export const ProductListContainer = ({
     }
   };
   const pageSize = 15;
+
+  useEffect(() => {
+    if (router.asPath === "/shop/page/1") {
+      dispatch({
+        type: "REMOVE_FILTER_QUERY",
+      });
+    }
+  }, [router, dispatch]);
 
   const listNameDisplay = () => {
     if (filterQuery) {
@@ -54,14 +63,27 @@ export const ProductListContainer = ({
 
   if (!products.length) {
     return (
-      <div className="flex flex-col items-center justify-center my-24">
-        <div className="description text-center mb-16">
-          <h1 className=" text-3xl font-bold">No items in this category</h1>
-          <p className="text-neutral-600">use search or change categories</p>
-        </div>
-        <div className="flex gap-5 w-full">
-          <SearchProducts showFilter />
-          <FilterProducts />
+      <div className="w-full justify-center mb-12">
+        <div className="content container mx-auto my-20">
+          <div className="description text-center mb-16">
+            <h1 className=" text-3xl font-bold">
+              We can&apos;t find any{" "}
+              <strong className="text-secondary"> {filterQuery} </strong> :(
+            </h1>
+            <p className="text-neutral-600 dark:text-primary-light">
+              use search again or change categories
+            </p>
+          </div>
+          <div className="px-6">
+            <SearchProducts showFilter />
+            <div className="flex flex-col my-12 gap-4 md:gap-2 md:justify-end lg:flex-row ">
+              <FilterProducts />
+              <SortingProducts
+                sortingMethod={sortingMethod}
+                setSortingMethod={setSortingMethod}
+              />
+            </div>
+          </div>
         </div>
       </div>
     );

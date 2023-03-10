@@ -5,9 +5,8 @@ import Image from "next/image";
 import Button from "../UI/Button";
 
 import { Store } from "../../store/Store";
-import { deliveryCountries } from "../../utilities/deliveryCountries";
 
-const Final = () => {
+const Final = ({ deliveryCountriesData, setDeliveryPrice }) => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const { state } = useContext(Store);
   const {
@@ -16,6 +15,25 @@ const Final = () => {
   const { watch } = useFormContext();
   const formData = watch();
   const totalAmount = cartItems.reduce((total, item) => item.price + total, 0);
+
+  const getTotalAmountPriceData = (country) => {
+    const data = deliveryCountriesData.find((item) => item.country === country);
+    if (data.price !== null) {
+      setDeliveryPrice(data.price);
+      return {
+        totalPrice: totalAmount + data.price,
+        deliveryCost: `$${data.price}`,
+      };
+    } else {
+      setDeliveryPrice(null);
+      return {
+        totalPrice: totalAmount,
+        deliveryCost: "FREE SHIPPING",
+      };
+    }
+  };
+
+  const totalAmountData = getTotalAmountPriceData(formData.country);
 
   return (
     <div className="finall w-full border rounded-md shadow-md p-6">
@@ -48,11 +66,11 @@ const Final = () => {
           </div>
           <div className="price flex justify-between my-3 text-green-400">
             <p>Delivery:</p>
-            <p className="font-bold  text-md">FREE SHIPPING</p>
+            <p className="font-bold  text-md">{totalAmountData.deliveryCost}</p>
           </div>
           <div className="price flex justify-between my-3">
             <p className="font-bold">Total:</p>
-            <p className="font-bold  text-xl">${totalAmount}</p>
+            <p className="font-bold  text-xl">${totalAmountData.totalPrice}</p>
           </div>
         </div>
       </div>

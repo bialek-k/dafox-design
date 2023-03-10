@@ -6,7 +6,7 @@ import { ProductList } from "../ProductList/ProductList";
 
 const RelatedProducts = ({ relatedCategoryProducts, relatedLinkData }) => {
   return (
-    <div className="wrapper  py-6 my-16 w-full">
+    <div className="wrapper px-6 py-6 my-16 w-full">
       <div className="container mx-auto my-12">
         <h2 className="text-2xl font-bold text-center mb-6">
           Products from{" "}

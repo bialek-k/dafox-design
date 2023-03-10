@@ -1,7 +1,7 @@
 import { ProductListContainer } from "../../components/ProductList/ProductListContainer";
 import { client } from "../../lib/apollo";
 import { gql } from "@apollo/client";
-import Hero from "../../components/Hero";
+import { Hero } from "../../components/HeroSection/Hero";
 
 const Page = ({
   products,

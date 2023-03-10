@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useState, useContext } from "react";
-import { getCategoryId } from "../utilities/categoryHandler";
+import { getCategoryId } from "../../utilities/categoryHandler";
 
-import { Store } from "../store/Store";
+import { Store } from "../../store/Store";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,7 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ListSubheader from "@mui/material/ListSubheader";
 
-export default function FilterProducts() {
+export const FilterProducts = () => {
   const [filters, setFilters] = useState([]);
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
@@ -79,4 +79,4 @@ export default function FilterProducts() {
       </FormControl>
     </div>
   );
-}
+};

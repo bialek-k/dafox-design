@@ -1,6 +1,4 @@
-import React from "react";
 import Radio from "@mui/material/Radio";
-
 import { yellow, grey } from "@mui/material/colors";
 import FormControlLabel from "@mui/material/FormControlLabel";
 

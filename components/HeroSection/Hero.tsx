@@ -1,11 +1,9 @@
-import Welcome from "./Welcome";
+import { Welcome } from "./Welcome";
 
-const Hero = () => {
+export const Hero = () => {
   return (
     <div className="flex flex-col w-full items-center relative">
       <Welcome />
     </div>
   );
 };
-
-export default Hero;

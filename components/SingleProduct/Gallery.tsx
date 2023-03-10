@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Store } from "../store/Store";
+import { Store } from "../../store/Store";
 import Backdrop from "@mui/material/Backdrop";
 
 import { Image as DatoImage } from "react-datocms";

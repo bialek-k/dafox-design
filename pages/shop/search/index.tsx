@@ -1,9 +1,7 @@
 import React from "react";
 import { ProductListContainer } from "../../../components/ProductList/ProductListContainer";
-
 import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
-import Hero from "../../../components/Hero";
 
 const SearchPage = ({ data, totalProductNumber }) => {
   return (
@@ -77,8 +75,6 @@ export async function getServerSideProps(context) {
       skip,
     },
   });
-
-  console.log(data);
 
   return {
     props: {

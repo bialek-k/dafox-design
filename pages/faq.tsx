@@ -1,29 +1,17 @@
-import React, { useEffect, useContext } from "react";
 import FaqContent from "../components/FaqContent";
+import { getALlFaqs } from "../lib/DatocmsApiCall";
 
-import { client } from "../lib/apollo";
-import { AllFaqsQuery } from "../lib/queries";
-
-import { Store } from "../store/Store";
-
-const Faq = ({ data }) => {
-  const { dispatch } = useContext(Store);
-
-  useEffect(() => {
-    dispatch({
-      type: "SET_FAQ_CONTENT",
-      payload: data,
-    });
-  }, [dispatch, data]);
-
-  return <FaqContent data={data} />;
+const Faq = ({ faqData }) => {
+  return <FaqContent faqData={faqData} />;
 };
 
 export async function getStaticProps() {
-  const { data } = await client.query(AllFaqsQuery);
+  const faqData = await getALlFaqs();
 
   return {
-    props: { data },
+    props: {
+      faqData: faqData.data.allFaqs,
+    },
   };
 }
 

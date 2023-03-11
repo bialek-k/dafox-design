@@ -1,38 +1,30 @@
 import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Divider } from "@mui/material";
 import { Store } from "../../store/Store";
-import SortingProducts from "../SortingProducts";
-import { FilterProducts } from "./FilterProducts";
+
+import { Divider } from "@mui/material";
+
 import { getSortingMethod } from "../../utilities/getSortingMethod";
 import { Pagination } from "../Pagination/Pagination";
 import { AmountOfProducts } from "./AmountOfProducts";
-import { SearchProducts } from "../SearchProducts";
 import { ProductList } from "./ProductList";
-
-import { ElfsightWidget } from "react-elfsight-widget";
-
-import { ContactForm } from "../Form/ContactForm";
-import { BestsellerContainer } from "./Bestseller/BestsellerContainer";
 
 export const ProductListContainer = ({
   products,
   totalProducts,
-  bestsellerProducts,
 }): React.ReactElement => {
-  const [sortingMethod, setSortingMethod] = useState("Price: low to high");
   const {
-    state: { searchProducts, filterCategory, filterQuery },
+    state: { searchProducts, filterCategory, filterQuery, storedSortingMethod },
     dispatch,
   } = useContext(Store);
   const router = useRouter();
 
   const queryProducts = () => {
     if (searchProducts.length) {
-      const prod = getSortingMethod(sortingMethod, searchProducts);
+      const prod = getSortingMethod(storedSortingMethod, searchProducts);
       return prod;
     } else {
-      return getSortingMethod(sortingMethod, products);
+      return getSortingMethod(storedSortingMethod, products);
     }
   };
   const pageSize = 15;
@@ -61,76 +53,16 @@ export const ProductListContainer = ({
     }
   };
 
-  if (!products.length) {
-    return (
-      <div className="w-full justify-center mb-12">
-        <div className="content container mx-auto my-20">
-          <div className="description text-center mb-16">
-            <h1 className=" text-3xl font-bold">
-              We can&apos;t find any{" "}
-              <strong className="text-secondary"> {filterQuery} </strong> :(
-            </h1>
-            <p className="text-neutral-600 dark:text-primary-light">
-              use search again or change categories
-            </p>
-          </div>
-          <div className="px-6">
-            <SearchProducts showFilter />
-            <div className="flex flex-col my-12 gap-4 md:gap-2 md:justify-end lg:flex-row ">
-              <FilterProducts />
-              <SortingProducts
-                sortingMethod={sortingMethod}
-                setSortingMethod={setSortingMethod}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="w-full justify-center mb-12" id="productList">
-      <div className="mx-auto my-20 ">
-        <section className="title container mx-auto flex items-center flex-col gap-6 w-full text-justify mb-28 px-6">
-          <h1 className="text-center text-3xl font-bold">
-            Custom Steering Wheels
-          </h1>
-          <p className="text-justify md:text-center text-sm md:text-base md:w-2/3  text-primary-dark dark:text-primary-darkMode tracking-wider">
-            Upgrade your vehicle&apos;s interior with a custom steering wheel
-            that reflects your personal style and enhances your driving
-            experience. Our product list features a wide range of custom
-            steering wheels designed to meet the{" "}
-            <strong className="text-secondary">unique</strong> preferences of
-            every driver. From classic leather-wrapped wheels to sleek carbon
-            fiber designs, our collection offers something for{" "}
-            <strong className="text-secondary">everyone.</strong>
-          </p>
-        </section>
-        <section className="filterSection container mx-auto px-6">
-          <SearchProducts showFilter />
-          <div className="flex flex-col my-12 gap-4 md:gap-2 md:justify-end lg:flex-row ">
-            <FilterProducts />
-            <SortingProducts
-              sortingMethod={sortingMethod}
-              setSortingMethod={setSortingMethod}
-            />
-          </div>
-        </section>
-        {bestsellerProducts.length ? (
-          <section className="bg-neutral-100 dark:bg-neutral-700 py-12 ">
-            <BestsellerContainer bestsellerProducts={bestsellerProducts} />
-          </section>
-        ) : null}
+    <div className="w-full justify-center py-6" id="productList">
+      <div className="mx-auto">
         <section className="products container mx-auto px-6">
-          <div className="mt-12">
-            <AmountOfProducts
-              amountOfProducts={products.length}
-              totalProducts={totalProducts}
-              pageSize={pageSize}
-            />
-            {listNameDisplay()}
-          </div>
+          <AmountOfProducts
+            amountOfProducts={products.length}
+            totalProducts={totalProducts}
+            pageSize={pageSize}
+          />
+          {listNameDisplay()}
           <div className=" my-4 dark:invert">
             <Divider />
           </div>
@@ -157,29 +89,6 @@ export const ProductListContainer = ({
             />
           )}
         </section>
-        <Divider className="dark:invert" />
-        <div className="description flex justify-center my-6 px-6">
-          <p className="text-justify md:text-center text-sm md:text-base md:w-2/3 text-primary-dark dark:text-primary-darkMode tracking-wider">
-            Not only do custom steering wheels add a touch of style to your
-            vehicle&apos;s interior, they can also improve your{" "}
-            <strong className="text-yellow-500">grip</strong> and{" "}
-            <strong className="text-yellow-500">control</strong> on the road. A
-            properly fitted custom steering wheel can provide a better grip and
-            more comfortable driving position, reducing fatigue and{" "}
-            <strong className="text-yellow-500">enhancing </strong>
-            your driving experience.
-          </p>
-        </div>
-        <Divider className="dark:invert" />
-      </div>
-      <div className="contact">
-        <ContactForm
-          title="Need a super specific steering wheel?"
-          subtitle="Leave us a message and we'll get in touch ASAP."
-        />
-      </div>
-      <div className="reviews dark:bg-white py-32 overflow-hidden">
-        <ElfsightWidget widgetID={process.env.ELFSIGHT_WIDGET_ID} />
       </div>
     </div>
   );

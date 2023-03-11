@@ -53,7 +53,7 @@ export const ContactForm = ({ title, subtitle }: ContactFormProps) => {
 
   if (isSend) {
     return (
-      <div className="wrapper py-24 bg-yellow-500 mx-auto gap-2 flex flex-col items-center">
+      <div className="wrapper py-12 bg-yellow-500 mx-auto gap-2 flex flex-col items-center">
         <div className="container mx-auto">
           <h1 className=" text-center text-2xl md:text-4xl">
             Thanks <strong className="text-white">{name}</strong> for your
@@ -68,7 +68,7 @@ export const ContactForm = ({ title, subtitle }: ContactFormProps) => {
   }
 
   return (
-    <main className="wrapper py-12 bg-neutral-100 mx-auto flex flex-col items-center">
+    <main className="wrapper w-full py-12 bg-neutral-100 mx-auto flex flex-col items-center">
       <div className="container flex flex-col items-center gap-4">
         <div className="title flex flex-col gap-3 mb-6 px-6">
           <h1 className="font-bold text-center text-2xl dark:invert">

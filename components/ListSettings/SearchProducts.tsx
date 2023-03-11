@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
-import { Store } from "../store/Store";
+import { Store } from "../../store/Store";
 import { useRouter } from "next/router";
-import Button from "./UI/Button";
+import Button from "../UI/Button";
 import { FaMinusCircle } from "react-icons/fa";
 
 interface SearchProductsProps {

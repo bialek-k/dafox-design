@@ -42,7 +42,7 @@ export const Pagination = ({ totalProducts, pageSize, url }) => {
   });
 
   return (
-    <div className="flex flex-col gap-5 justify-center items-center w-full my-24">
+    <div className="flex flex-col gap-5 justify-center items-center w-full py-12">
       <p className="text-neutral-800 dark:invert drop-shadow-md">Page</p>
       <div className="flex flex-row gap-4">{paginationLinks}</div>
     </div>

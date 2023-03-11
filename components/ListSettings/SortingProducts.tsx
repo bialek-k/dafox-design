@@ -12,7 +12,7 @@ const sortingMethodArray = [
   "Price: high to low",
 ];
 
-const SortingProducts = ({ sortingMethod, setSortingMethod }) => {
+export const SortingProducts = ({ sortingMethod, setSortingMethod }) => {
   const handleChange = (event: SelectChangeEvent) => {
     setSortingMethod(event.target.value as string);
   };
@@ -41,5 +41,3 @@ const SortingProducts = ({ sortingMethod, setSortingMethod }) => {
     </div>
   );
 };
-
-export default SortingProducts;

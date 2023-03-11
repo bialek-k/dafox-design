@@ -2,15 +2,24 @@ import React from "react";
 import { ProductListContainer } from "../../../components/ProductList/ProductListContainer";
 import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
+import { BestsellerContainer } from "../../../components/ProductList/Bestseller/BestsellerContainer";
+import { ListSettings } from "../../../components/ListSettings/ListSettings";
+import { PageTitle } from "../../../components/PageTitle";
+import { NoProductsFound } from "../../../components/NoProductsFound";
 
 const SearchPage = ({ data, totalProductNumber, bestsellerProducts }) => {
   return (
     <div className="flex flex-col justify-center items-center">
+      {data.length > 0 ? <PageTitle /> : <NoProductsFound />}
+
+      <ListSettings />
       <ProductListContainer
         products={data}
         totalProducts={totalProductNumber}
-        bestsellerProducts={bestsellerProducts}
       />
+      <div className="bg-neutral-100 w-full my-12">
+        <BestsellerContainer bestsellerProducts={bestsellerProducts} />
+      </div>
     </div>
   );
 };

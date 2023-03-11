@@ -1,6 +1,6 @@
 import React from "react";
 import { client } from "../lib/apollo";
-import { privacyPolicyQuery } from "../lib/queries";
+import { privacyPolicyQuery } from "../lib/Aqueries";
 import { StructuredText } from "react-datocms";
 
 const PrivacyPolicy = ({ data }) => {

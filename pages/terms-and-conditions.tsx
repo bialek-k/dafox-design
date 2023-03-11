@@ -1,6 +1,6 @@
 import React from "react";
 import { StructuredText } from "react-datocms";
-import { termsQuery } from "../lib/queries";
+import { termsQuery } from "../lib/Aqueries";
 import { client } from "../lib/apollo";
 
 const Terms = ({ data }) => {

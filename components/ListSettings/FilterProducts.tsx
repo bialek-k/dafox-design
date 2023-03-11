@@ -36,6 +36,10 @@ export const FilterProducts = () => {
       payload: categoryID,
     });
 
+    dispatch({
+      type: "REMOVE_FILTER_QUERY",
+    });
+
     if (categoryID.name === "All Products") {
       router.push("/shop/page/1");
     }

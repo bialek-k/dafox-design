@@ -19,7 +19,7 @@ interface ProductProps {
 
 export const BestsellerContainer = ({ bestsellerProducts }) => {
   return (
-    <div className="container mx-auto px-6">
+    <div className="container mx-auto px-6 py-12">
       <div className="description flex flex-col gap-2 mb-12">
         <h2 className="text-3xl text-center ">
           Our <strong className="text-secondary">Bestseller</strong>

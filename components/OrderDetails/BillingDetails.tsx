@@ -2,8 +2,6 @@ import { InputText } from "../Form/InputText";
 import { InputSelect } from "../Form/InputSelect";
 import { InputCheckbox } from "../Form/InputCheckbox";
 
-import { deliveryCountries } from "../../utilities/deliveryCountries";
-
 import { useFormContext } from "react-hook-form";
 
 const BillingDetails = ({ deliveryCountriesData }): React.ReactElement => {

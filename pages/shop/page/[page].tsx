@@ -20,9 +20,11 @@ const page = ({ paginatedProducts, totalProducts, bestsellerProducts }) => {
       <Hero />
       <PageTitle />
       <ListSettings />
-      <div className="bg-neutral-100 w-full my-6">
-        <BestsellerContainer bestsellerProducts={bestsellerProducts} />
-      </div>
+      {bestsellerProducts.length > 0 && (
+        <div className="bg-neutral-100 w-full my-6">
+          <BestsellerContainer bestsellerProducts={bestsellerProducts} />
+        </div>
+      )}
       <ProductListContainer
         products={paginatedProducts.data.allProducts}
         totalProducts={totalProducts}

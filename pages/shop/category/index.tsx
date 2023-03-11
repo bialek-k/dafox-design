@@ -21,9 +21,11 @@ const CategoryPage = ({ data, totalProductNumber, bestsellerProducts }) => {
         products={data}
         totalProducts={totalProductNumber}
       />
-      <GrayBackgroundWrapper>
-        <BestsellerContainer bestsellerProducts={bestsellerProducts} />
-      </GrayBackgroundWrapper>
+      {bestsellerProducts.length > 0 && (
+        <GrayBackgroundWrapper>
+          <BestsellerContainer bestsellerProducts={bestsellerProducts} />
+        </GrayBackgroundWrapper>
+      )}
 
       <div className="reviews dark:bg-white py-12 mb-6 overflow-hidden">
         <ElfsightWidget widgetID={process.env.ELFSIGHT_WIDGET_ID} />

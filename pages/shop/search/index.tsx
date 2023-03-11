@@ -17,9 +17,11 @@ const SearchPage = ({ data, totalProductNumber, bestsellerProducts }) => {
         products={data}
         totalProducts={totalProductNumber}
       />
-      <div className="bg-neutral-100 w-full my-12">
-        <BestsellerContainer bestsellerProducts={bestsellerProducts} />
-      </div>
+      {bestsellerProducts.length > 0 && (
+        <div className="bg-neutral-100 w-full my-12">
+          <BestsellerContainer bestsellerProducts={bestsellerProducts} />
+        </div>
+      )}
     </div>
   );
 };

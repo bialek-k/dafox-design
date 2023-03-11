@@ -341,6 +341,21 @@ const privacyPolicyQuery = gql`
   }
 `;
 
+const termsAndConditionsQuery = gql`
+  query MyQuery {
+    term {
+      termsAndConditions {
+        value
+      }
+    }
+  }
+`;
+
+export const getTermsAndConditins = async () => {
+  const data = await client.query({ query: termsAndConditionsQuery });
+  return data;
+};
+
 export const getPrivacyPolicy = async () => {
   const data = await client.query({ query: privacyPolicyQuery });
   return data;

@@ -1,13 +1,11 @@
 import React from "react";
 import { StructuredText } from "react-datocms";
-import { termsQuery } from "../lib/Aqueries";
-import { client } from "../lib/apollo";
+import { getTermsAndConditins } from "../lib/DatocmsApiCall";
 
-const Terms = ({ data }) => {
-  console.log(data);
+const Terms = ({ termsData }) => {
   return (
     <div className="prose dark:prose-invert mx-auto prose-indigo px-6 py-24 max-w-4xl">
-      <StructuredText data={data.value} />
+      <StructuredText data={termsData.data.term.termsAndConditions} />
     </div>
   );
 };
@@ -15,11 +13,11 @@ const Terms = ({ data }) => {
 export default Terms;
 
 export async function getStaticProps() {
-  const data = await client.query(termsQuery);
+  const termsData = await getTermsAndConditins();
 
   return {
     props: {
-      data: data.data.term.termsAndConditions,
+      termsData,
     },
   };
 }

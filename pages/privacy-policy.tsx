@@ -1,7 +1,6 @@
 import React from "react";
-import { client } from "../lib/apollo";
-import { privacyPolicyQuery } from "../lib/Aqueries";
 import { StructuredText } from "react-datocms";
+import { getPrivacyPolicy } from "../lib/DatocmsApiCall";
 
 const PrivacyPolicy = ({ data }) => {
   const policy = data.privacyPolicy;
@@ -24,9 +23,9 @@ const PrivacyPolicy = ({ data }) => {
 export default PrivacyPolicy;
 
 export async function getStaticProps() {
-  const data = await client.query(privacyPolicyQuery);
+  const privacyPolicyData = await getPrivacyPolicy();
 
   return {
-    props: data,
+    props: { data: privacyPolicyData.data },
   };
 }

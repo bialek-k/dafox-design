@@ -328,6 +328,24 @@ const aboutQuery = gql`
   }
 `;
 
+const privacyPolicyQuery = gql`
+  query MyQuery {
+    privacyPolicy {
+      title {
+        value
+      }
+      content {
+        value
+      }
+    }
+  }
+`;
+
+export const getPrivacyPolicy = async () => {
+  const data = await client.query({ query: privacyPolicyQuery });
+  return data;
+};
+
 export const getAboutData = async () => {
   const data = await client.query({ query: aboutQuery });
   return data;

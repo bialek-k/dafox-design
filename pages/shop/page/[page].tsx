@@ -4,25 +4,45 @@ import { ProductListContainer } from "../../../components/ProductList/ProductLis
 import { Hero } from "../../../components/HeroSection/Hero";
 import {
   getBestsellerProducts,
+  getLimitedOfferProducts,
   paginatedProductLists,
 } from "../../../lib/DatocmsApiCall";
-import { BestsellerContainer } from "../../../components/ProductList/Bestseller/BestsellerContainer";
 import { ListSettings } from "../../../components/ListSettings/ListSettings";
 
 import { PageTitle } from "../../../components/PageTitle";
 import { Quote } from "../../../components/Quote";
 import { ContactForm } from "../../../components/Form/ContactForm";
 import { ElfsightWidget } from "react-elfsight-widget";
+import { SpecialOffersContainer } from "../../../components/ProductList/SpecialOffers/SpecialOffersContainer";
 
-const page = ({ paginatedProducts, totalProducts, bestsellerProducts }) => {
+const page = ({
+  paginatedProducts,
+  totalProducts,
+  bestsellerProducts,
+  limitedOfferProducts,
+}) => {
   return (
     <div className="flex flex-col justify-center items-center ">
       <Hero />
       <PageTitle />
       <ListSettings />
+      {limitedOfferProducts.length > 0 && (
+        <div className="bg-neutral-100 w-full my-6">
+          <SpecialOffersContainer
+            products={limitedOfferProducts}
+            title="Limited Offer Products"
+            subtitle="Get it in the best price!"
+          />
+        </div>
+      )}
       {bestsellerProducts.length > 0 && (
         <div className="bg-neutral-100 w-full my-6">
-          <BestsellerContainer bestsellerProducts={bestsellerProducts} />
+          <SpecialOffersContainer
+            products={bestsellerProducts}
+            title="Bestseller"
+            subtitle="Steering wheels from this collection are the most purchased items by
+            customers"
+          />
         </div>
       )}
       <ProductListContainer
@@ -74,11 +94,13 @@ export async function getStaticProps(context) {
 
   const paginatedProducts = await client.query(paginatedProductLists(another));
   const bestsellerProducts = await getBestsellerProducts();
+  const limitedOfferProducts = await getLimitedOfferProducts();
 
   return {
     props: {
       paginatedProducts,
       bestsellerProducts,
+      limitedOfferProducts,
       totalProducts: paginatedProducts.data._allProductsMeta.count,
     },
   };

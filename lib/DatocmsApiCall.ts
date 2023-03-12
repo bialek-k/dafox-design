@@ -9,6 +9,11 @@ const slugQuery = gql`
   }
 `;
 
+export const getAllPathsProducts = async () => {
+  const { data } = await client.query({ query: slugQuery });
+  return data;
+};
+
 const singleProductQuery = gql`
   query MyQuery($slug: String) {
     product(filter: { slug: { eq: $slug } }) {
@@ -73,12 +78,62 @@ const singleProductQuery = gql`
   }
 `;
 
+export const getSingleProduct = async (slug) => {
+  const { data } = await client.query({
+    query: singleProductQuery,
+    variables: { slug: slug },
+  });
+  return data.product;
+};
+
 const bestsellerProductsQuery = gql`
   query MyQuery {
     bestsellerProducts: allProducts(filter: { bestseller: { eq: "true" } }) {
       name
       id
       slug
+      bestseller
+      limitedOffer
+      price
+      freeShipping
+      promotion
+      inStock
+      category {
+        id
+        series
+        name
+      }
+      image {
+        responsiveImage {
+          alt
+          base64
+          bgColor
+          title
+          aspectRatio
+          height
+          sizes
+          src
+          srcSet
+          webpSrcSet
+          width
+        }
+      }
+    }
+  }
+`;
+
+export const getBestsellerProducts = async () => {
+  const { data } = await client.query({ query: bestsellerProductsQuery });
+  return data.bestsellerProducts;
+};
+
+const limitedOfferQuery = gql`
+  query MyQuery {
+    limitedOffer: allProducts(filter: { limitedOffer: { eq: "true" } }) {
+      name
+      id
+      slug
+      limitedOffer
       bestseller
       price
       freeShipping
@@ -107,6 +162,11 @@ const bestsellerProductsQuery = gql`
     }
   }
 `;
+
+export const getLimitedOfferProducts = async () => {
+  const { data } = await client.query({ query: limitedOfferQuery });
+  return data.limitedOffer;
+};
 
 export const productsByCategoryQuery = (queryId, nextPageOfProducts) => {
   return {
@@ -278,6 +338,11 @@ const allFaqsQuery = gql`
   }
 `;
 
+export const getALlFaqs = async () => {
+  const data = await client.query({ query: allFaqsQuery });
+  return data;
+};
+
 const aboutQuery = gql`
   query MyQuery {
     allAbouts {
@@ -328,6 +393,11 @@ const aboutQuery = gql`
   }
 `;
 
+export const getAboutData = async () => {
+  const data = await client.query({ query: aboutQuery });
+  return data;
+};
+
 const privacyPolicyQuery = gql`
   query MyQuery {
     privacyPolicy {
@@ -340,6 +410,11 @@ const privacyPolicyQuery = gql`
     }
   }
 `;
+
+export const getPrivacyPolicy = async () => {
+  const data = await client.query({ query: privacyPolicyQuery });
+  return data;
+};
 
 const termsAndConditionsQuery = gql`
   query MyQuery {
@@ -354,37 +429,4 @@ const termsAndConditionsQuery = gql`
 export const getTermsAndConditins = async () => {
   const data = await client.query({ query: termsAndConditionsQuery });
   return data;
-};
-
-export const getPrivacyPolicy = async () => {
-  const data = await client.query({ query: privacyPolicyQuery });
-  return data;
-};
-
-export const getAboutData = async () => {
-  const data = await client.query({ query: aboutQuery });
-  return data;
-};
-
-export const getALlFaqs = async () => {
-  const data = await client.query({ query: allFaqsQuery });
-  return data;
-};
-
-export const getBestsellerProducts = async () => {
-  const { data } = await client.query({ query: bestsellerProductsQuery });
-  return data.bestsellerProducts;
-};
-
-export const getAllPathsProducts = async () => {
-  const { data } = await client.query({ query: slugQuery });
-  return data;
-};
-
-export const getSingleProduct = async (slug) => {
-  const { data } = await client.query({
-    query: singleProductQuery,
-    variables: { slug: slug },
-  });
-  return data.product;
 };

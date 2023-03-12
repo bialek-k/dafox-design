@@ -2,25 +2,46 @@ import React from "react";
 import { ProductListContainer } from "../../../components/ProductList/ProductListContainer";
 import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
-import { BestsellerContainer } from "../../../components/ProductList/Bestseller/BestsellerContainer";
 import { ListSettings } from "../../../components/ListSettings/ListSettings";
 import { PageTitle } from "../../../components/PageTitle";
 import { NoProductsFound } from "../../../components/NoProductsFound";
+import { SpecialOffersContainer } from "../../../components/ProductList/SpecialOffers/SpecialOffersContainer";
+import { GrayBackgroundWrapper } from "../../../components/UI/GrayBackgroundWrapper";
+import {
+  getBestsellerProducts,
+  getLimitedOfferProducts,
+} from "../../../lib/DatocmsApiCall";
 
-const SearchPage = ({ data, totalProductNumber, bestsellerProducts }) => {
+const SearchPage = ({
+  data,
+  totalProductNumber,
+  bestsellerProducts,
+  limitedOfferProducts,
+}) => {
   return (
     <div className="flex flex-col justify-center items-center">
       {data.length > 0 ? <PageTitle /> : <NoProductsFound />}
-
       <ListSettings />
       <ProductListContainer
         products={data}
         totalProducts={totalProductNumber}
       />
       {bestsellerProducts.length > 0 && (
-        <div className="bg-neutral-100 w-full my-12">
-          <BestsellerContainer bestsellerProducts={bestsellerProducts} />
-        </div>
+        <SpecialOffersContainer
+          products={bestsellerProducts}
+          title="Bestseller"
+          subtitle="Steering wheels from this collection are the most purchased items by
+          customers"
+        />
+      )}
+      {limitedOfferProducts.length > 0 && (
+        <GrayBackgroundWrapper>
+          <SpecialOffersContainer
+            products={limitedOfferProducts}
+            title="Limited Offer Products"
+            subtitle="Get it in the best price!"
+          />
+        </GrayBackgroundWrapper>
       )}
     </div>
   );
@@ -77,41 +98,6 @@ export async function getServerSideProps(context) {
     }
   `;
 
-  const bestsellerQuery = gql`
-    query MyQuery {
-      bestsellerProducts: allProducts(filter: { bestseller: { eq: "true" } }) {
-        name
-        id
-        slug
-        bestseller
-        price
-        freeShipping
-        promotion
-        inStock
-        category {
-          id
-          series
-          name
-        }
-        image {
-          responsiveImage {
-            alt
-            base64
-            bgColor
-            title
-            aspectRatio
-            height
-            sizes
-            src
-            srcSet
-            webpSrcSet
-            width
-          }
-        }
-      }
-    }
-  `;
-
   const skip = 15 * (context.query.page - 1);
 
   const { data } = await client.query({
@@ -123,15 +109,14 @@ export async function getServerSideProps(context) {
     },
   });
 
-  const bestData = await client.query({
-    query: bestsellerQuery,
-  });
+  const limitedOfferProducts = await getLimitedOfferProducts();
+  const bestsellerProducts = await getBestsellerProducts();
 
   return {
     props: {
       data: data.paginatedSearchProducts,
-      bestsellerProducts: bestData.data.bestsellerProducts,
-
+      limitedOfferProducts,
+      bestsellerProducts,
       totalProductNumber: data._allProductsMeta.count,
     },
   };

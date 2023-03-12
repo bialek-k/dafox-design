@@ -1,6 +1,7 @@
 import { Image as DatoImage } from "react-datocms";
 
 import { FaStar } from "react-icons/fa";
+import { BiTime } from "react-icons/bi";
 
 interface ProductProps {
   title: string;
@@ -9,7 +10,7 @@ interface ProductProps {
   promotion: any;
   freeShipping: any;
   bestseller: boolean;
-  bestsellerProducts?: any;
+  limitedOffer?: boolean;
 }
 
 export const Product = ({
@@ -19,6 +20,7 @@ export const Product = ({
   promotion,
   freeShipping,
   bestseller,
+  limitedOffer,
 }: ProductProps): React.ReactElement => {
   return (
     <div className="wrapper bg-white dark:bg-neutral-900 rounded-md shadow-md h-80 sm:h-110 md:h-88 lg:h-100 ease-in-out duration-200 ">
@@ -30,9 +32,12 @@ export const Product = ({
             layout="responsive"
             data={data.image.responsiveImage}
           />
-          {bestseller && (
-            <FaStar className="text-secondary p-2 w-12 h-12 absolute top-0 left-0" />
-          )}
+          <div className="absolute top-0 left-0 flex">
+            {bestseller && <FaStar className="text-secondary p-2 w-12 h-12" />}
+            {limitedOffer && (
+              <BiTime className="text-secondary p-2 w-12 h-12" />
+            )}
+          </div>
         </div>
         <div className="content flex flex-col justify-between px-2 py-2 h-full ">
           <div className="title">

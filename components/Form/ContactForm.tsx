@@ -68,13 +68,15 @@ export const ContactForm = ({ title, subtitle }: ContactFormProps) => {
   }
 
   return (
-    <main className="wrapper w-full py-12 bg-neutral-100 mx-auto flex flex-col items-center">
+    <main className="wrapper w-full py-12 bg-neutral-100 dark:bg-neutral-800 mx-auto flex flex-col items-center">
       <div className="container flex flex-col items-center gap-4">
         <div className="title flex flex-col gap-3 mb-6 px-6">
-          <h1 className="font-bold text-center text-2xl dark:invert">
+          <h1 className="font-bold text-center text-2xl text-primary-dark dark:text-primary-light">
             {title}
           </h1>
-          <p className="text-neutral-600 text-center text-sm">{subtitle}</p>
+          <p className="text-primary-dark dark:text-primary-light text-center text-sm">
+            {subtitle}
+          </p>
         </div>
         <FormProvider {...methods}>
           <form
@@ -105,7 +107,7 @@ export const ContactForm = ({ title, subtitle }: ContactFormProps) => {
               />
             </div>
 
-            <div className="flex-1 text-sm text-center text-primary-dark">
+            <div className="flex-1 text-sm text-center text-primary-dark dark:text-primary-light">
               <a href="mailto:info@dafoxdesign.com">info@dafoxdesign.com</a>
               <p>Al. Piłsudskiego 23a</p>
               <p>Rzeszów 35-074</p>

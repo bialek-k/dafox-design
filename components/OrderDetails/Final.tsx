@@ -36,8 +36,8 @@ const Final = ({ deliveryCountriesData, setDeliveryPrice }) => {
   const totalAmountData = getTotalAmountPriceData(formData.country);
 
   return (
-    <div className="finall w-full border rounded-md shadow-md p-6">
-      <h1 className="font-bold text-xl mb-2">3. Summary</h1>
+    <div className="finall w-full border border-neutral-300 dark:border-neutral-500 rounded-md shadow-md p-6">
+      <h1 className="font-bold text-xl mb-2 dark:text-secondary">3. Summary</h1>
       <div className="content">
         {cartItems.map((item) => {
           return (
@@ -45,7 +45,7 @@ const Final = ({ deliveryCountriesData, setDeliveryPrice }) => {
               <div className="flex items-center h-min">
                 <Image
                   src={item.image.responsiveImage}
-                  className="rounded-lg"
+                  className="rounded-lg shadow-lg"
                   width={86}
                   height={86}
                   alt="product photo"

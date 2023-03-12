@@ -13,8 +13,10 @@ const BillingDetails = ({ deliveryCountriesData }): React.ReactElement => {
     .map((item) => item.country);
 
   return (
-    <div className="deliveryAddres w-full  border shadow-md rounded-md px-4 py-4">
-      <h1 className="font-bold text-xl mb-2">1. Billing Details</h1>
+    <div className="deliveryAddres w-full border border-neutral-300 dark:border-neutral-500 shadow-md rounded-md px-4 py-4">
+      <h1 className="font-bold text-xl mb-2 dark:text-secondary">
+        1. Billing Details
+      </h1>
       <div className="flex flex-col ">
         <div className="flex flex-col py-2  ">
           <div className="flex flex-col md:flex-row">

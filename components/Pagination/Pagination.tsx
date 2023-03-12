@@ -41,10 +41,6 @@ export const Pagination = ({ totalProducts, pageSize, url }) => {
     );
   });
 
-  if (totalProducts < 1) {
-    return "";
-  }
-
   return (
     <div className="flex flex-col gap-5 justify-center items-center w-full py-12">
       <p className="text-neutral-800 dark:invert drop-shadow-md">Page</p>

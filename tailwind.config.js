@@ -26,6 +26,7 @@ module.exports = {
       },
       dropShadow: {
         clg: "0 10px 0px rgba(234, 179, 8, 1)",
+        inputShadow: "0px 0px 10px rgb(234, 179, 8, 0.3)",
       },
     },
     screens: {

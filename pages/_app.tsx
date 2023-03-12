@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     const handleTabChange = () => {
       if (document.hidden) {
-        document.title = "Come back to us :)";
+        document.title = "Come back :) | Dafox Design";
       } else {
         document.title = originalTitle;
       }

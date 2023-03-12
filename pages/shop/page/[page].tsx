@@ -36,7 +36,7 @@ const page = ({ paginatedProducts, totalProducts, bestsellerProducts }) => {
         title="Need a super specific steering wheel?"
         subtitle="Leave us a message and we'll get in touch ASAP."
       />
-      <div className="reviews dark:bg-white py-12 mb-6 overflow-hidden">
+      <div className="reviews dark:bg-white w-full py-12 mb-6 overflow-hidden">
         <ElfsightWidget widgetID={process.env.ELFSIGHT_WIDGET_ID} />
       </div>
     </div>

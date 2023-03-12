@@ -3,7 +3,6 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { Store } from "../../store/Store";
-import defaultPhoto from "../../assets/item.png";
 import deleteIcon_black from "../../assets/delete_black.svg";
 import deleteIcon_white from "../../assets/delete_white.svg";
 
@@ -37,15 +36,17 @@ const ListOfProducts = () => {
         {cartItems.map((item) => (
           <tr key={item.slug} className="border-b">
             <td className="hidden md:inline-block w-full ">
-              <div className="flex w-24 h-24 md:mx-auto">
+              <div className="flex w-24 h-24 md:mx-auto ">
                 <DatoImage
                   data={item.image.responsiveImage}
-                  className="rounded-lg"
+                  className="rounded-lg shadow-lg"
                 />
               </div>
             </td>
             <td className="py-2 font-bold text-sm  text-center w-1/3">
-              <Link href={`/shop/${item.slug}`}>{item.name}</Link>
+              <Link href={`/shop/${item.slug}`}>
+                <a className="hover:text-secondary">{item.name}</a>
+              </Link>
             </td>
 
             <td className="px-5 font-bold py-2 text-center ">$ {item.price}</td>
@@ -55,8 +56,8 @@ const ListOfProducts = () => {
                   src={
                     systemTheme === "dark" ? deleteIcon_white : deleteIcon_black
                   }
-                  height={16}
-                  width={16}
+                  height={21}
+                  width={21}
                   alt="delete icon"
                 />
               </button>

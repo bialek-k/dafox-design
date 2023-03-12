@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
-import Product from "./Product";
+import { Product } from "./Product";
 
 interface ProductProps {
   name?: string;
@@ -13,6 +13,7 @@ interface ProductProps {
   category?: any;
   slug?: string;
   id?: any;
+  bestseller: boolean;
 }
 
 export const ProductList = ({ queryProducts }) => {
@@ -32,6 +33,7 @@ export const ProductList = ({ queryProducts }) => {
                 price={product.price}
                 promotion={product.promotion}
                 freeShipping={product.freeShipping}
+                bestseller={product.bestseller}
               />
             </motion.div>
           </a>

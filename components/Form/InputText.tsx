@@ -52,7 +52,7 @@ export const InputText = ({
           placeholder={label}
           className={
             inputClassName ||
-            "border px-4 py-2 rounded-md text-xs w-full dark:bg-neutral-700 "
+            "border border-neutral-300 dark:border-neutral-500 px-4 py-2 rounded-md text-xs w-full dark:bg-neutral-700 "
           }
         />
         {error && <FormErrorMessage message={error.message} />}
@@ -76,7 +76,7 @@ export const InputText = ({
           placeholder={label ?? name}
           className={
             textAreaClassName ||
-            "border px-4 py-2 rounded-lg text-xs mb-2 h-24 w-full dark:bg-neutral-700"
+            "border border-neutral-300 dark:border-neutral-500 px-4 py-2 rounded-lg text-xs mb-2 h-24 w-full dark:bg-neutral-700"
           }
         />
         {error && <FormErrorMessage message={error.message} />}

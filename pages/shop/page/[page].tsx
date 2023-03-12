@@ -2,15 +2,43 @@ import { client } from "../../../lib/apollo";
 import { gql } from "@apollo/client";
 import { ProductListContainer } from "../../../components/ProductList/ProductListContainer";
 import { Hero } from "../../../components/HeroSection/Hero";
+import {
+  getBestsellerProducts,
+  paginatedProductLists,
+} from "../../../lib/DatocmsApiCall";
+import { BestsellerContainer } from "../../../components/ProductList/Bestseller/BestsellerContainer";
+import { ListSettings } from "../../../components/ListSettings/ListSettings";
 
-const page = ({ data, totalProducts }) => {
+import { PageTitle } from "../../../components/PageTitle";
+import { Quote } from "../../../components/Quote";
+import { ContactForm } from "../../../components/Form/ContactForm";
+import { ElfsightWidget } from "react-elfsight-widget";
+
+const page = ({ paginatedProducts, totalProducts, bestsellerProducts }) => {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center ">
       <Hero />
+      <PageTitle />
+      <ListSettings />
+      {bestsellerProducts.length > 0 && (
+        <div className="bg-neutral-100 w-full my-6">
+          <BestsellerContainer bestsellerProducts={bestsellerProducts} />
+        </div>
+      )}
       <ProductListContainer
-        products={data.allProducts}
+        products={paginatedProducts.data.allProducts}
         totalProducts={totalProducts}
       />
+      <div className="w-full mb-12">
+        <Quote />
+      </div>
+      <ContactForm
+        title="Need a super specific steering wheel?"
+        subtitle="Leave us a message and we'll get in touch ASAP."
+      />
+      <div className="reviews dark:bg-white w-full py-12 mb-6 overflow-hidden">
+        <ElfsightWidget widgetID={process.env.ELFSIGHT_WIDGET_ID} />
+      </div>
     </div>
   );
 };
@@ -42,54 +70,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const paginatedProductsLists = gql`
-    query AllProducts($first: IntType, $skip: IntType) {
-      _allProductsMeta {
-        count
-      }
-      allProducts(first: $first, skip: $skip) {
-        name
-        id
-        slug
-        price
-        freeShipping
-        promotion
-        inStock
-        category {
-          id
-          series
-          name
-        }
-        image {
-          responsiveImage {
-            alt
-            base64
-            bgColor
-            title
-            aspectRatio
-            height
-            sizes
-            src
-            srcSet
-            webpSrcSet
-            width
-          }
-        }
-      }
-    }
-  `;
-
   const another = 15 * (context.params.page - 1);
 
-  const { data } = await client.query({
-    query: paginatedProductsLists,
-    variables: { first: 15, skip: another },
-  });
+  const paginatedProducts = await client.query(paginatedProductLists(another));
+  const bestsellerProducts = await getBestsellerProducts();
 
   return {
     props: {
-      data,
-      totalProducts: data._allProductsMeta.count,
+      paginatedProducts,
+      bestsellerProducts,
+      totalProducts: paginatedProducts.data._allProductsMeta.count,
     },
   };
 }

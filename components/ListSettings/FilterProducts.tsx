@@ -36,6 +36,10 @@ export const FilterProducts = () => {
       payload: categoryID,
     });
 
+    dispatch({
+      type: "REMOVE_FILTER_QUERY",
+    });
+
     if (categoryID.name === "All Products") {
       router.push("/shop/page/1");
     }
@@ -61,15 +65,18 @@ export const FilterProducts = () => {
   };
 
   return (
-    <div className="w-full lg:w-64 shadow-md">
+    <div className="w-full lg:w-64 shadow-md ">
       <FormControl fullWidth>
-        <InputLabel id="filter-select-label" className="dark:invert">
+        <InputLabel
+          id="filter-select-label"
+          className="dark:invert border-neutral-300 dark:border-neutral-500"
+        >
           Categories
         </InputLabel>
         <Select
           value={state.filterCategory.name}
           labelId="filter-select-label"
-          className="dark:bg-neutral-100 dark:mt-2"
+          className="dark:bg-neutral-700 dark:text-primary-light dark:mt-2"
           fullWidth
           onChange={handleChange}
           label="Categories"

@@ -1,61 +1,6 @@
 import { client } from "./apollo";
 import { gql } from "@apollo/client";
 
-const allProducts = gql`
-  query AllProducts {
-    allCategories {
-      id
-      series
-      name
-    }
-    allProducts(first: 100) {
-      name
-      id
-      slug
-      price
-      freeShipping
-      promotion
-      inStock
-      category {
-        id
-        series
-        name
-      }
-      image {
-        responsiveImage {
-          alt
-          base64
-          bgColor
-          title
-          aspectRatio
-          height
-          sizes
-          src
-          srcSet
-          webpSrcSet
-          width
-        }
-      }
-      gallery {
-        id
-        responsiveImage {
-          aspectRatio
-          alt
-          base64
-          bgColor
-          height
-          sizes
-          src
-          srcSet
-          title
-          webpSrcSet
-          width
-        }
-      }
-    }
-  }
-`;
-
 const slugQuery = gql`
   query MyQuery {
     allProducts(first: 100) {
@@ -128,9 +73,307 @@ const singleProductQuery = gql`
   }
 `;
 
-export const getAllProducts = async () => {
-  const { data } = await client.query({ query: allProducts });
-  return data.allProducts;
+const bestsellerProductsQuery = gql`
+  query MyQuery {
+    bestsellerProducts: allProducts(filter: { bestseller: { eq: "true" } }) {
+      name
+      id
+      slug
+      bestseller
+      price
+      freeShipping
+      promotion
+      inStock
+      category {
+        id
+        series
+        name
+      }
+      image {
+        responsiveImage {
+          alt
+          base64
+          bgColor
+          title
+          aspectRatio
+          height
+          sizes
+          src
+          srcSet
+          webpSrcSet
+          width
+        }
+      }
+    }
+  }
+`;
+
+export const productsByCategoryQuery = (queryId, nextPageOfProducts) => {
+  return {
+    query: gql`
+      query MyQuery($allIn: [ItemId], $first: IntType, $skip: IntType) {
+        _allProductsMeta {
+          count
+        }
+        Products_count: allProducts(
+          filter: { category: { allIn: $allIn } }
+          first: "100"
+        ) {
+          id
+        }
+
+        Paginated: allProducts(
+          filter: { category: { allIn: $allIn } }
+          first: $first
+          skip: $skip
+        ) {
+          name
+          id
+          slug
+          price
+          freeShipping
+          promotion
+          inStock
+          category {
+            id
+            series
+            name
+          }
+          image {
+            responsiveImage {
+              alt
+              base64
+              src
+              webpSrcSet
+            }
+          }
+        }
+      }
+    `,
+    variables: { allIn: queryId, first: 15, skip: nextPageOfProducts },
+  };
+};
+
+export const paginatedProductLists = (skip) => {
+  return {
+    query: gql`
+      query AllProducts($first: IntType, $skip: IntType) {
+        _allProductsMeta {
+          count
+        }
+        allProducts(first: $first, skip: $skip) {
+          name
+          id
+          slug
+          bestseller
+          price
+          freeShipping
+          promotion
+          inStock
+          category {
+            id
+            series
+            name
+          }
+          image {
+            responsiveImage {
+              alt
+              base64
+              bgColor
+              title
+              aspectRatio
+              height
+              sizes
+              src
+              srcSet
+              webpSrcSet
+              width
+            }
+          }
+        }
+      }
+    `,
+    variables: { first: 15, skip },
+  };
+};
+
+export const getRelatedProducts = (catId) => {
+  return {
+    query: gql`
+      query MyQuery($allIn: [ItemId]) {
+        allProducts(filter: { category: { allIn: $allIn } }) {
+          name
+          id
+          slug
+          price
+          freeShipping
+          promotion
+          inStock
+          category {
+            id
+            series
+            name
+          }
+          image {
+            responsiveImage {
+              alt
+              base64
+              src
+              webpSrcSet
+            }
+          }
+        }
+      }
+    `,
+    variables: { allIn: catId },
+  };
+};
+
+export const searchQueryResponse = (regexp) => {
+  return {
+    query: gql`
+      query MyQuery($regexp: String!) {
+        allProducts(filter: { name: { matches: { regexp: "$regexp" } } }) {
+          name
+          id
+          slug
+          price
+          freeShipping
+          promotion
+          inStock
+          category {
+            id
+            series
+            name
+          }
+          image {
+            responsiveImage {
+              alt
+              base64
+              bgColor
+              title
+              aspectRatio
+              height
+              sizes
+              src
+              srcSet
+              webpSrcSet
+              width
+            }
+          }
+        }
+      }
+    `,
+    variables: { regexp },
+  };
+};
+
+const allFaqsQuery = gql`
+  query MyQuery {
+    allFaqs {
+      id
+      question
+      answer
+    }
+  }
+`;
+
+const aboutQuery = gql`
+  query MyQuery {
+    allAbouts {
+      id
+      content {
+        value
+        blocks {
+          __typename
+          ... on ImageRecord {
+            id
+            image {
+              responsiveImage {
+                alt
+                base64
+                bgColor
+                title
+                aspectRatio
+                height
+                sizes
+                src
+                srcSet
+                webpSrcSet
+                width
+              }
+            }
+          }
+          ... on PostgalleryRecord {
+            id
+            postimagesgallery {
+              responsiveImage {
+                alt
+                base64
+                bgColor
+                title
+                aspectRatio
+                height
+                sizes
+                src
+                srcSet
+                webpSrcSet
+                width
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const privacyPolicyQuery = gql`
+  query MyQuery {
+    privacyPolicy {
+      title {
+        value
+      }
+      content {
+        value
+      }
+    }
+  }
+`;
+
+const termsAndConditionsQuery = gql`
+  query MyQuery {
+    term {
+      termsAndConditions {
+        value
+      }
+    }
+  }
+`;
+
+export const getTermsAndConditins = async () => {
+  const data = await client.query({ query: termsAndConditionsQuery });
+  return data;
+};
+
+export const getPrivacyPolicy = async () => {
+  const data = await client.query({ query: privacyPolicyQuery });
+  return data;
+};
+
+export const getAboutData = async () => {
+  const data = await client.query({ query: aboutQuery });
+  return data;
+};
+
+export const getALlFaqs = async () => {
+  const data = await client.query({ query: allFaqsQuery });
+  return data;
+};
+
+export const getBestsellerProducts = async () => {
+  const { data } = await client.query({ query: bestsellerProductsQuery });
+  return data.bestsellerProducts;
 };
 
 export const getAllPathsProducts = async () => {

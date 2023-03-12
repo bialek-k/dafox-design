@@ -6,7 +6,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 
-const FaqContent = ({ data }) => {
+const FaqContent = ({ faqData }) => {
   return (
     <section className="container mx-auto py-24 px-6 mb-24">
       <div className="title flex flex-col pb-8">
@@ -15,7 +15,7 @@ const FaqContent = ({ data }) => {
         </h1>
       </div>
       <div className="content lg:w-3/4 lg:mx-auto">
-        {data.allFaqs.map((faq) => {
+        {faqData.map((faq) => {
           return (
             <Accordion
               key={faq.id}

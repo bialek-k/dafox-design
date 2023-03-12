@@ -29,7 +29,7 @@ const Gallery = ({ active, setActive, singleProduct }) => {
           open={open}
           onClick={handleClose}
         >
-          <div className="w-1/3 border-8 shadow-lg">
+          <div className="w-1/3 border-8 shadow-lg ">
             <DatoImage
               data={
                 !selectedImg
@@ -40,14 +40,14 @@ const Gallery = ({ active, setActive, singleProduct }) => {
           </div>
         </Backdrop>
       </div>
-      <div className="relative" onClick={handleToggle}>
+      <div className="relative dark:shadow-xl" onClick={handleToggle}>
         <DatoImage
           data={
             selectedImg
               ? selectedImg["responsiveImage"]
               : singleProduct.gallery[0].responsiveImage
           }
-          className="rounded-md"
+          className="rounded-md dark:border dark:border-neutral-900"
           layout="responsive"
         />
       </div>
@@ -61,10 +61,10 @@ const Gallery = ({ active, setActive, singleProduct }) => {
               <DatoImage
                 data={singleThumb.responsiveImage}
                 layout="responsive"
-                className={` rounded-md hover:opacity-100 cursor-pointer ${
+                className={`  dark:shadow-xl rounded-md hover:opacity-100 cursor-pointer  ${
                   active == singleThumb.id
-                    ? "opacity-100 ring-4 ring-yellow-400 "
-                    : "opacity-70"
+                    ? "opacity-100 ring-4 ring-yellow-400  "
+                    : "opacity-70 "
                 }`}
               />
             </a>

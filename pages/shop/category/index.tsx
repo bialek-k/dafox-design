@@ -1,74 +1,53 @@
-import React from "react";
-
 import { client } from "../../../lib/apollo";
-import { gql } from "@apollo/client";
 import { ProductListContainer } from "../../../components/ProductList/ProductListContainer";
 
-const CategoryPage = ({ data, totalProductNumber }) => {
+import { GrayBackgroundWrapper } from "../../../components/UI/GrayBackgroundWrapper";
+import { ElfsightWidget } from "react-elfsight-widget";
+
+import {
+  getBestsellerProducts,
+  productsByCategoryQuery,
+} from "../../../lib/DatocmsApiCall";
+import { PageTitle } from "../../../components/PageTitle";
+import { ListSettings } from "../../../components/ListSettings/ListSettings";
+import { BestsellerContainer } from "../../../components/ProductList/Bestseller/BestsellerContainer";
+
+const CategoryPage = ({ data, totalProductNumber, bestsellerProducts }) => {
   return (
     <div className="flex flex-col justify-center items-center">
+      <PageTitle />
+      <ListSettings />
       <ProductListContainer
         products={data}
         totalProducts={totalProductNumber}
       />
+      {bestsellerProducts.length > 0 && (
+        <GrayBackgroundWrapper>
+          <BestsellerContainer bestsellerProducts={bestsellerProducts} />
+        </GrayBackgroundWrapper>
+      )}
+
+      <div className="reviews dark:bg-white py-12 mb-6 overflow-hidden">
+        <ElfsightWidget widgetID={process.env.ELFSIGHT_WIDGET_ID} />
+      </div>
     </div>
   );
 };
 
 export async function getServerSideProps(context) {
-  const query = gql`
-    query MyQuery($allIn: [ItemId], $first: IntType, $skip: IntType) {
-      _allProductsMeta {
-        count
-      }
-      Products_count: allProducts(
-        filter: { category: { allIn: $allIn } }
-        first: "100"
-      ) {
-        id
-      }
+  const nextPageOfProducts = 15 * (context.query.page - 1);
 
-      Paginated: allProducts(
-        filter: { category: { allIn: $allIn } }
-        first: $first
-        skip: $skip
-      ) {
-        name
-        id
-        slug
-        price
-        freeShipping
-        promotion
-        inStock
-        category {
-          id
-          series
-          name
-        }
-        image {
-          responsiveImage {
-            alt
-            base64
-            src
-            webpSrcSet
-          }
-        }
-      }
-    }
-  `;
+  const productsByCategory = await client.query(
+    productsByCategoryQuery(context.query.id, nextPageOfProducts)
+  );
 
-  const another = 15 * (context.query.page - 1);
-
-  const { data } = await client.query({
-    query,
-    variables: { allIn: context.query.id, first: 15, skip: another },
-  });
-
-  const count = data.Products_count.length;
+  const bestsellerProducts = await getBestsellerProducts();
+  const count = productsByCategory.data.Products_count.length;
 
   return {
     props: {
-      data: data.Paginated,
+      data: productsByCategory.data.Paginated,
+      bestsellerProducts,
       totalProductNumber: count,
     },
   };

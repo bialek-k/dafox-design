@@ -1,10 +1,6 @@
-import React from "react";
-
-import { client } from "../lib/apollo";
-import { aboutQuery } from "../lib/queries";
-
 import { Image as DatoImage } from "react-datocms";
 import { StructuredText } from "react-datocms";
+import { getAboutData } from "../lib/DatocmsApiCall";
 
 const About = ({ data }): React.ReactElement => {
   return (
@@ -49,10 +45,10 @@ const About = ({ data }): React.ReactElement => {
 };
 
 export async function getStaticProps() {
-  const { data } = await client.query(aboutQuery);
+  const aboutData = await getAboutData();
 
   return {
-    props: { data },
+    props: { data: aboutData.data },
   };
 }
 

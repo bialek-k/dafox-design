@@ -12,7 +12,7 @@ const sortingMethodArray = [
   "Price: high to low",
 ];
 
-const SortingProducts = ({ sortingMethod, setSortingMethod }) => {
+export const SortingProducts = ({ sortingMethod, setSortingMethod }) => {
   const handleChange = (event: SelectChangeEvent) => {
     setSortingMethod(event.target.value as string);
   };
@@ -25,7 +25,7 @@ const SortingProducts = ({ sortingMethod, setSortingMethod }) => {
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"
-          className="dark:bg-neutral-100 lg:w-48 dark:mt-2"
+          className="dark:bg-neutral-700 dark:text-primary-light lg:w-48 dark:mt-2"
           id="demo-simple-select"
           label="Sorting"
           value={sortingMethod}
@@ -41,5 +41,3 @@ const SortingProducts = ({ sortingMethod, setSortingMethod }) => {
     </div>
   );
 };
-
-export default SortingProducts;

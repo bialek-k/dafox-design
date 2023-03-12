@@ -8,14 +8,18 @@ const initialState = {
     totalPrice: 0,
   },
   ctxAllProducts: [],
-  faqContent: [],
   searchProducts: [],
   filterQuery: "",
   filterCategory: { id: 0, name: "All Products" },
+  storedSortingMethod: "Price: low to high",
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_SORTING_METHOD": {
+      return { ...state, storedSortingMethod: action.payload };
+    }
+
     case "SET_SEARCH_PRODUCTS": {
       const searchProducts = action.payload;
       return { ...state, searchProducts };
@@ -23,11 +27,6 @@ const reducer = (state, action) => {
 
     case "SET_FILTER_CATEGORY": {
       return { ...state, filterCategory: action.payload };
-    }
-
-    case "SET_FAQ_CONTENT": {
-      const storedFaqContent = action.payload;
-      return { ...state, faqContent: storedFaqContent };
     }
 
     case "SET_ALL_PRODUCTS": {

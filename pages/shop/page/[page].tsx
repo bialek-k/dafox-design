@@ -9,12 +9,13 @@ import {
 } from "../../../lib/DatocmsApiCall";
 import { ListSettings } from "../../../components/ListSettings/ListSettings";
 
+import { BestsellerProducts } from "../../../components/ProductList/SpecialOffers/BestsellerProducts";
+import { LimitedOfferProducts } from "../../../components/ProductList/SpecialOffers/LimitedOfferProducts";
+
 import { PageTitle } from "../../../components/PageTitle";
 import { Quote } from "../../../components/Quote";
 import { ContactForm } from "../../../components/Form/ContactForm";
 import { ElfsightWidget } from "react-elfsight-widget";
-import { SpecialOffersContainer } from "../../../components/ProductList/SpecialOffers/SpecialOffersContainer";
-import { Divider } from "@mui/material";
 
 const page = ({
   paginatedProducts,
@@ -29,21 +30,12 @@ const page = ({
       <ListSettings />
       {limitedOfferProducts.length > 0 && (
         <div className="bg-neutral-100 w-full my-6">
-          <SpecialOffersContainer
-            products={limitedOfferProducts}
-            title="Exclusive Steering Wheels"
-            subtitle="Upgrade your driving experience with our exclusive steering wheels, available in limited supply. Made with high-quality automotive leather or alcantara. 
-            Our premium steering wheels offer both style and comfort. Don't miss out - shop now while stocks last!"
-          />
+          <BestsellerProducts bestsellerProducts={bestsellerProducts} />
         </div>
       )}
       {bestsellerProducts.length > 0 && (
         <div className="bg-neutral-100 w-full my-6">
-          <SpecialOffersContainer
-            products={bestsellerProducts}
-            title="Bestseller Steering Wheels"
-            subtitle="Our best-selling car steering wheels are the most frequently chosen products appreciated by customers for their quality, comfort, and attractive design. Made from high-quality materials such as leather, alcantara, and carbon fiber, they add a luxurious touch to any vehicle. These are your favorite gems that our customers frequently recommend and cherish."
-          />
+          <LimitedOfferProducts limitedOfferProducts={limitedOfferProducts} />
         </div>
       )}
       <ProductListContainer

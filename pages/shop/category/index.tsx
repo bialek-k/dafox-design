@@ -11,7 +11,8 @@ import {
 } from "../../../lib/DatocmsApiCall";
 import { PageTitle } from "../../../components/PageTitle";
 import { ListSettings } from "../../../components/ListSettings/ListSettings";
-import { SpecialOffersContainer } from "../../../components/ProductList/SpecialOffers/SpecialOffersContainer";
+import { BestsellerProducts } from "../../../components/ProductList/SpecialOffers/BestsellerProducts";
+import { LimitedOfferProducts } from "../../../components/ProductList/SpecialOffers/LimitedOfferProducts";
 
 const CategoryPage = ({
   data,
@@ -29,21 +30,12 @@ const CategoryPage = ({
       />
       {bestsellerProducts.length > 0 && (
         <GrayBackgroundWrapper>
-          <SpecialOffersContainer
-            products={bestsellerProducts}
-            title="Bestseller Steering Wheels"
-            subtitle="Our best-selling car steering wheels are the most frequently chosen products appreciated by customers for their quality, comfort, and attractive design. Made from high-quality materials such as leather, alcantara, and carbon fiber, they add a luxurious touch to any vehicle. These are your favorite gems that our customers frequently recommend and cherish."
-          />
+          <BestsellerProducts bestsellerProducts={bestsellerProducts} />
         </GrayBackgroundWrapper>
       )}
       {limitedOfferProducts.length > 0 && (
         <GrayBackgroundWrapper>
-          <SpecialOffersContainer
-            products={limitedOfferProducts}
-            title="Exclusive Steering Wheels"
-            subtitle="Upgrade your driving experience with our exclusive steering wheels, available in limited supply. Made with high-quality automotive leather or alcantara. 
-            Our premium steering wheels offer both style and comfort. Don't miss out - shop now while stocks last!"
-          />
+          <LimitedOfferProducts limitedOfferProducts={limitedOfferProducts} />
         </GrayBackgroundWrapper>
       )}
 

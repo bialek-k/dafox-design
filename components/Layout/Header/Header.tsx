@@ -30,7 +30,7 @@ const Header = (): React.ReactElement => {
 
       <div className="bg-neutral-900 px-5">
         <div className="container mx-auto">
-          <header className="flex items-center justify-between py-4 ">
+          <header className="flex items-center justify-between py-4">
             <div>
               <Link href="/shop/page/1">
                 <a>

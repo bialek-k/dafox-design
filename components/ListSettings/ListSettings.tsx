@@ -14,7 +14,7 @@ export const ListSettings = () => {
       type: "SET_SORTING_METHOD",
       payload: sortingMethod,
     });
-  }, [sortingMethod]);
+  }, [sortingMethod, dispatch]);
 
   return (
     <section className="container mx-auto px-6 flex flex-col gap-5 py-12">

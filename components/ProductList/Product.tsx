@@ -1,6 +1,8 @@
 import { Image as DatoImage } from "react-datocms";
 
-import { FaStar } from "react-icons/fa";
+import { Tooltip } from "@mui/material";
+
+import { FaStar, FaQuestionCircle } from "react-icons/fa";
 import { BiTime } from "react-icons/bi";
 
 interface ProductProps {
@@ -44,9 +46,11 @@ export const Product = ({
             <p className="text-xs md:text-sm ">{title}</p>
           </div>
           {freeShipping && (
-            <p className="font-bold py-2 text-sm md:text-xl text-yellow-400">
-              FREE SHIPPING
-            </p>
+            <Tooltip arrow title="Excluded: Izarel - $50">
+              <p className="font-bold text-sm md:text-xl text-yellow-400">
+                FREE SHIPPING
+              </p>
+            </Tooltip>
           )}
           <div className="price flex flex-col md:flex-row md:items-center justify-between">
             <div className="stock">

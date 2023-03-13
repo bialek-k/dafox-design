@@ -29,11 +29,11 @@ export const SpecialOffersContainer = ({
 }: SpecialOffersContainerProps) => {
   return (
     <div className="container mx-auto px-6 py-12">
-      <div className="description flex flex-col gap-2 mb-12">
-        <h2 className="text-3xl text-center ">
-          Our <strong className="text-secondary">{title}</strong>
+      <div className="description flex flex-col gap-2 mb-12 md:w-2/3 mx-auto">
+        <h2 className="text-3xl font-bold text-secondary text-center ">
+          {title}
         </h2>
-        <p className="text-center text-primary-dark dark:text-primary-light">
+        <p className="text-center text-sm md:text-base text-primary-dark dark:text-primary-light">
           {subtitle}
         </p>
       </div>

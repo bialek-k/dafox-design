@@ -24,10 +24,6 @@ const singleProductQuery = gql`
       promotion
       slug
       inStock
-      boki {
-        price
-        name
-      }
       category {
         name
         id
@@ -38,10 +34,6 @@ const singleProductQuery = gql`
       }
       description {
         value
-      }
-      goraIDol {
-        name
-        price
       }
       image {
         responsiveImage {
@@ -72,6 +64,27 @@ const singleProductQuery = gql`
           srcSet
           webpSrcSet
           width
+        }
+      }
+      accessories {
+        id
+        name
+        shortDescription {
+          value
+        }
+        price
+        onlyInUe
+        image {
+          responsiveImage {
+            alt
+            aspectRatio
+            base64
+            bgColor
+            height
+            sizes
+            src
+            webpSrcSet
+          }
         }
       }
     }

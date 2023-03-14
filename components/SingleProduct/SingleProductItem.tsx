@@ -7,6 +7,8 @@ import { Divider } from "@mui/material";
 import Gallery from "./Gallery";
 import RelatedProducts from "./RelatedProducts";
 
+import { AccessoryItem } from "../Accessories/AccessoryItem";
+
 export const SingleProductItem = ({
   singleProduct,
   relatedProducts,
@@ -14,6 +16,8 @@ export const SingleProductItem = ({
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
   const [active, setActive] = useState(null);
+
+  console.log(singleProduct.accessories);
 
   const relatedLinkData = singleProduct.category.map((cat) => {
     return {
@@ -46,7 +50,7 @@ export const SingleProductItem = ({
 
   return (
     <>
-      <div className="wrapper mt-24 mb-48 ">
+      <div className="wrapper mt-24 mb-48">
         <div className="container mx-auto px-6 md:px-12 ">
           <div className="product w-full flex flex-col lg:flex-row py-4 justify-center gap-6 mb-10 ">
             <div className="photo w-full mb-2 lg:mb-0 lg:w-1/3 ">
@@ -106,6 +110,24 @@ export const SingleProductItem = ({
               </div>
             </div>
           </div>
+          {singleProduct.accessories.length > 0 && (
+            <div className="accessories">
+              {singleProduct.accessories.map(
+                ({ id, image, name, onlyInUe, price, shortDescription }) => (
+                  <AccessoryItem
+                    key={id}
+                    name={name}
+                    shortDescription={shortDescription}
+                    onlyInUE={onlyInUe}
+                    image={image.responsiveImage}
+                    price={price}
+                  />
+                )
+              )}
+            </div>
+          )}
+          <div className="accessories"></div>
+
           <div className="mt-24 dark:invert">
             <Divider />
           </div>
